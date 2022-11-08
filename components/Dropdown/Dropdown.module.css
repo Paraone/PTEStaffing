@@ -1,0 +1,15 @@
+.dropdown {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.dropdown:hover .list {
+    display: block;
+}
+
+.list {
+    display: none;
+    list-style: none;
+    position: absolute;
+}
