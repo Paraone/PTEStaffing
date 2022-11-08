@@ -1,9 +1,9 @@
 const nextConnect = require('next-connect');
-const MongoClient = require('mongodb').MongoClient;
+import clientPromise from 'lib/mongodb';
 const assert = require('assert');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const jwtSecret = 'SUPERSECRETE20220';
+const jwtSecret = process.env.JWT_SECRET;
 import middleware from '../../middleware/middleware';
 
 export const config = {
@@ -15,10 +15,7 @@ export const config = {
 const url = 'mongodb://localhost:27017';
 const dbName = 'ptestaffing';
 
-const client = new MongoClient(url, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+const client = clientPromise;
 
 function findUser(db, email, callback) {
   const collection = db.collection('user');

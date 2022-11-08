@@ -6,7 +6,8 @@ const bcrypt = require('bcrypt');
 const v4 = require('uuid').v4;
 const jwt = require('jsonwebtoken');
 // import  { sendMail } from '../../controllers/mailController';
-const jwtSecret = 'SUPERSECRETE20220';
+const jwtSecret = process.env.JWT_SECRET;
+import clientPromise from 'lib/mongodb';
 import middleware from '../../middleware/middleware';
 
 export const config = {
@@ -19,10 +20,7 @@ const saltRounds = 10;
 const url = 'mongodb://localhost:27017';
 const dbName = 'ptestaffing';
 
-const client = new mongo.MongoClient(url, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+const client = clientPromise;
 
 function findUser(db, email, profileId, callback) {
   const collection = db.collection('user');
