@@ -3,10 +3,11 @@ const mongo = require('mongodb');
 const assert = require('assert');
 import { rejects } from 'assert';
 import fs from 'fs';
+import clientPromise from 'lib/mongodb';
 import middleware from '../../../middleware/middleware';
 import { useDrive } from '../google/gapi';
 const jwt = require('jsonwebtoken');
-const jwtSecret = 'SUPERSECRETE20220';
+const jwtSecret = process.env.JWT_SECRET;
 // const nodemailer = require("nodemailer");
 
 export const config = {
@@ -18,10 +19,7 @@ export const config = {
 const url = 'mongodb://localhost:27017';
 const dbName = 'ptestaffing';
 
-const client = new mongo.MongoClient(url, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+const client = clientPromise;
 
 const apiRoute = nextConnect({
   onError(err, req, res) {
