@@ -10,7 +10,7 @@ middleware.use((req, res, next) => {
     
         form.parse(req, (err, fields, files) => {
             if (err) {
-                console.log({ err });
+                console.log('middleware.js', { err });
                 next();
                 return;
             }

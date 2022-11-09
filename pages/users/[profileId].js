@@ -18,7 +18,7 @@ const User = () => {
 
             setUserData(response?.data?.data);
         }).catch((err) => {
-          console.log({ err })
+          console.log('users/[profileId].js', { err })
         });
         
         return () => { source.cancel("Cancelling in cleanup") };

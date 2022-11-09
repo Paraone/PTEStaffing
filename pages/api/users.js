@@ -1,5 +1,4 @@
 const nextConnect = require('next-connect');
-const mongo = require('mongodb');
 const assert = require('assert');
 const uuid = require('uuid-random');
 const bcrypt = require('bcrypt');
@@ -19,8 +18,6 @@ export const config = {
 const saltRounds = 10;
 const url = 'mongodb://localhost:27017';
 const dbName = 'ptestaffing';
-
-const client = clientPromise;
 
 function findUser(db, email, profileId, callback) {
   const collection = db.collection('user');
@@ -54,7 +51,7 @@ function createUser(db, firstName, lastName, email, password, profileId, callbac
 
 const apiRoute = nextConnect({
   onError(err, req, res) {
-    if (err) console.log({ err })
+    if (err) console.log('api/users.js', { err })
     return res.status(403)
   },
   
@@ -65,7 +62,7 @@ const apiRoute = nextConnect({
 
 apiRoute.use(middleware);
 
-apiRoute.post((req, res) => {
+apiRoute.post(async (req, res) => {
   
   // signup
   try {
@@ -77,9 +74,9 @@ apiRoute.post((req, res) => {
   } catch (bodyError) {
     return res.status(401).json({error: true, message: bodyError.message});
   }
-  
-  client.connect(function(err) {
-    assert.equal(null, err);
+
+  try {
+    const client = await clientPromise;
     const db = client.db(dbName);
     const { email, password, firstName, lastName, profileId } = req.body;
 
@@ -123,18 +120,24 @@ apiRoute.post((req, res) => {
         return;
       }
     });
-  });
+  } catch (e) {
+    console.log('users.js try/catch', { e });
+    res.status(400).json({ error: true, message: e });
+  }
 });
 
-apiRoute.get((req, res) => {
-  client.connect(async (err) => {
-    assert.equal(null, err);
+apiRoute.get(async (req, res) => {
+  try {
+    const client = await clientPromise;
     const db = client.db(dbName);
     const collection = db.collection('user');
 
     const data = await collection.find().toArray();
     return res.status(200).json({ data })
-  });
+  } catch (error) {
+    console.log('get users.js', { error });
+    res.status(400).json({ error: true, message: error });
+  }
 });
 
 export default apiRoute;

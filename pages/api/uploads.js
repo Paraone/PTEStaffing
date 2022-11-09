@@ -21,7 +21,7 @@ const client = new mongo.MongoClient(url, {
 
 const apiRoute = nextConnect({
   onError(err, req, res) {
-    if (err) console.log({ err })
+    if (err) console.log('uploads.js', { err })
     return res.status(403)
   },
   // Handle any other HTTP method
@@ -49,7 +49,7 @@ apiRoute.post(({ files }, res) => {
             media: media,
             fields: 'id'
         }, (err, file) => {
-            if (err) console.log({ err });
+            if (err) console.log('uploads.js', { err });
             const id = file?.data?.id;
             return res.status(200).json({ id });
         });

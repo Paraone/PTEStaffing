@@ -5,7 +5,7 @@ import { rejects } from 'assert';
 import fs from 'fs';
 import clientPromise from 'lib/mongodb';
 import middleware from '../../../middleware/middleware';
-import { useDrive } from '../google/gapi';
+// import { useDrive } from '../google/gapi';
 const jwt = require('jsonwebtoken');
 const jwtSecret = process.env.JWT_SECRET;
 // const nodemailer = require("nodemailer");
@@ -19,11 +19,9 @@ export const config = {
 const url = 'mongodb://localhost:27017';
 const dbName = 'ptestaffing';
 
-const client = clientPromise;
-
 const apiRoute = nextConnect({
   onError(err, req, res) {
-    if (err) console.log({ err })
+    if (err) console.log('[profileId].js', { err })
     return res.status(403)
   },
   // Handle any other HTTP method
@@ -34,10 +32,11 @@ const apiRoute = nextConnect({
 
 apiRoute.use(middleware);
 
-apiRoute.get((req, res) => {
+apiRoute.get(async (req, res) => {
   const { query : { profileId } } = req;
-  client.connect(async (err) => {
-    assert.equal(null, err);
+
+  try {
+    const client = await clientPromise;
     const db = client.db(dbName); 
     const collection = db.collection('user');
 
@@ -46,20 +45,24 @@ apiRoute.get((req, res) => {
       return res.status(200).json({ data: { ...data, password: undefined} });
     })
     .catch((err) => {
-      console.log({ err });
+      console.log('[profileId].js', { err });
       return res.status(401).json({ data: { err } });
     });
-  });
+
+  } catch (error) {
+    console.log('get [profileId].js', { error });
+  }
 })
 
-apiRoute.patch(({ body, files, query }, res) => {
+apiRoute.patch(async ({ body, files, query }, res) => {
   const { profileId, confirmationCode } = query;
 
-  if (confirmationCode) {
-    client.connect((err) => {
-      assert.equal(null, err);
-      const db = client.db(dbName);
-      const collection = db.collection('user');
+  try {
+    const client = await clientPromise;
+    const db = client.db(dbName);
+    const collection = db.collection('user');
+
+    if (confirmationCode) {
       collection.findOne({ confirmationCode }, (err, data) => {
         console.log({err, data})
         const {email, userId } = data;
@@ -79,29 +82,22 @@ apiRoute.patch(({ body, files, query }, res) => {
           return res.status(200).json({ email, token});
         });
       });
-    });
-    return;
-  }
+      return;
+    }
 
-  const { 
-    firstName, 
-    lastName,
-    email,
-    phone
-  } = body;
+    const { 
+      firstName, 
+      lastName,
+      email,
+      phone
+    } = body;
 
-  try {
     assert.notEqual(null, lastName, 'Last Name required');
     assert.notEqual(null, firstName, 'First Name required');
     assert.notEqual(null, email, 'Email required');
     assert.notEqual(null, phone, 'A phone number is required');
-  } catch (bodyError) {
-    return res.status(401).json({error: true, message: bodyError.message});
-  }
-  client.connect(async (err) => {
-    assert.equal(null, err);
-    const db = client.db(dbName);
-    const collection = db.collection('user');
+
+
     const updateFields = Object.keys(body).reduce((acc, key) => {
       if (!body[key] || body[key] === 'undefined') return acc;
       return {
@@ -113,28 +109,29 @@ apiRoute.patch(({ body, files, query }, res) => {
     const fieldData = fileKeys.map((name) => {
       const { mimeType, filepath } = files[name];
       return new Promise((resolve) => {
-        useDrive((drive) => {
-          const fileMetadata = {
-            name: `${firstName} ${lastName} ${name}`,
-            mimeType
-          };
-          const media = {
-            mimeType,
-            body: fs.createReadStream(filepath)
-          };
-          drive.files.create({
-            resource: fileMetadata,
-            media: media,
-            fields: 'id'
-          }, (err, file) => {
-            if (err) {
-              console.log({ err });
-              rejects({ err })
-            }
-            const id = file?.data?.id;
-            resolve([name, id]);
-          });
-        });
+        resolve(['john doe', '1111']);
+        // useDrive((drive) => {
+        //   const fileMetadata = {
+        //     name: `${firstName} ${lastName} ${name}`,
+        //     mimeType
+        //   };
+        //   const media = {
+        //     mimeType,
+        //     body: fs.createReadStream(filepath)
+        //   };
+        //   drive.files.create({
+        //     resource: fileMetadata,
+        //     media: media,
+        //     fields: 'id'
+        //   }, (err, file) => {
+        //     if (err) {
+        //       console.log('[profileId]', { err });
+        //       rejects({ err })
+        //     }
+        //     const id = file?.data?.id;
+        //     resolve([name, id]);
+        //   });
+        // });
       });
     })
     Promise.all(fieldData).then(async (values) => {
@@ -142,14 +139,15 @@ apiRoute.patch(({ body, files, query }, res) => {
         const deletedFiles = values.map(([fieldname, id]) => {
           return new Promise((resolve) => {
             if (user[fieldname] && user[fieldname] !== id) {
-              useDrive((drive) => {
-                  drive.files.delete({ fileId: user[fieldname] }, (err) => {
-                    if (err) console.log( err );
-                    console.log(`'image ${user[fieldname]} deleted'`);
-                    updateFields[fieldname] = id;
-                    return resolve({});
-                  })
-              });
+              resolve({});
+              // useDrive((drive) => {
+              //     drive.files.delete({ fileId: user[fieldname] }, (err) => {
+              //       if (err) console.log( err );
+              //       console.log(`'image ${user[fieldname]} deleted'`);
+              //       updateFields[fieldname] = id;
+              //       return resolve({});
+              //     })
+              // });
             } else {
               updateFields[fieldname] = id;
               return resolve({});
@@ -166,7 +164,10 @@ apiRoute.patch(({ body, files, query }, res) => {
       })
 
     })
-  });
+  } catch (error) {
+    console.log('patch [profileId].js', { error });
+    res.status(400).json({ error: true, message: error });
+  }
 })
 
 export default apiRoute;
