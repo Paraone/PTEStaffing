@@ -19,18 +19,18 @@ const saltRounds = 10;
 const url = 'mongodb://localhost:27017';
 const dbName = 'ptestaffing';
 
-const findUser = async (db, email, profileId) => {
+function findUser(db, email, profileId, callback) {
   const collection = db.collection('user');
-  return await collection.findOne({ $or: [{ email }, { profileId }]}, { _id: 0, password: 0 });
+  collection.findOne({ $or: [{ email }, { profileId }]}, { _id: 0, password: 0 }, callback);
 }
 
-const createUser = async (db, firstName, lastName, email, password, profileId) => {
+function createUser(db, firstName, lastName, email, password, profileId, callback) {
   const collection = db.collection('user');
 
-  bcrypt.hash(password, saltRounds, async (err, hash) => {
+  bcrypt.hash(password, saltRounds, function(err, hash) {
     const confirmationCode = uuid();
 
-    return await collection.insertOne(
+    collection.insertOne(
       {
         userId: v4(),
         firstName,
@@ -40,7 +40,12 @@ const createUser = async (db, firstName, lastName, email, password, profileId) =
         confirmationCode,
         emailConfirmed: false,
         password: hash,
-      });
+      },
+      function(err, userCreated) {
+        assert.equal(err, null);
+        callback(userCreated);
+      },
+    );
   });
 }
 
