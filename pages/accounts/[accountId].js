@@ -30,7 +30,7 @@ const Account = () => {
           cancelToken: source.token
       })
       .then(handleData)
-      .catch((err) => console.log({ err }))
+      .catch((err) => console.log('[accountId].js', { err }))
       
       return () => { source.cancel("Cancelling in cleanup") };
     }, []);

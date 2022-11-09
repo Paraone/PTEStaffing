@@ -10,7 +10,7 @@ export const config = {
 
 const apiRoute = nextConnect({
   onError(err, req, res) {
-    if (err) console.log({ err })
+    if (err) console.log('emails.js', { err })
     return res.status(403)
   },
   // Handle any other HTTP method

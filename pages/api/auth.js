@@ -12,12 +12,9 @@ export const config = {
   },
 }
 
-const url = 'mongodb://localhost:27017';
 const dbName = 'ptestaffing';
 
-const client = clientPromise;
-
-function findUser(db, email, callback) {
+async function findUser(db, email, callback) {
   const collection = db.collection('user');
   collection.findOne({ email }, callback);
 }
@@ -29,7 +26,7 @@ function authUser(db, email, password, hash, callback) {
 
 const apiRoute = nextConnect({
   onError(err, req, res) {
-    if (err) console.log({ err })
+    if (err) console.log('auth.js', { err })
     return res.status(403)
   },
   // Handle any other HTTP method
@@ -40,20 +37,21 @@ const apiRoute = nextConnect({
 
 apiRoute.use(middleware);
 
-apiRoute.post((req, res) => {
+apiRoute.post(async (req, res) => {
+    let client;
     //login
     try {
       assert.notEqual(null, req.body.email, 'Email required');
-      assert.notEqual(null, req.body.password, 'Password required');
+      assert.notEqual(null, req.body.password, 'Password required');    
     } catch (bodyError) {
       res.status(403).send(bodyError.message);
     }
 
-    client.connect(function(err) {
-      assert.equal(null, err);
+    try {
+      client = await clientPromise;
       const db = client.db(dbName);
-      const email = req.body.email;
-      const password = req.body.password;
+      const email = req?.body?.email;
+      const password = req?.body?.password;
 
       findUser(db, email, function(err, user) {
         if (err) {
@@ -85,7 +83,10 @@ apiRoute.post((req, res) => {
           });
         }
       });
-    });
+    } catch (error) {
+      console.log({error});
+      res.status(400).json({error});
+    }
 });
 
 export default apiRoute;

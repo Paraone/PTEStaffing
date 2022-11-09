@@ -107,7 +107,6 @@ export const Form = ({ inputs, title, route, handleData, method = 'post' }) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log('pic1: ', fields['profilePic1']);
         fieldKeys.forEach((name) => validateField(name));
         const isValid = fieldKeys.reduce((acc, name) => {
             if(!acc) return acc;
