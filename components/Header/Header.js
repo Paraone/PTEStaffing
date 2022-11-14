@@ -38,7 +38,7 @@ const Header = () => {
               />
             </Link>
             <div>
-              {!!userId ?
+              {userId ?
                 (
                   <Menu className={styles['user-menu']} menuItems={userMenu}/>
                 ) : (    
