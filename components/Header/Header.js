@@ -42,8 +42,8 @@ const Header = () => {
                 (
                   <Menu className={styles['user-menu']} menuItems={userMenu}/>
                 ) : (    
-                  <div>
-                    <Login /> or <Link href="/signup">Sign Up</Link>
+                  <div className={styles['header-login']}>
+                    <Login /> <span>or</span> <Link href="/signup">Sign Up</Link>
                   </div>
                 )
               }
