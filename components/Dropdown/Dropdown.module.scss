@@ -1,0 +1,50 @@
+.dropdown {
+    display: flex;
+    flex-direction: column;
+    line-height: 20px;
+
+    &:hover {
+        .list {
+            display: block;
+        }
+    }
+
+    .heading {
+        display: inline-block;
+    }
+
+    .list {
+        display: none;
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        margin: 20px auto 0;
+        padding: 0;
+
+        li {
+            margin: 0 auto;
+            text-decoration: none;
+            list-style-type: none;
+        }
+
+        a {
+            transition: background-color .2s ease-in;
+
+            &:hover {
+                background-color: lightgrey;
+            }
+        }
+    }
+
+    a {
+        display: inline-block;
+        background-color: white;
+        width: 100%;
+        background-color: white;
+        text-decoration: none;
+
+        &:visited {
+            color: black;
+        }
+    }
+}
