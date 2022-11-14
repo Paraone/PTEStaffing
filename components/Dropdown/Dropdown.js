@@ -23,12 +23,14 @@ const Dropdown = ({ heading, list, cta, className }) => {
 Dropdown.propTypes = {
     heading: string.isRequired,
     cta: string,
+    className: string,
     list: array
 };
 
 Dropdown.defaultProps = {
     list: [],
-    cta: ''
+    cta: '',
+    className: ''
 }
 
 export default Dropdown;

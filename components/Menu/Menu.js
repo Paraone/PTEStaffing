@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { array } from 'prop-types';
+import { array, string } from 'prop-types';
 import cx from 'classnames';
 import Dropdown from '~components/Dropdown/Dropdown';
 import styles from './Menu.module.scss';
@@ -25,7 +25,12 @@ const Menu = ({ menuItems, className }) => {
 };
 
 Menu.propTypes = {
-    menuItems: array.isRequired
+    menuItems: array.isRequired,
+    className: string 
+}
+
+Menu.defaultProps = {
+    className: ''
 }
 
 export default Menu;

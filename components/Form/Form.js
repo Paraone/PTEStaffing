@@ -197,9 +197,9 @@ Form.propTypes = {
     title: string, 
     route: string, 
     className: string, 
-    className: string, 
     handleData: func, 
-    method: string
+    method: string,
+    submission: string
 }
 
 Form.defaultProps = {
