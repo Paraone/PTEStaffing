@@ -1,13 +1,14 @@
 import React from 'react';
 import { array, string } from 'prop-types';
+import cx from 'classnames';
 import Link from 'next/link';
-import styles from './Dropdown.module.css';
+import styles from './Dropdown.module.scss';
 
-const Dropdown = ({ heading, list, cta }) => {
+const Dropdown = ({ heading, list, cta, className }) => {
 
     return (
-        <div className={styles.dropdown}>
-            <div className={styles.heading}><Link href={cta}>{heading}</Link></div>
+        <div className={cx(styles.dropdown, className)}>
+            <Link className={styles.heading} href={cta}>{heading}</Link>
             <ul className={styles.list}>
                 {
                     list.map(({ linkName, linkValue }, index) => (

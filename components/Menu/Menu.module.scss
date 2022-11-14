@@ -1,0 +1,29 @@
+.menu {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    position: relative;
+
+    .dropdown {
+        font-size: 12px;
+        display: inline-block;
+        position: relative;
+        height: 40px;
+
+        ul {
+            margin-top: 0;
+            position: absolute;
+    
+            a {
+                max-width: 140px;
+            }
+        }
+    }
+
+    div {
+
+        ul {
+            position: absolute;
+        }
+    }
+}

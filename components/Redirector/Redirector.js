@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { node, string, oneOfType } from 'prop-types';
+import { node } from 'prop-types';
 import Router, { useRouter } from 'next/router';
 import { UserContext } from '~components/Layout/Layout';
 
@@ -42,7 +42,7 @@ const Redirector = ({ children }) => {
 }
 
 Redirector.propTypes = {
-    children: oneOfType([node, string]).isRequired
+    children: node.isRequired
 }
 
 export default Redirector;
