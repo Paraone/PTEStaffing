@@ -1,0 +1,25 @@
+.header {
+    width: 100%;
+
+    .header-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+}
+
+.user-menu {
+    a {
+        margin-left: 10px;
+        color: grey;
+
+        &:visited {
+            color: grey;
+        }
+    }
+}

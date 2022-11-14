@@ -1,6 +1,7 @@
 export { default as Header } from './Header/Header.js';
 export { default as Menu } from './Menu/Menu.js';
 export { default as Layout } from "./Layout/Layout.js";
+export { default as Login } from "./Login/Login.js";
 export { default as Redirector } from "./Redirector/Redirector.js";
 export { default as Input } from "./Input/Input.js";
 export { default as Form } from "./Form/Form.js";

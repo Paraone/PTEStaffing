@@ -1,0 +1,34 @@
+[
+    {
+        "heading": "Event Consultation & Staffing",
+        "cta": "/events",
+        "list": [
+            {
+                "linkName": "home",
+                "cta": "/"
+            },
+            {
+                "linkName": "users",
+                "cta": "/users"
+            }
+        ]
+    },
+    {
+        "heading": "Medical & Allied Health Care Staffing",
+        "cta": "/healthcare",
+        "list": [
+            {
+                "linkName": "users",
+                "cta": "/users"
+            }
+        ]
+    },
+    {
+        "heading": "Cleaning Services",
+        "cta": "/cleaning"
+    },
+    {
+        "heading": "Privacy Police",
+        "cta": "/privacy"
+    }
+]
