@@ -2,11 +2,13 @@ import React from 'react';
 import { string, shape, func, bool } from 'prop-types';
 import ImageInput from './ImageInput';
 import ResumeInput from './ResumeInput';
+import styles from './Input.module.scss';
 
 export const Input = (props) => {
     const { 
         type, 
         error,
+        placeholder,
         name, 
         label, 
         value, 
@@ -52,6 +54,7 @@ export const Input = (props) => {
                     onBlur={() => onBlur(name)}
                     name={name}
                     checked={checked}
+                    placeholder={placeholder}
                     type={type}
                     required={required} 
                 />
@@ -63,6 +66,7 @@ export const Input = (props) => {
                 {label && <label htmlFor={name}>{labelText}</label>}
                 <input
                     value={value}
+                    placeholder={placeholder}
                     onChange={changeHandler}
                     onBlur={() => onBlur(name)}
                     name={name}
@@ -74,7 +78,7 @@ export const Input = (props) => {
     return (
         <div>
             {inputWithLabel}
-            <div>{!validated ? error : ' '}</div>
+            <div className={styles.error}>{!validated ? error : ' '}</div>
         </div>
     );
 };
@@ -83,7 +87,8 @@ Input.propTypes = {
     type: string,
     error: string,
     name: string.isRequired, 
-    label: string.isRequired, 
+    label: string, 
+    placeholder: string,
     value: string, 
     required: bool, 
     checked: bool,
@@ -99,6 +104,8 @@ Input.defaultProps = {
     onBlur: _ => _,
     fileId: '',
     type: '',
+    label: '',
+    placeholder: '',
     error: '',
     value: '',
     required: false,

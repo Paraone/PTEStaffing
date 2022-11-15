@@ -2,7 +2,7 @@
     {
         "type": "email",
         "name": "email",
-        "label": "Email",
+        "placeholder": "Email",
         "required": true,
         "error": "You must enter a valid email.",
         "validation": {
@@ -12,7 +12,7 @@
     {
         "type": "password",
         "name": "password",
-        "label": "Password",
+        "placeholder": "password",
         "required": true,
         "error": "Password and Confirm Password must match.",
         "validation": {}

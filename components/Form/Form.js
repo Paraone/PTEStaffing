@@ -3,7 +3,7 @@ import { string, array, func} from 'prop-types';
 import axios from 'axios';
 import { Input, CheckboxGroup } from '~components';
 
-export const Form = ({ inputs, title, route, handleData, method = 'post' }) => {
+export const Form = ({ inputs, title, route, handleData, method, className, submission = 'Submit' }) => {
     if (!Array.isArray(inputs) || !inputs.length) return null;
 
     const initFields = () => {
@@ -183,12 +183,10 @@ export const Form = ({ inputs, title, route, handleData, method = 'post' }) => {
         });
         
     return (
-        <form>
-            <fieldset>
-                {title && <legend>{title}</legend>}
-                {renderInputs()}
-            </fieldset>
-            <button onClick={onSubmit}>Submit</button>
+        <form className={className}>
+            {title && <legend>{title}</legend>}
+            {renderInputs()}
+            <button onClick={onSubmit}>{submission}</button>
             {formError && <p style={{color: 'red'}}>{formError}</p>}
         </form>
     );
@@ -198,14 +196,18 @@ Form.propTypes = {
     inputs: array, 
     title: string, 
     route: string, 
+    className: string, 
     handleData: func, 
-    method: string
+    method: string,
+    submission: string
 }
 
 Form.defaultProps = {
     inputs: [],
     title: '',
     route: '',
+    className: '',
+    submission: 'Submit',
     method: 'post',
     handleData: _ => _
 }

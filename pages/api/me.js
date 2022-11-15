@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const jwtSecret = process.env.JWT_SECRET;
+const jwtSecret = process.env.JWT_SECRET; // eslint-disable-line
 
 export default (req, res) => {
   if (req.method === 'GET') {

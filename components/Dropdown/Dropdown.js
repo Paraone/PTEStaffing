@@ -11,8 +11,8 @@ const Dropdown = ({ heading, list, cta, className }) => {
             <Link className={styles.heading} href={cta}>{heading}</Link>
             <ul className={styles.list}>
                 {
-                    list.map(({ linkName, linkValue }, index) => (
-                        <li key={index}><Link href={linkValue}>{linkName}</Link></li>
+                    list.map(({ linkName, cta }, index) => (
+                        <li key={index}><Link href={cta}>{linkName}</Link></li>
                     ))
                 }
             </ul>
@@ -23,12 +23,14 @@ const Dropdown = ({ heading, list, cta, className }) => {
 Dropdown.propTypes = {
     heading: string.isRequired,
     cta: string,
+    className: string,
     list: array
 };
 
 Dropdown.defaultProps = {
     list: [],
-    cta: ''
+    cta: '',
+    className: ''
 }
 
 export default Dropdown;
