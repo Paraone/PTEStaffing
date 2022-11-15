@@ -1,18 +1,18 @@
 import React from 'react';
-import { array, string } from 'prop-types';
+import { array, func, string } from 'prop-types';
 import cx from 'classnames';
 import Link from 'next/link';
 import styles from './Dropdown.module.scss';
 
-const Dropdown = ({ heading, list, cta, className }) => {
+const Dropdown = ({ heading, list, cta, className, onClick }) => {
 
     return (
         <div className={cx(styles.dropdown, className)}>
-            <Link className={styles.heading} href={cta}>{heading}</Link>
+            <Link onClick={onClick} className={styles.heading} href={cta}>{heading}</Link>
             <ul className={styles.list}>
                 {
                     list.map(({ linkName, cta }, index) => (
-                        <li key={index}><Link href={cta}>{linkName}</Link></li>
+                        <li key={index}><Link onClick={onClick} href={cta}>{linkName}</Link></li>
                     ))
                 }
             </ul>
@@ -24,13 +24,15 @@ Dropdown.propTypes = {
     heading: string.isRequired,
     cta: string,
     className: string,
-    list: array
+    list: array,
+    onClick: func
 };
 
 Dropdown.defaultProps = {
     list: [],
     cta: '',
-    className: ''
+    className: '',
+    onClick: _ => _
 }
 
 export default Dropdown;
