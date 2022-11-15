@@ -3,7 +3,7 @@ import clientPromise from 'lib/mongodb';
 const assert = require('assert');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const jwtSecret = process.env.JWT_SECRET;
+const jwtSecret = process.env.JWT_SECRET; // eslint-disable-line
 import middleware from '../../middleware/middleware';
 
 export const config = {
