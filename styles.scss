@@ -3,7 +3,7 @@ body {
   font-family: 'SF Pro Text', 'SF Pro Icons', system-ui, 'Helvetica Neue', 'Helvetica';
   font-size: 1rem;
   padding: 20px 20px 60px;
-  width: 550px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -14,13 +14,14 @@ form label {
 }
 
 a {
+    color: grey;
     display: inline-block;
     background-color: white;
     background-color: white;
     text-decoration: none;
 
     &:visited {
-        color: black;
+        color: grey;
     }
 }
 
