@@ -13,7 +13,7 @@ const Menu = ({ menuItems, className }) => {
             <Dropdown key={index} heading={heading} cta={cta} list={list} />
         ) :
         (
-            <Link href={cta}>{heading}</Link>
+            <Link key={index} href={cta}>{heading}</Link>
         )
     });
 
