@@ -49,7 +49,7 @@ const Header = () => {
               }
             </div>
           </div>
-          <Menu menuItems={menuItems}/>
+          <Menu className={styles['main-nav']} menuItems={menuItems}/>
         </div>
     )
 };
