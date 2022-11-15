@@ -1,19 +1,31 @@
 import Link from 'next/link';
-import { array, string } from 'prop-types';
+import { array, func, string } from 'prop-types';
 import cx from 'classnames';
 import Dropdown from '~components/Dropdown/Dropdown';
 import styles from './Menu.module.scss';
 
 
-const Menu = ({ menuItems, className }) => {
+const Menu = ({ menuItems, className, onClick }) => {
     const items = menuItems.map(({ heading, cta, list }, index) => {
         const hasList = list && list.length > 0;
         return hasList ? 
         (
-            <Dropdown key={index} heading={heading} cta={cta} list={list} />
+            <Dropdown 
+                onClick={onClick}
+                key={index} 
+                heading={heading} 
+                cta={cta} 
+                list={list} 
+            />
         ) :
         (
-            <Link key={index} href={cta}>{heading}</Link>
+            <Link 
+                onClick={onClick} 
+                key={index} 
+                href={cta}
+            >
+                {heading}
+            </Link>
         )
     });
 
@@ -26,11 +38,13 @@ const Menu = ({ menuItems, className }) => {
 
 Menu.propTypes = {
     menuItems: array.isRequired,
-    className: string 
+    className: string,
+    onClick: func
 }
 
 Menu.defaultProps = {
-    className: ''
+    className: '',
+    onClick: _ => _
 }
 
 export default Menu;
