@@ -24,6 +24,7 @@ const Layout = ({ children }) => {
     }, 250);
 
     useEffect(() => {
+        handleResize();
         window.addEventListener("resize", handleResize);
         return () => { window.removeEventListener('resize', handleResize); }
     }, []);
