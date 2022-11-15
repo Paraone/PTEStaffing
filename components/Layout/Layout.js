@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import { debounce } from 'lodash';
 import fetch from 'isomorphic-unfetch';
 import { node, string, oneOfType } from 'prop-types';
@@ -37,6 +38,9 @@ const Layout = ({ children }) => {
 
     return (
         <UserContext.Provider value={data}>
+            <Head>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
             {navigation}
             {!!alert && <p>{alert}</p>}
             {children}
