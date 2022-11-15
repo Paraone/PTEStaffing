@@ -1,13 +1,10 @@
 const nextConnect = require('next-connect');
-const mongo = require('mongodb');
 const assert = require('assert');
-import { rejects } from 'assert';
-import fs from 'fs';
 import clientPromise from 'lib/mongodb';
 import middleware from '../../../middleware/middleware';
 // import { useDrive } from '../google/gapi';
 const jwt = require('jsonwebtoken');
-const jwtSecret = process.env.JWT_SECRET;
+const jwtSecret = process.env.JWT_SECRET; // eslint-disable-line
 // const nodemailer = require("nodemailer");
 
 export const config = {
@@ -16,7 +13,6 @@ export const config = {
   },
 }
 
-const url = 'mongodb://localhost:27017';
 const dbName = 'ptestaffing';
 
 const apiRoute = nextConnect({
@@ -106,8 +102,8 @@ apiRoute.patch(async ({ body, files, query }, res) => {
       }
     }, {});
     const fileKeys = Object.keys(files);
-    const fieldData = fileKeys.map((name) => {
-      const { mimeType, filepath } = files[name];
+    const fieldData = fileKeys.map((name) => { // eslint-disable-line
+      // const { mimeType, filepath } = files[name];
       return new Promise((resolve) => {
         resolve(['john doe', '1111']);
         // useDrive((drive) => {
