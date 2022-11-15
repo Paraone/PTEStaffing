@@ -20,7 +20,7 @@ const dbName = 'ptestaffing';
 
 function findUser(db, email, profileId, callback) {
   const collection = db.collection('user');
-  collection.findOne({ $or: [{ email }, { profileId }]}, { _id: 0, password: 0 }, callback);
+  collection.findOne({ $or: [{ email }, { profileId }]}, { projection: { _id: 0, password: 0 }}, callback);
 }
 
 function createUser(db, firstName, lastName, email, password, profileId, callback) {
@@ -131,7 +131,7 @@ apiRoute.get(async (req, res) => {
     const db = client.db(dbName);
     const collection = db.collection('user');
 
-    const data = await collection.find().toArray();
+    const data = await collection.find({}, { projection: { _id: 0, password: 0 } }).toArray();
     return res.status(200).json({ data })
   } catch (error) {
     console.log('get users.js', { error });

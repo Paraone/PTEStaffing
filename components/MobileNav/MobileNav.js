@@ -59,11 +59,11 @@ const MobileNav = () => {
                     <Menu onClick={toggleMenu} className={styles['mobile-user-menu']} menuItems={userMenu}/>
                 ) : (    
                     <div className={styles['mobile-nav-login']}>
-                    <Login /> <span>or</span> <Link href="/signup">Sign Up</Link>
+                    <Login /> <span>or</span> <Link onClick={toggleMenu} href="/signup">Sign Up</Link>
                     </div>
                 )
             }
-            <Menu onClick={toggleMenu} className={styles['mobile-main-nav']} menuItems={menuItems}/>
+            <Menu onClick={toggleMenu} className={styles['mobile-user-menu']} menuItems={menuItems}/>
         </div>
         </>
 

@@ -36,9 +36,9 @@ apiRoute.get(async (req, res) => {
     const db = client.db(dbName); 
     const collection = db.collection('user');
 
-    collection.findOne({ profileId }, { password: false })
+    collection.findOne({ profileId }, {projection: { password: 0 }})
     .then((data) => {
-      return res.status(200).json({ data: { ...data, password: undefined} });
+      return res.status(200).json({ data });
     })
     .catch((err) => {
       console.log('[profileId].js', { err });
