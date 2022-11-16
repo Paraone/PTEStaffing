@@ -19,9 +19,11 @@ const Layout = ({ children }) => {
     });
 
     const [showMobile, setShowMobile] = useState(true);
+    const [loaded, setLoaded] = useState(false);
     const handleResize = debounce(() => {
         if (window.screen.availWidth >= 480) setShowMobile(false);
         else if (window.screen.availWidth <= 480) setShowMobile(true);
+        if (!loaded) setLoaded(true);
     }, 250);
 
     useEffect(() => {
@@ -32,7 +34,7 @@ const Layout = ({ children }) => {
 
     useEffect(() => { revalidate(); }, [children]);
 
-    if (!data) return <h1>Loading...</h1>;
+    if (!data || !loaded) return <h1>Loading...</h1>;
     const navigation = showMobile ? <MobileNav /> : <Header />
     // let loggedIn = !!data.profileId;
 
