@@ -51,6 +51,10 @@
             }
         }
     }
+
+    a:active {
+        background-color: lightgrey;
+    }
 }
 
 .mobile-user-menu {
@@ -72,7 +76,7 @@
 }
 
 .hide {
-    transform: translateX(-420px);
+    transform: translateX(-500px);
 }
 
 .modal-menu {
