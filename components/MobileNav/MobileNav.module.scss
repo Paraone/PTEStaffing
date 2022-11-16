@@ -64,7 +64,7 @@
         &:visited{
             color: black;
         }
-        
+
         > a {
             border: unset;
         }
@@ -72,7 +72,7 @@
 }
 
 .hide {
-    display: none;
+    transform: translateX(-420px);
 }
 
 .modal-menu {
@@ -87,6 +87,7 @@
     right: 0;
     background-color: white;
     overflow: scroll;
+    transition: transform .2s ease-in;
 
     .close-btn {
         width: 100%;
