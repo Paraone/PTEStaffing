@@ -1,7 +1,10 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { useContext } from 'react';
+import { UserContext } from '~components/Layout/Layout';
 
 function Home() {
+  const { userId } = useContext(UserContext);
   return (
     <div>
       <Head>
@@ -15,9 +18,14 @@ function Home() {
         in Medical and Allied Health Care Industries, Event Consultation & Planning 
         and Corporate & Residential Cleaning Services
       </p>
-      <Link href="/login">Login</Link>
-      <p>or</p>
-      <Link href="/signup">Sign Up</Link>
+      {!userId &&
+        <>
+          <Link href="/login">Login</Link>
+          <p>or</p>
+          <Link href="/signup">Sign Up</Link>
+        </>
+      }
+      
     </div>
   );
 }
