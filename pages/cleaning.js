@@ -1,8 +1,14 @@
 import Head from 'next/head';
+import cx from 'classnames';
+import { useTransitionHook } from '~hooks';
+import transitionStyles from '../transitions.module.scss';
 
 function Cleaning() {
+
+  const pageStyles = useTransitionHook();
+
   return (
-    <div>
+    <div className={pageStyles}>
       <Head>
         <title>Cleaning Us | PTE Staffing</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />

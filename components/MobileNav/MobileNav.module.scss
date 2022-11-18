@@ -1,4 +1,5 @@
 .mobile-nav {
+    
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -80,6 +81,7 @@
 }
 
 .modal-menu {
+    z-index: 400;
     position: fixed;
     flex-direction: column;
     padding: 10px;

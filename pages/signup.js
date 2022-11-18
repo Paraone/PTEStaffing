@@ -3,6 +3,7 @@ import cookie from 'js-cookie';
 import Router from 'next/router';
 import signupForm from '../json/forms/signup.json';
 import { Form } from '~components';
+import {useTransitionHook} from '~hooks';
 
 const ROUTE = '/api/users';
 const handleData = ({data}) => {
@@ -15,10 +16,13 @@ const handleData = ({data}) => {
   }
 };
 
-const Signup = () => (
-  <div>
+const Signup = () => {
+  const pageStyles = useTransitionHook();
+
+  return (
+  <div className={pageStyles}>
     <Form inputs={signupForm} title="Sign Up" route={ROUTE} handleData={handleData} />
   </div>
-);
+)};
 
 export default Signup;

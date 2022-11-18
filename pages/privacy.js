@@ -1,9 +1,15 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import cx from 'classnames';
+import { useTransitionHook } from '~hooks';
+import transitionStyles from '../transitions.module.scss';
 
 function Privacy() {
+  
+  const pageStyles = useTransitionHook();
+
   return (
-    <div>
+    <div className={pageStyles}>
       <Head>
         <title>Privacy Policy | PTE Staffing</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />

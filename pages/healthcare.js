@@ -1,8 +1,11 @@
+import { useTransitionHook } from 'customHooks';
 import Head from 'next/head';
 
 function Healthcare() {
+  const pageStyles = useTransitionHook();
+
   return (
-    <div>
+    <div className={pageStyles}>
         <Head>
             <title>Healthcare Services | PTE Staffing</title>
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />

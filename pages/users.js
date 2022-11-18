@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 import { Redirector } from '~components';
+import {useTransitionHook} from '~hooks';
+
 
 // TODO: remove unwanted fields from user data
 
 const Users = () => {
+    const pageStyles = useTransitionHook();
     const [userData, setUserData] = useState([]);
     useEffect(() => {
         let source = axios.CancelToken.source();
@@ -36,7 +39,7 @@ const Users = () => {
 
     return (
         <Redirector>
-            <div>
+            <div className={pageStyles}>
                 User Profiles:
                 {userProfiles}
             </div>

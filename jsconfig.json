@@ -3,6 +3,7 @@
         "baseUrl": ".",
         "paths": {
         "~components": ["components/index"],
+        "~hooks": ["customHooks/index"],
         "~components/*": ["components/*"],
         "~json": ["json/index"],
         "~middleware": ["middleware/index"],

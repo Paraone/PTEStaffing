@@ -66,19 +66,21 @@ const Account = () => {
 
     return (!!email &&
       <Redirector>
-        <Head>
-          <title>Account Page: {accountId}</title>
-          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        </Head>
-        <h1>Account for {firstName + ' ' + lastName}</h1>
-  
-        <Form  
-          inputs={inputsWithValues} 
-          title="Account Info" 
-          route={`/api/users/${accountId}`} 
-          handleData={handleFormData} 
-          method="patch"
-        />
+        <div>
+          <Head>
+            <title>Account Page: {accountId}</title>
+            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+          </Head>
+          <h1>Account for {firstName + ' ' + lastName}</h1>
+    
+          <Form  
+            inputs={inputsWithValues} 
+            title="Account Info" 
+            route={`/api/users/${accountId}`} 
+            handleData={handleFormData} 
+            method="patch"
+          />
+        </div>
       </Redirector>
     );
 }
