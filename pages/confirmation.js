@@ -2,13 +2,13 @@ import axios from 'axios';
 import Head from 'next/head';
 import Router, { useRouter } from 'next/router';
 import cookie from 'js-cookie';
-
+import { useTransitionHook } from '~hooks';
 
 
 function Confirmation() {
     const router = useRouter();
     const { confirmationCode, email, profileId } = router?.query || {};
-
+    const pageStyles = useTransitionHook();
 
     if (confirmationCode) {
         axios
@@ -25,7 +25,7 @@ function Confirmation() {
     }
 
     return (
-        <div>
+        <div className={pageStyles}>
             <Head>
             <title>PTEStaffing | Account Confirmation Page</title>
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />

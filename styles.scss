@@ -1,7 +1,7 @@
 
 body {
   font-family: 'SF Pro Text', 'SF Pro Icons', system-ui, 'Helvetica Neue', 'Helvetica';
-  font-size: 0.6rem;
+  font-size: 16px;
   margin: 0 auto;
   
   #__next {
@@ -36,15 +36,17 @@ a {
     }
 }
 
+.page {
+  opacity: 0;
+  transition: opacity .25s ease-in;
+}
+
 @media only screen and (min-width: 481px) {
-  body {
-    font-size: 0.8rem;
-  }
 }
 
 @media only screen and (min-width: 769px) {
   body {
-    font-size: 1rem
+    font-size: 18px;
   }
 }
 

@@ -1,0 +1,11 @@
+.page {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all .5s ease-in;
+    z-index: 0;
+}
+
+.page.fadeIn {
+    opacity: 1;
+    transform: translateY(0px);
+}

@@ -1,12 +1,15 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useContext } from 'react';
+import { useTransitionHook } from '~hooks';
 import { UserContext } from '~components/Layout/Layout';
 
 function Home() {
   const { userId } = useContext(UserContext);
+  const pageStyles = useTransitionHook(10);
+
   return (
-    <div>
+    <div className={pageStyles}>
       <Head>
         <title>Welcome to PTE Staffing</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />

@@ -44,27 +44,29 @@ const User = () => {
     
     return (!!email &&
       <Redirector>
-        <Head>
-          <title>Profile Page: {profileId}</title>
-          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        </Head>
         <div>
-          {profilePic1 && <img src={profilePic1Url}width={120}/>}
-          {profilePic2 && <img src={profilePic2Url}width={120}/>}
+          <Head>
+            <title>Profile Page: {profileId}</title>
+            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+          </Head>
+          <div>
+            {profilePic1 && <img src={profilePic1Url}width={120}/>}
+            {profilePic2 && <img src={profilePic2Url}width={120}/>}
+          </div>
+          <h1>{profileId}</h1>
+          <h3>{firstName + ' ' + lastName}</h3>
+    
+          <div>phone: {phone}</div>
+          <div>email: {email}</div>
+          <div>positions: {positions}</div>
+          <div>
+            <p>Address:</p>
+            {address1 && <div>{address1}</div>}
+            {address2 && <div>{address2}</div>}
+            {(city || state || zip) && <div>{`${city}, ${state} ${zip}`}</div>}
+          </div>
+          {resume && <h3><a href={`https://drive.google.com/uc?id=${resume}`} target="_blank" rel="noreferrer">resume</a></h3>}
         </div>
-        <h1>{profileId}</h1>
-        <h3>{firstName + ' ' + lastName}</h3>
-  
-        <div>phone: {phone}</div>
-        <div>email: {email}</div>
-        <div>positions: {positions}</div>
-        <div>
-          <p>Address:</p>
-          {address1 && <div>{address1}</div>}
-          {address2 && <div>{address2}</div>}
-          {(city || state || zip) && <div>{`${city}, ${state} ${zip}`}</div>}
-        </div>
-        {resume && <h3><a href={`https://drive.google.com/uc?id=${resume}`} target="_blank" rel="noreferrer">resume</a></h3>}
       </Redirector>
     );
 }

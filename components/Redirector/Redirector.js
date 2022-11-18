@@ -2,9 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import { node } from 'prop-types';
 import Router, { useRouter } from 'next/router';
 import { UserContext } from '~components/Layout/Layout';
+import { useTransitionHook } from 'customHooks';
 
 const Redirector = ({ children }) => {
-
+    const pageStyles = useTransitionHook();
     const router = useRouter();
     const { query = {} } = router;
     const { accountId } = query;
@@ -35,7 +36,7 @@ const Redirector = ({ children }) => {
     if (loading) return <h1>Loading...</h1>;
 
     return (
-        <div>
+        <div className={pageStyles}>
             {children}
         </div>
     );
