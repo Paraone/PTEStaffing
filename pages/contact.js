@@ -1,8 +1,11 @@
 import Head from 'next/head';
+import { useTransitionHook } from '~hooks';
 
 function Contact() {
+  const pageStyles = useTransitionHook();
+  
   return (
-    <div>
+    <div className={pageStyles}>
       <Head>
         <title>Contact Us | PTE Staffing</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
