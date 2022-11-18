@@ -1,8 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import cx from 'classnames';
 import { useTransitionHook } from '~hooks';
-import transitionStyles from '../transitions.module.scss';
 
 function Privacy() {
   

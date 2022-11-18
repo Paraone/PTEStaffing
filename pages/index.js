@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useContext } from 'react';
-import { useTransitionHook } from '~hooks';
+import { useTransitionHook } from '~hooks';
 import { UserContext } from '~components/Layout/Layout';
 
 function Home() {

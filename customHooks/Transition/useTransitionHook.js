@@ -11,6 +11,8 @@ const useTransitionHook = (delayDuration = 10) => {
         const transitionDelay = setTimeout(() => {
             setShouldTransition(true);
         }, delayDuration);
+
+        return () => { clearTimeout(transitionDelay) };
     }, []);
 
     const pageStyles = cx(
