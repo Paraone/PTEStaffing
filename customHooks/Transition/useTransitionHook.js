@@ -7,13 +7,7 @@ const { page, fadeIn } = transitionStyles;
 const useTransitionHook = (delayDuration = 10) => {
     const [shouldTransition, setShouldTransition] = useState(false);
 
-    useEffect(() => {
-        const transitionDelay = setTimeout(() => {
-            setShouldTransition(true);
-        }, delayDuration);
-
-        return () => { clearTimeout(transitionDelay) };
-    }, []);
+    useEffect(() => setShouldTransition(true), []);
 
     const pageStyles = cx(
         page,
