@@ -8,7 +8,9 @@
         "~json": ["json/index"],
         "~middleware": ["middleware/index"],
         "~models": ["models/index"],
-        "~pages": ["pages/index"]
+        "~pages": ["pages/index"],
+        "~constants": ["constants/index"],
+        "~controllers/*": ["controllers/*"]
         }
     }
 }

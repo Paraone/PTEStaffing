@@ -6,79 +6,53 @@ function Healthcare() {
 
   return (
     <div className={pageStyles}>
-        <Head>
-            <title>Healthcare Services | PTE Staffing</title>
-            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        </Head>
-        <h1>Event Consultation & Staffing</h1>
-        <p> 
-            Since 2014 PTE has been a valued staffing solutions partner in the Tri- State 
-            Area. PTE experts simplify the onboarding process by sourcing, vetting and 
-            matching prospective candidates to the specific needs of your organization. 
-            Whether you are planning an event in the privacy of your home or are expecting 
-            30,000 guests at your music festival. PTE is your go to staffing solution. It 
-            is no secret that staff turnover, absences, burnout and even expansion can lead 
-            to staffing vacancies resulting in lost revenues for your business. Based in 
-            New York City, operating Nationally PTE has amassed a diverse network of Skilled, 
-            Reliable, and Attentive associates delivering support in each market and industry 
-            we serve.
-        </p>
+      <Head>
+        <title>Healthcare Services | PTE Staffing</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <div>
+        <h1>Medical & Allied Health Care Staffing</h1>
+        <p>PTE is Your Allied Workforce Solutions Partner &nbsp;</p>
 
- 
-
-      <h2>A Unique Consulting and Assignment Staffing Solution</h2>
-
-
- 
         <p>
-            Live Entertainment
-
-            Concert Production and Promotion
-
-            Private and Corporate Event Planning 
-
-            Brand Activation & Promotional Campaigns
-
-            Digital Advertising Solutions 
-
-
-            Hospitality
-
-            F&B Staffing
-
-            Concierge 
-
-            Private and Corporate Culinary Experiences
-
-            Food and Cocktail Menu design
-
-            Corporate and Residential Cleaning
-
-            
-
-            Construction and Renovation
-
-            Project Managers
-
-            Laborers
-
-            Trade Experts
-
-            Medical Clinicians and Allied Health Care
-
-            RN&apos;s
-
-            CNS&apos;s
-
-            NP&apos;s
-
-            LPN&apos;s
-
-            Allied Health Care Providers
-
-
-            Whether at home, on location or at the office. We truly understand what it takes to create life long memories and the long term success you or your organization deserves
+          <span>
+            PTE is an innovator in workforce solutions and offers medical clinician and allied health care workforce specialties for various assignment lengths — including&nbsp;
+          </span>
+          <a href="https://www.amnhealthcare.com/permanent-placement-recruitment-services/" target="_blank">
+            <span>permanent placement</span>
+          </a>
+          <span>, travel, and temporary staff.</span>
         </p>
+
+        <p>
+          Our staffing experts will match you with qualified candidates through a careful screening, interviewing, and quality assurance process.&nbsp;
+        </p>
+
+        <p>Home Health Care Aides and Medical Field Workforce Solutions</p>
+
+        <p>
+          <span>
+            You can trust PTE with your loved one's and organizations medical affiliate clinicians staffing needs. PTE's r
+          </span>
+          <a href="https://www.amnhealthcare.com/recruitment-process-outsourcing/" target="_blank">
+            <span>ecruitment process is tailored to</span>
+          </a>
+          <span>
+            &nbsp;provides a dedicated team to your facility for the complete process of recruitment, hiring, and onboarding. We specialize in sourcing Home Health Aides, Registered Professional Nurses (RN's), and Clinical Nurse Specialists (CNS's) Whether your family member requires live-in care or regular check-ins several times a week, our services are the answer you are looking for. We work with patients who have recently been discharged from the hospital, patients with disabilities, as well as patients with chronic or terminal illness. Our services include short-term and long-term plans, which we can adjust based on the changing needs of your family member. We also offer respite care for patients who already have a primary caregiver but are in need of on call coverage.&nbsp;
+          </span>
+        </p>
+
+        <p>Filling More Allied Positions</p>
+
+        <p>PTE Staffing allied services recruit qualified allied health professionals.</p>
+
+        <p>Physical Therapists</p>
+
+        <p>
+          We specialize in delivering qualified Physical Therapists (PT) to a variety of clinic settings. Our team understands how important a PT is when planning for preventive care, rehabilitation, and treatment for patients with chronic conditions and illnesses. That’s why we’ll work hard to mine our database of PTs. You can count on a diversified and well-rounded candidate to hit the ground from day one. We go the extra step to vet each candidate to make sure they are the best fit for your therapy needs.
+        </p>
+
+      </div>
     </div>
   );
 }
