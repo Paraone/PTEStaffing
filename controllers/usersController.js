@@ -1,5 +1,3 @@
-const assert = require('assert');
-const uuid = require('uuid-random');
 const bcrypt = require('bcrypt');
 const v4 = require('uuid').v4;
 import { WORKER_ACCOUNT_TYPE } from '~constants';

@@ -18,7 +18,7 @@ function Healthcare() {
           <span>
             PTE is an innovator in workforce solutions and offers medical clinician and allied health care workforce specialties for various assignment lengths — including&nbsp;
           </span>
-          <a href="https://www.amnhealthcare.com/permanent-placement-recruitment-services/" target="_blank">
+          <a href="https://www.amnhealthcare.com/permanent-placement-recruitment-services/" rel="noreferrer" target="_blank">
             <span>permanent placement</span>
           </a>
           <span>, travel, and temporary staff.</span>
@@ -32,13 +32,13 @@ function Healthcare() {
 
         <p>
           <span>
-            You can trust PTE with your loved one's and organizations medical affiliate clinicians staffing needs. PTE's r
+            You can trust PTE with your loved one&apos;s and organizations medical affiliate clinicians staffing needs. PTE&apos;s r
           </span>
-          <a href="https://www.amnhealthcare.com/recruitment-process-outsourcing/" target="_blank">
+          <a href="https://www.amnhealthcare.com/recruitment-process-outsourcing/" rel="noreferrer" target="_blank">
             <span>ecruitment process is tailored to</span>
           </a>
           <span>
-            &nbsp;provides a dedicated team to your facility for the complete process of recruitment, hiring, and onboarding. We specialize in sourcing Home Health Aides, Registered Professional Nurses (RN's), and Clinical Nurse Specialists (CNS's) Whether your family member requires live-in care or regular check-ins several times a week, our services are the answer you are looking for. We work with patients who have recently been discharged from the hospital, patients with disabilities, as well as patients with chronic or terminal illness. Our services include short-term and long-term plans, which we can adjust based on the changing needs of your family member. We also offer respite care for patients who already have a primary caregiver but are in need of on call coverage.&nbsp;
+            &nbsp;provides a dedicated team to your facility for the complete process of recruitment, hiring, and onboarding. We specialize in sourcing Home Health Aides, Registered Professional Nurses (RN&apos;s), and Clinical Nurse Specialists (CNS&apos;s) Whether your family member requires live-in care or regular check-ins several times a week, our services are the answer you are looking for. We work with patients who have recently been discharged from the hospital, patients with disabilities, as well as patients with chronic or terminal illness. Our services include short-term and long-term plans, which we can adjust based on the changing needs of your family member. We also offer respite care for patients who already have a primary caregiver but are in need of on call coverage.&nbsp;
           </span>
         </p>
 

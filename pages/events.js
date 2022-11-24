@@ -120,16 +120,16 @@ function Events() {
 
         <ul>
           <li>
-            RN's
+            RN&apos;s
           </li>
           <li>
-            CNS's
+            CNS&apos;s
           </li>
           <li>
-            NP's
+            NP&apos;s
           </li>
           <li>
-            LPN's
+            LPN&apos;s
           </li>
           <li>
             Allied Health Care Providers

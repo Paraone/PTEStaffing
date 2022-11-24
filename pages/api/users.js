@@ -5,7 +5,7 @@ const jwtSecret = process.env.JWT_SECRET; // eslint-disable-line
 import clientPromise from 'lib/mongodb';
 import middleware from '../../middleware/middleware';
 import { findWorker, createWorker } from '~controllers/usersController';
-import  { sendMail } from '~controllers/mailController';
+// import  { sendMail } from '~controllers/mailController';
 
 export const config = {
   api: {
@@ -50,7 +50,7 @@ apiRoute.post(async (req, res) => {
     const { ops, ops: [createdUser] } = await createWorker(db, firstName, lastName, email, password, profileId);
     
     if (ops.length === 1) {
-      const { userId, email, firstName, lastName, profileId, confirmationCode, emailConfirmed } = createdUser;
+      const { userId, email, firstName, lastName, profileId, /*confirmationCode, */emailConfirmed } = createdUser;
       const token = jwt.sign(
         {userId, email, firstName, lastName, profileId, emailConfirmed },
         jwtSecret,
@@ -59,20 +59,20 @@ apiRoute.post(async (req, res) => {
         },
       );
 
-      const emailData = {
-        from: '<management@ptestaffing.com>',
-        to: email,
-        subject: "PTEStaffing Registration test ✔",
-        message: `
-          Please go to the link below to confirm your account\n
-          https://local.ptestaffing.com:3000/confirmation?confirmationCode=${confirmationCode}&profileId=${profileId}
-        `
-      };
+      // const emailData = {
+      //   from: '<management@ptestaffing.com>',
+      //   to: email,
+      //   subject: "PTEStaffing Registration test ✔",
+      //   message: `
+      //     Please go to the link below to confirm your account\n
+      //     https://local.ptestaffing.com:3000/confirmation?confirmationCode=${confirmationCode}&profileId=${profileId}
+      //   `
+      // };
       res.status(200).json({token, email});
       return;
-      sendMail(emailData, (data) => { 
-        return;
-      });
+      // sendMail(emailData, (data) => { 
+      //   return;
+      // });
     }
   } catch (e) {
     res.status(400).json({ error: true, message: e.message || e });

@@ -1,14 +1,7 @@
 const nextConnect = require('next-connect');
-const assert = require('assert');
-const uuid = require('uuid-random');
-const bcrypt = require('bcrypt');
-const v4 = require('uuid').v4;
-const jwt = require('jsonwebtoken');
 // import  { sendMail } from '../../controllers/mailController';
-const jwtSecret = process.env.JWT_SECRET; // eslint-disable-line
 import clientPromise from 'lib/mongodb';
 import middleware from '../../middleware/middleware';
-import { WORKER_ACCOUNT_TYPE } from '~constants';
 import { findWorker, createWorker } from '~controllers/usersController';
 
 export const config = {
@@ -51,8 +44,8 @@ apiRoute.get(async (req, res) => {
         console.log({ e })
     }
 });
-apiRoute.post(async (req, res) => {});
-apiRoute.put(async (req, res) => {});
-apiRoute.delete(async (req, res) => {});
+// apiRoute.post(async (req, res) => {});
+// apiRoute.put(async (req, res) => {});
+// apiRoute.delete(async (req, res) => {});
 
 export default apiRoute;
