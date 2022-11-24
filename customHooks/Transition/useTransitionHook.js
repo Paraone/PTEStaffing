@@ -4,7 +4,7 @@ import transitionStyles from '../../transitions.module.scss';
 
 const { page, fadeIn } = transitionStyles;
 
-const useTransitionHook = (delayDuration = 10) => {
+const useTransitionHook = () => {
     const [shouldTransition, setShouldTransition] = useState(false);
 
     useEffect(() => setShouldTransition(true), []);
