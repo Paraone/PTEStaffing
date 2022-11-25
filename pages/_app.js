@@ -1,16 +1,23 @@
-import App from 'next/app';
+import { SessionProvider } from 'next-auth/react';
+import PropTypes from 'prop-types';
 import { Layout } from '~components';
 import '../styles.scss';
 
-class MyApp extends App {
-    render () {
-        const { Component, pageProps } = this.props;
-        return (
+export function MyApp ({ Component, pageProps: { session, ...pageProps } }) {
+    return (
+        <SessionProvider session={session}>
             <Layout>
                 <Component {...pageProps} />
             </Layout>
-        );
-    }
+        </SessionProvider>
+    );
+} 
+
+MyApp.propTypes = {
+    Component: PropTypes.node.isRequired,
+    pageProps: PropTypes.shape({
+        session: PropTypes.shape({})
+    })
 }
 
 export default MyApp;
