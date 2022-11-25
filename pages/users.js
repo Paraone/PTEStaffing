@@ -15,7 +15,6 @@ const Users = () => {
         axios.get('/api/users', {
             cancelToken: source.token
         }).then((response) => {
-            console.log(response)
             const users = response?.data?.data;
             setUserData(users);
         });
