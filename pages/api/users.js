@@ -2,8 +2,8 @@ const nextConnect = require('next-connect');
 const assert = require('assert');
 const jwt = require('jsonwebtoken');
 const jwtSecret = process.env.JWT_SECRET; // eslint-disable-line
-import clientPromise from 'lib/mongodb';
 import middleware from '../../middleware/middleware';
+import clientPromise from 'lib/mongodb';
 import { findWorker, createWorker } from '~controllers/usersController';
 // import  { sendMail } from '~controllers/mailController';
 
@@ -37,17 +37,14 @@ apiRoute.post(async (req, res) => {
     assert.notEqual(null, email, 'Email required');
     assert.notEqual(null, password, 'Password required');
     assert.notEqual(null, profileId, 'Profile ID required');
-    
-    const client = await clientPromise;
-    const db = client.db(dbName);
 
-    const worker = await findWorker(db, email, profileId)
+    const worker = await findWorker(email, profileId)
     if (worker) {
       res.status(400).json({ error: 'User already exists.' });
       return;
     }
 
-    const { ops, ops: [createdUser] } = await createWorker(db, firstName, lastName, email, password, profileId);
+    const { ops, ops: [createdUser] } = await createWorker(firstName, lastName, email, password, profileId);
     
     if (ops.length === 1) {
       const { userId, email, firstName, lastName, profileId, /*confirmationCode, */emailConfirmed } = createdUser;

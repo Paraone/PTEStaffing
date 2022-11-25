@@ -16,7 +16,6 @@ export const ResumeInput = ({
     onBlur,
     fileId
 }) => {
-    console.log({ fileId })
     const fileUrl = `https://drive.google.com/uc?id=${fileId}`;
     const defaultResume = 'no file uploaded';
     
@@ -82,7 +81,7 @@ ResumeInput.propTypes = {
     name: string.isRequired, 
     label: string.isRequired, 
     value: string.isRequired, 
-    file: string.isRequired,
+    file: string,
     required: bool, 
     validated: bool,
     onChange: func, 
@@ -93,6 +92,7 @@ ResumeInput.propTypes = {
 ResumeInput.defaultProps = {
     required: false,
     vlaidated: true,
+    file: '',
     onChange: _ => _,
     onBlur: _ => _
 }

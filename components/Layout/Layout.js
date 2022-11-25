@@ -2,9 +2,9 @@ import React, { createContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { debounce } from 'lodash';
-import fetch from 'isomorphic-unfetch';
+// import fetch from 'isomorphic-unfetch';
 import { node, string, oneOfType } from 'prop-types';
-import useSWR from 'swr';
+// import useSWR from 'swr';
 import cookie from 'js-cookie';
 import { Header, Footer, MobileNav } from '~components';
 
@@ -13,10 +13,13 @@ export const UserContext = createContext({});
 const Layout = ({ children }) => {
     const { query: { alert } } = useRouter();
 
-    const {data = {}, revalidate} = useSWR('/api/me', async function(args) {
-        const res = await fetch(args);
-        return res.json();
-    });
+    // const {data = {}, revalidate} = useSWR('/api/me', async function(args) {
+    //     const res = await fetch(args);
+    //     return res.json();
+    // });
+
+    const data = {};
+    const revalidate = _ => _;
 
     const [showMobile, setShowMobile] = useState(true);
     const [loaded, setLoaded] = useState(false);
