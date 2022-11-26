@@ -1,24 +1,18 @@
 import React, { createContext, useEffect, useState } from 'react';
+import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { debounce } from 'lodash';
-// import fetch from 'isomorphic-unfetch';
 import { node, string, oneOfType } from 'prop-types';
-// import useSWR from 'swr';
 import cookie from 'js-cookie';
 import { Header, Footer, MobileNav } from '~components';
 
 export const UserContext = createContext({});
 
-const Layout = ({ children }) => {
+const Layout = ({ children, ...rest }) => {
+    console.log({ rest })
     const { query: { alert } } = useRouter();
 
-    // const {data = {}, revalidate} = useSWR('/api/me', async function(args) {
-    //     const res = await fetch(args);
-    //     return res.json();
-    // });
-
-    const data = {};
     const revalidate = _ => _;
 
     const [showMobile, setShowMobile] = useState(true);
@@ -37,12 +31,12 @@ const Layout = ({ children }) => {
 
     useEffect(() => { revalidate(); }, [children]);
 
-    if (!data || !loaded) return <h1>Loading...</h1>;
+    if (!loaded) return <h1>Loading...</h1>;
     const navigation = showMobile ? <MobileNav /> : <Header />
     // let loggedIn = !!data.profileId;
 
     return (
-        <UserContext.Provider value={data}>
+        <UserContext.Provider value={{}}>
             <Head>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
@@ -56,6 +50,24 @@ const Layout = ({ children }) => {
 
 Layout.propTypes = {
     children: oneOfType([node, string]).isRequired
+}
+
+export async function getServerSideProps(ctx) {
+  const session = await getSession(ctx);
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      },
+    }
+  }
+
+  return {
+    props: {
+      ...session,
+    }
+  }
 }
 
 export default Layout;

@@ -1,11 +1,10 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { useContext } from 'react';
 import { useTransitionHook } from '~hooks';
-import { UserContext } from '~components/Layout/Layout';
+import { useSession } from 'next-auth/react';
 
 function Home() {
-  const { userId } = useContext(UserContext);
+  const { session } = useSession();
   const pageStyles = useTransitionHook(10);
 
   return (
@@ -21,7 +20,7 @@ function Home() {
         in Medical and Allied Health Care Industries, Event Consultation & Planning 
         and Corporate & Residential Cleaning Services
       </p>
-      {!userId &&
+      {!session &&
         <>
           <Link href="/login">Login</Link>
           <p>or</p>
