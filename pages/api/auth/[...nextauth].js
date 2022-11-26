@@ -35,8 +35,8 @@ export const authOptions = {
         }
     }),
     GoogleProvider({
-        clientId: process.env.GOOGLE_SIGN_IN_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_SIGN_IN_SECRET
+        clientId: process.env.GOOGLE_SIGN_IN_CLIENT_ID, // eslint-disable-line
+        clientSecret: process.env.GOOGLE_SIGN_IN_SECRET // eslint-disable-line
     }),
     // ...add more providers here
   ],
