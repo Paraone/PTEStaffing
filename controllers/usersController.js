@@ -5,11 +5,19 @@ import { WORKER_ACCOUNT_TYPE, DB_NAME } from '~constants';
 
 const saltRounds = 10;
 
-export async function findWorker(email, profileId) {
+async function getUserCollection() {
     const client = await clientPromise;
-    const db = client.db(DB_NAME);
-    const collection = db.collection('user');
-    return await collection.findOne({ $or: [{ email }, { profileId }]}, { projection: { _id: 0, password: 0 }});
+    const db = client.db(DB_NAME)
+    return db.collection('user');
+}
+
+export async function authWorker(password, hash) {
+    return await bcrypt.compare(password, hash);
+}
+
+export async function findWorker(email, profileId) {
+    const collection = await getUserCollection();
+    return await collection.findOne({ $or: [{ email }, { profileId }]});
 }
 
 export async function createWorker(firstName, lastName, email, password, profileId) {

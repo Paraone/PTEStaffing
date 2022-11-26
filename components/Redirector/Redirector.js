@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useSession } from 'next-auth/react';
 import { node } from 'prop-types';
 import Router, { useRouter } from 'next/router';
 import { UserContext } from '~components/Layout/Layout';
@@ -9,11 +10,13 @@ const Redirector = ({ children }) => {
     const router = useRouter();
     const { query = {} } = router;
     const { accountId } = query;
-    const { userId, profileId, emailConfirmed, email } = useContext(UserContext);
+    const { data: session } = useSession();
+    console.log({session})
+    const { profileId, email, emailConfirmed } = session?.session?.user || {};
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {   
-        if (!userId) {
+        if (!session) {
             const alert = 'you must be logged in to view this page.'
             Router.push(`/login?alert=${alert}`);
             return;
