@@ -25,7 +25,6 @@ const apiRoute = nextConnect({
 apiRoute.use(middleware);
 
 apiRoute.post(async (req, res) => {
-    let client;
     const { email, password } = req?.body || {};
     //login
     try {

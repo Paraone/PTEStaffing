@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { node } from 'prop-types';
 import Router, { useRouter } from 'next/router';
-import { UserContext } from '~components/Layout/Layout';
 import { useTransitionHook } from 'customHooks';
 
 const Redirector = ({ children }) => {
@@ -11,7 +10,6 @@ const Redirector = ({ children }) => {
     const { query = {} } = router;
     const { accountId } = query;
     const { data: session } = useSession();
-    console.log({session})
     const { profileId, email, emailConfirmed } = session?.session?.user || {};
     const [loading, setLoading] = useState(true);
 
