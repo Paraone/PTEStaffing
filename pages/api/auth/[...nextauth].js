@@ -1,5 +1,6 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
+import GoogleProvider from 'next-auth/providers/google';
 import { findWorker, authWorker } from "controllers/usersController";
 
 export const authOptions = {
@@ -32,6 +33,10 @@ export const authOptions = {
           // (i.e., the request IP address)
           // Return null if user data could not be retrieved
         }
+    }),
+    GoogleProvider({
+        clientId: process.env.GOOGLE_SIGN_IN_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_SIGN_IN_SECRET
     }),
     // ...add more providers here
   ],
