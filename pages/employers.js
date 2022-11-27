@@ -3,6 +3,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import { Redirector } from '~components';
 import {useTransitionHook} from '~hooks';
+import styles from './employers.module.scss';
 
 
 const Employers = () => {
@@ -10,10 +11,13 @@ const Employers = () => {
     const [userData, setUserData] = useState([]);
     useEffect(() => {
         let source = axios.CancelToken.source();
-        axios.get('/api/staff', {
+        axios.get('/api/employers', {
             cancelToken: source.token
         }).then((response) => {
-            const users = response?.data?.data;
+            let users = response?.data?.data;
+            if (Array.isArray(users) && users.length > 1) {
+                users = users.sort((a, b) => b.businessName > a.businessName ? -1 : 1)
+            }
             setUserData(users);
         });
         
@@ -21,14 +25,15 @@ const Employers = () => {
     }, []);
 
     const userProfiles = Array.isArray(userData) && userData.length > 0 ?
-        userData.map(({ profileId, firstName, lastName, email, profilePic1 }, index) => (
-            <div key={index}>
-                <div><img width={120} src={profilePic1 ? `https://drive.google.com/uc?id=${profilePic1}` : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Placeholder_no_text.svg/1200px-Placeholder_no_text.svg.png'} /></div>
+        userData.map(({ businessName, firstName, lastName, email, logo }, index) => (
+            <div className={styles.business} key={index}>
+                <h1>{businessName}</h1>
+                <div><img width={120} src={logo ? `https://drive.google.com/uc?id=${logo}` : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Placeholder_no_text.svg/1200px-Placeholder_no_text.svg.png'} /></div>
                 <div>First Name: {firstName}</div>
                 <div>Last Name: {lastName}</div>
                 <div>Email: {email}</div>
-                <div><Link href="/users/[profileId]" as={`/users/${profileId}`}>profilePage</Link></div>
-                <div><Link href="/accounts/[accountId]" as={`/accounts/${profileId}`}>Account Page</Link></div>
+                <div><Link href="/employer/[businessName]" as={`/employer/${businessName}`}>Overview</Link></div>
+                <div><Link href="/accounts/[businessName]" as={`/accounts/${businessName}`}>Account Page</Link></div>
             </div>
         ))
         :
@@ -37,8 +42,10 @@ const Employers = () => {
     return (
         <Redirector>
             <div className={pageStyles}>
-                User Profiles:
-                {userProfiles}
+                <h2>Businesses:</h2>
+                <div className={styles.businesses}>
+                    {userProfiles}  
+                </div>
             </div>
         </Redirector>
     );

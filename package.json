@@ -9,7 +9,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "testing": "next",
+    "testing": "node server.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix",
     "format": "--write './**/*.{js,jsx,ts,tsx,css,md,json}' --config"
