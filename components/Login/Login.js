@@ -1,19 +1,10 @@
 import React from 'react';
-import { useSession, signIn, signOut } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 
-const Login = () => {
-  const { data: session } = useSession();
-  console.log({ session })
-  if (session) {
-    return (
-      <>
-        <button onClick={() => signOut()}>Sign out</button>
-      </>
-    )
-  }
+const Login = () => {  
   return (
     <>
-      <button onClick={() => signIn()}>Log in</button>
+      <button onClick={() => signIn("email", { callbackUrl: `/?alert=${'You have signed in.'}`})}>Log in</button>
     </>
   )
 };

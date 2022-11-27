@@ -1,7 +1,6 @@
 import axios from 'axios';
 import Head from 'next/head';
 import Router, { useRouter } from 'next/router';
-import cookie from 'js-cookie';
 import { useTransitionHook } from '~hooks';
 
 
@@ -12,13 +11,12 @@ function Confirmation() {
 
     if (confirmationCode) {
         axios
-        .patch(`/api/users/${profileId}?confirmationCode=${confirmationCode}`)
-        .then(({ data: { token, error } }) => {
+        .patch(`/api/staff/${profileId}?confirmationCode=${confirmationCode}`)
+        .then(({ data, data: { error, email } }) => {
+            console.log({ data })
             if (error) console.log({error});
-            if (token) {
-                cookie.set('token', token, { expires: 2 });
-                Router.push(`/accounts/${profileId}`);
-            }
+            if (!email) return console.log({ email });
+            Router.push(`/?alert=${'You have successfully registered your account.'}`);
         });
 
         return <h1>Redirecting...</h1>;

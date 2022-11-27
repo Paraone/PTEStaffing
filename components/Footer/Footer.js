@@ -1,25 +1,15 @@
-import { func } from 'prop-types';
-import { useContext } from 'react';
-import { UserContext } from '~components/Layout/Layout';
+import { useSession, signOut } from 'next-auth/react';
 
-const Footer = ({ revalidate, cookie }) =>{
-    const { userId } = useContext(UserContext);
-    return (userId &&
+const Footer = () =>{
+    const { data: session } = useSession();
+
+    return (session &&
         <p>
-            <button
-                onClick={() => {
-                cookie.remove('token');
-                revalidate();
-            }}>
+            <button onClick={() => { signOut({ callbackUrl: `/?alert=${'You have been signed out.'}`}) }}>
                 Logout
             </button>
         </p>
     );
 };
-
-Footer.propTypes = {
-    revalidate: func.isRequired,
-    cookie: func.isRequired
-}
 
 export default Footer;
