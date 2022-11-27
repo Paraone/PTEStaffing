@@ -3,7 +3,7 @@ import axios from 'axios';
 import Router, { useRouter } from 'next/router';
 import Head from 'next/head';
 import { Redirector, Form } from '~components';
-import inputs from '../../json/forms/BusinessAccount.json';
+import inputs from '../../json/forms/businessAccount.json';
 
 const BusinessAccount = () => {
     const router = useRouter();

@@ -8,8 +8,8 @@ import styles from './Header.module.scss';
 
 const Header = () => {
   const { data: session } = useSession();
-  const { userId, profileId, businessName, accountType } = session?.session?.user || {};
-  console.log({ userId, profileId, businessName, accountType })
+  const { userId, profileId, businessName } = session?.session?.user || {};
+
   let profileHeading = 'profile';
   let profileCta = `/staff/${profileId}`
   let accountCta = `/accounts/${profileId}`
