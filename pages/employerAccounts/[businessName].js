@@ -10,7 +10,7 @@ const BusinessAccount = () => {
 
     const { query: { businessName } } = router;
     const [userData, setUserData] = useState({});
-    const { firstName, lastName, email } = userData;
+    const { email } = userData;
 
     const handleData = (response) => {
         setUserData(response?.data?.data || {});
