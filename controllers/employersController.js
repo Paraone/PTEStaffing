@@ -29,11 +29,11 @@ export async function findEmployer({ email, businessName, confirmationCode }) {
 }
 
 export async function createEmployer(firstName, lastName, email, password, businessName) {
-    const collection = getEmployerCollection();
-    
+    const collection = await getEmployerCollection();
+    console.log({ collection })
     return await bcrypt.hash(password, saltRounds).then(async (hash) => {
         if (!hash) {
-            return { error: 'No hash returned.'};
+            return null;
         }
         const confirmationCode = v4();
         return await collection.insertOne(

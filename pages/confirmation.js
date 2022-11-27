@@ -6,10 +6,24 @@ import { useTransitionHook } from '~hooks';
 
 function Confirmation() {
     const router = useRouter();
-    const { confirmationCode, email, profileId } = router?.query || {};
+    const { confirmationCode, email, profileId, businessName } = router?.query || {};
     const pageStyles = useTransitionHook();
-
+    console.log({ confirmationCode, email, profileId, businessName })
     if (confirmationCode) {
+        if (businessName) {
+            console.log({ businessName })
+            axios
+            .patch(`/api/employer/${businessName}?confirmationCode=${confirmationCode}`)
+            .then(({ data, data: { error, email } }) => {
+                console.log({ data })
+                if (error) console.log({error});
+                if (!email) return console.log({ email });
+                Router.push(`/?alert=${'You have successfully registered your account.'}`);
+            });
+
+            return <h1>Redirecting...</h1>
+        }
+
         axios
         .patch(`/api/staff/${profileId}?confirmationCode=${confirmationCode}`)
         .then(({ data, data: { error, email } }) => {

@@ -1,7 +1,8 @@
 const nextConnect = require('next-connect');
-// import  { sendMail } from '../../controllers/mailController';
+const assert = require('assert');
 import middleware from '../../middleware/middleware';
-import { findEmployer, createEmployer } from 'controllers/employersController';
+import { findEmployer, createEmployer, getEmployerCollection } from '~controllers/employersController';
+// import  { sendMail } from '~controllers/mailController';
 
 export const config = {
   api: {
@@ -11,7 +12,7 @@ export const config = {
 
 const apiRoute = nextConnect({
   onError(err, req, res) {
-    if (err) console.log('api/employers.js', { err })
+    if (err) console.log('api/employer.js', { err })
     return res.status(403)
   },
   
@@ -22,25 +23,60 @@ const apiRoute = nextConnect({
 
 apiRoute.use(middleware);
 
-apiRoute.get(async (req, res) => {
-    try {
-        const employer = await findEmployer('w@w.com', 'ww');
-        
-        if (employer) {
-            res.status(400).json({ error: 'User already exists' })
-            return;
-        }
-        
-        createEmployer().then((data) => { 
-            console.log({data}) 
-            return res.status(200).json({data})
-        })
-    } catch (e) {
-        console.log({ e })
+apiRoute.post(async (req, res) => {
+  const { email, password, firstName, lastName, businessName } = req.body;
+  
+  try {
+    assert.notEqual(null, lastName, 'Last Name required');
+    assert.notEqual(null, firstName, 'First Name required');
+    assert.notEqual(null, email, 'Email required');
+    assert.notEqual(null, password, 'Password required');
+    assert.notEqual(null, businessName, 'Profile ID required');
+
+    const employer = await findEmployer({ email, businessName })
+    if (employer) {
+      res.status(400).json({ error: 'Business is already registered.' });
+      return;
     }
+    
+    console.log('creating user');
+    const { ops, ops: [createdUser] } = await createEmployer(firstName, lastName, email, password, businessName);
+    
+    if (ops.length === 1) {
+      console.log({ businessName })
+      const { email, confirmationCode } = createdUser;
+
+      // const emailData = {
+      //   from: '<management@pteEmployering.com>',
+      //   to: email,
+      //   subject: "PTEEmployering Registration test ✔",
+      //   message: `
+      //     Please go to the link below to confirm your account\n
+      //     http://localhost:3000/confirmation?confirmationCode=${confirmationCode}&businessName=${businessName}
+      //   `
+      // };
+      res.status(200).json({ email, url: `http://localhost:3000/confirmation?confirmationCode=${confirmationCode}&businessName=${businessName}` });
+      return;
+      // sendMail(emailData, (data) => { 
+      //   return;
+      // });
+    }
+  } catch (e) {
+    res.status(400).json({ error: true, message: e.message || e });
+  }
 });
-// apiRoute.post(async (req, res) => {});
-// apiRoute.put(async (req, res) => {});
-// apiRoute.delete(async (req, res) => {});
+
+apiRoute.get(async (req, res) => {
+  try {
+    
+    const collection = await getEmployerCollection();
+    const data = await collection.find({}, { projection: { _id: 0, password: 0 } }).toArray();
+
+    return res.status(200).json({ data })
+  } catch (error) {
+    console.log('get users.js', { error });
+    res.status(400).json({ error: true, message: error });
+  }
+});
 
 export default apiRoute;

@@ -1,6 +1,6 @@
 const nextConnect = require('next-connect');
 const assert = require('assert');
-import { getStaffCollection } from 'controllers/staffController';
+import { getEmployerCollection } from 'controllers/employersController';
 import middleware from '../../../middleware/middleware';
 // import { useDrive } from '../google/gapi';
 
@@ -12,7 +12,7 @@ export const config = {
 
 const apiRoute = nextConnect({
   onError(err, req, res) {
-    if (err) console.log('[profileId].js', { err })
+    if (err) console.log('[businessName].js', { err })
     return res.status(403)
   },
   // Handle any other HTTP method
@@ -24,38 +24,38 @@ const apiRoute = nextConnect({
 apiRoute.use(middleware);
 
 apiRoute.get(async (req, res) => {
-  const { query : { profileId } } = req;
+  const { query : { businessName } } = req;
 
   try {
-    const collection = await getStaffCollection();
+    const collection = await getEmployerCollection();
 
-    collection.findOne({ profileId }, {projection: { password: 0 }})
+    collection.findOne({ businessName }, {projection: { password: 0 }})
     .then((data) => {
       return res.status(200).json({ data });
     })
     .catch((err) => {
-      console.log('[profileId].js', { err });
+      console.log('[businessName].js', { err });
       return res.status(401).json({ data: { err } });
     });
 
   } catch (error) {
-    console.log('get [profileId].js', { error });
+    console.log('get [businessName].js', { error });
   }
 })
 
 apiRoute.patch(async ({ body, files, query }, res) => {
-  const { profileId, confirmationCode } = query;
+  const { businessName, confirmationCode } = query;
 
   try {
-    const collection = await getStaffCollection();
+    const collection = await getEmployerCollection();
     if (confirmationCode) {
 
-      const staff = await collection.findOne({ confirmationCode })
-      if (!staff) {
+      const employer = await collection.findOne({ confirmationCode })
+      if (!employer) {
         res.status(400).json({ error: true, message: 'not found' })
       }
 
-      const { email } = staff;
+      const { email } = employer;
         
       collection.updateOne(
         { confirmationCode }, 
@@ -106,7 +106,7 @@ apiRoute.patch(async ({ body, files, query }, res) => {
         //     fields: 'id'
         //   }, (err, file) => {
         //     if (err) {
-        //       console.log('[profileId]', { err });
+        //       console.log('[businessName]', { err });
         //       rejects({ err })
         //     }
         //     const id = file?.data?.id;
@@ -116,7 +116,7 @@ apiRoute.patch(async ({ body, files, query }, res) => {
       });
     })
     Promise.all(fieldData).then(async (values) => {
-      collection.findOne({ profileId }).then((user) => {
+      collection.findOne({ businessName }).then((user) => {
         const deletedFiles = values.map(([fieldname, id]) => {
           return new Promise((resolve) => {
             if (user[fieldname] && user[fieldname] !== id) {
@@ -137,7 +137,7 @@ apiRoute.patch(async ({ body, files, query }, res) => {
         })
 
         Promise.all(deletedFiles).then(() => {
-          collection.updateOne({ profileId }, { $set: updateFields }, { upsert: true }, (err, data) => {
+          collection.updateOne({ businessName }, { $set: updateFields }, { upsert: true }, (err, data) => {
             return res.status(200).json(data);
           });
         })
@@ -145,7 +145,7 @@ apiRoute.patch(async ({ body, files, query }, res) => {
 
     })
   } catch (error) {
-    console.log('patch [profileId].js', { error });
+    console.log('patch [businessName].js', { error });
     res.status(400).json({ error: true, message: error });
   }
 })
