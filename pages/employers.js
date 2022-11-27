@@ -5,14 +5,12 @@ import { Redirector } from '~components';
 import {useTransitionHook} from '~hooks';
 
 
-// TODO: remove unwanted fields from user data
-
-const Users = () => {
+const Employers = () => {
     const pageStyles = useTransitionHook();
     const [userData, setUserData] = useState([]);
     useEffect(() => {
         let source = axios.CancelToken.source();
-        axios.get('/api/users', {
+        axios.get('/api/staff', {
             cancelToken: source.token
         }).then((response) => {
             const users = response?.data?.data;
@@ -46,4 +44,4 @@ const Users = () => {
     );
 }
 
-export default Users;
+export default Employers;

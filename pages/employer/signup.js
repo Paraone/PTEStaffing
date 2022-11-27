@@ -1,6 +1,6 @@
 import React from 'react';
 import Router from 'next/router';
-import signupForm from '../json/forms/signup.json';
+import signupForm from 'json/forms/employerSignup.json';
 import { Form } from '~components';
 import {useTransitionHook} from '~hooks';
 
@@ -19,7 +19,7 @@ const Signup = () => {
 
   return (
   <div className={pageStyles}>
-    <Form inputs={signupForm} title="Sign Up" route={ROUTE} handleData={handleData} />
+    <Form inputs={signupForm} title="Employer Sign Up" route={ROUTE} handleData={handleData} />
   </div>
 )};
 

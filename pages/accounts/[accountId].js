@@ -17,7 +17,7 @@ const Account = () => {
     };
 
     const handleFormData = () => {
-      Router.push(`/users/${accountId}`);
+      Router.push(`/staff/${accountId}`);
     };
 
     useEffect(() => {
@@ -26,7 +26,7 @@ const Account = () => {
       let source = axios.CancelToken.source();
       axios({
           method: 'GET',
-          url: `/api/users/${accountId}`,
+          url: `/api/staff/${accountId}`,
           cancelToken: source.token
       })
       .then(handleData)
@@ -76,7 +76,7 @@ const Account = () => {
           <Form  
             inputs={inputsWithValues} 
             title="Account Info" 
-            route={`/api/users/${accountId}`} 
+            route={`/api/staff/${accountId}`} 
             handleData={handleFormData} 
             method="patch"
           />

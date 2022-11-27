@@ -1,15 +1,16 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import cx from 'classnames';
 import Link from 'next/link';
 import Image from 'next/image';
 import Menu from '../Menu/Menu';
-import { UserContext } from '~components/Layout/Layout';
 import { Login } from '~components';
 import menuItems from '../../json/nav.json';
 import styles from './MobileNav.module.scss';
+import { useSession } from 'next-auth/react';
 
 const MobileNav = () => {
-    const { userId, profileId } = useContext(UserContext);
+    const { data: session } = useSession();
+    const { userId, profileId } = session?.sessio?.user || {};
     const [displayMenu, setDisplayMenu] = useState(false);
     const userMenu = [
       {
