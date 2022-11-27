@@ -39,7 +39,7 @@ const Staff = () => {
     return (
         <Redirector>
             <div className={pageStyles}>
-                User Profiles:
+                Staff Members:
                 {userProfiles}
             </div>
         </Redirector>

@@ -53,7 +53,7 @@ apiRoute.post(async (req, res) => {
       //     http://localhost:3000/confirmation?confirmationCode=${confirmationCode}&profileId=${profileId}
       //   `
       // };
-      res.status(200).json({ email, url: `http://localhost:3000/confirmation?confirmationCode=${confirmationCode}&profileId=${profileId}` });
+      res.status(200).json({ email, url: `https://local.ptestaffing.com:3000/confirmation?confirmationCode=${confirmationCode}&profileId=${profileId}` });
       return;
       // sendMail(emailData, (data) => { 
       //   return;

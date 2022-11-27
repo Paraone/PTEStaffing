@@ -8,19 +8,32 @@ import styles from './Header.module.scss';
 
 const Header = () => {
   const { data: session } = useSession();
-  const { userId, profileId } = session?.session?.user || {};
+  const { userId, profileId, businessName } = session?.session?.user || {};
+
+  let profileHeading = 'profile';
+  let profileCta = `/staff/${profileId}`
+  let accountCta = `/accounts/${profileId}`
+  if (businessName) {
+    profileHeading = 'overview';
+    profileCta = `/employer/${businessName}`;
+    accountCta = `/employerAccounts/${businessName}`
+  }
     const userMenu = [
+      {
+        heading: 'employers',
+        cta: '/employers'
+      },
       {
         heading: 'staff',
         cta: '/staff'
       },
       {
-        heading: 'profile',
-        cta: `/staff/${profileId}`
+        heading: profileHeading,
+        cta: profileCta
       },
       {
         heading: 'account',
-        cta: `/accounts/${profileId}`
+        cta: accountCta
       }
     ]
 
