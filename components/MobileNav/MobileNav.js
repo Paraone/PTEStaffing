@@ -10,16 +10,16 @@ import { useSession } from 'next-auth/react';
 
 const MobileNav = () => {
     const { data: session } = useSession();
-    const { userId, profileId } = session?.sessio?.user || {};
+    const { userId, profileId } = session?.session?.user || {};
     const [displayMenu, setDisplayMenu] = useState(false);
     const userMenu = [
       {
-        heading: 'users',
-        cta: '/users'
+        heading: 'staff',
+        cta: '/staff'
       },
       {
         heading: 'profile',
-        cta: `/users/${profileId}`
+        cta: `/staff/${profileId}`
       },
       {
         heading: 'account',
@@ -55,7 +55,7 @@ const MobileNav = () => {
         </div>
         <div className={cx(styles['modal-menu'], { [styles.hide]: !displayMenu })}>
             <div className={styles['close-btn']}><button onClick={toggleMenu}>X</button></div>
-            {userId ?
+            {session ?
                 (
                     <Menu onClick={toggleMenu} className={styles['mobile-user-menu']} menuItems={userMenu}/>
                 ) : (    
