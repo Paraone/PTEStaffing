@@ -10,7 +10,7 @@ import { useSession } from 'next-auth/react';
 
 const MobileNav = () => {
     const { data: session } = useSession();
-    const { userId, profileId } = session?.session?.user || {};
+    const { profileId } = session?.session?.user || {};
     const [displayMenu, setDisplayMenu] = useState(false);
     const userMenu = [
       {
