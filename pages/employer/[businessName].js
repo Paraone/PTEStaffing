@@ -12,7 +12,7 @@ const User = () => {
 
     useEffect(() => {
         let source = axios.CancelToken.source();
-        axios.get(`/api/staff/${businessName}`, {
+        axios.get(`/api/employer/${businessName}`, {
             cancelToken: source.token
         }).then((response) => {
 
@@ -35,12 +35,10 @@ const User = () => {
       state,
       zip,
       positions,
-      profilePic1,
-      profilePic2,
+      logo,
       resume
      } = userData || {};
-    const profilePic1Url = `https://drive.google.com/uc?id=${profilePic1}`;
-    const profilePic2Url = `https://drive.google.com/uc?id=${profilePic2}`;
+    const logoUrl = `https://drive.google.com/uc?id=${logo}`;
     
     return (!!email &&
       <Redirector>
@@ -50,8 +48,7 @@ const User = () => {
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           </Head>
           <div>
-            {profilePic1 && <img src={profilePic1Url}width={120}/>}
-            {profilePic2 && <img src={profilePic2Url}width={120}/>}
+            {logo && <img src={logoUrl}width={120}/>}
           </div>
           <h1>{businessName}</h1>
           <h3>{firstName + ' ' + lastName}</h3>

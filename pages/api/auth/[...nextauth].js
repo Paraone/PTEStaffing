@@ -2,6 +2,7 @@ import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from 'next-auth/providers/google';
 import { findstaff, authstaff } from "controllers/staffController";
+import { authEmployer, findEmployer } from "controllers/employersController";
 
 export const authOptions = {
   // Configure one or more authentication providers
@@ -15,14 +16,22 @@ export const authOptions = {
         async authorize(credentials) {
             const { email, password } = credentials;
             const staff = await findstaff({ email });
-            if (!staff) return null
+            const employer = await findEmployer({ email });
+            if (!staff) {
+              if (!employer) return null;
+
+              const  { password: passwordHash } = employer;
+              const match = await authEmployer(password, passwordHash);
+
+              if (!match) return null;
+
+              return employer;
+            }
 
             const { password: passwordHash } = staff;
             const match = await authstaff(password, passwordHash);
 
-            if (!match) {
-                return null
-            }
+            if (!match) return null;
 
             return staff;
           // You need to provide your own logic here that takes the credentials
@@ -43,9 +52,26 @@ export const authOptions = {
   callbacks: {
     session: async ({ session }) => {
         if (!session) return;
-        
-        const staff = await findstaff({ email: session?.user?.email });
-        if (!staff) return;
+        const email = session?.user?.email;
+        const staff = await findstaff({ email });
+        const employer = await findEmployer({ email})
+        if (!staff) {
+          if (!employer) return;
+
+          return {
+            session: {
+              user: {
+                userId: employer.userId,
+                firstName: employer.firstName,
+                lastName: employer.lastName,
+                businessName: employer.businessName,
+                email,
+                emailConfirmed: employer.emailConfirmed,
+                accountType: employer.accountType
+              }
+            }
+          }
+        }
 
         return {
           session: {
@@ -54,15 +80,17 @@ export const authOptions = {
               firstname: staff.firstName,
               lastname: staff.lastName,
               profileId: staff.profileId,
-              email: staff.email,
-              emailConfirmed: staff.emailConfirmed
+              email,
+              emailConfirmed: staff.emailConfirmed,
+              accountType: staff.accountType
             }
           }
         };
       },
       async signIn({ account, profile }) {
+        console.log({ account, profile });
         if (account.provider === "google") {
-          return profile.email_verified
+          return profile.email_verified;
         }
         return true // Do different verification for other providers that don't have `email_verified`
       },
