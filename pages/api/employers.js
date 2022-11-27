@@ -1,7 +1,7 @@
 const nextConnect = require('next-connect');
 // import  { sendMail } from '../../controllers/mailController';
 import middleware from '../../middleware/middleware';
-import { findEmployer, createEmployer } from '~controllers/EmployerController';
+import { findEmployer, createEmployer } from '~controllers/employerController';
 
 export const config = {
   api: {
