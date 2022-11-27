@@ -2,9 +2,11 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useTransitionHook } from '~hooks';
 import { useSession } from 'next-auth/react';
+import styles from './index.module.scss';
 
 function Home() {
-  const { session } = useSession();
+  const { data: session } = useSession();
+
   const pageStyles = useTransitionHook(10);
 
   return (
@@ -14,6 +16,11 @@ function Home() {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <h1>PTESTAFFING.COM</h1>
+      <h2>I want to:</h2>
+      <div className={styles.signups}>
+        <Link className={styles['signup-btn']} href="/employer/signup">find staff</Link>
+        <Link className={styles['signup-btn']} href="/staff/signup">find work</Link>
+      </div>
       <h2>The Tri-State Area&apos;s Leading Professional Staffing Network</h2>
       <p>
         Our Network of Associates are Dedicated to Excellence of Service 

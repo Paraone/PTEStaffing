@@ -12,7 +12,7 @@ const User = () => {
 
     useEffect(() => {
         let source = axios.CancelToken.source();
-        axios.get(`/api/users/${profileId}`, {
+        axios.get(`/api/staff/${profileId}`, {
             cancelToken: source.token
         }).then((response) => {
 

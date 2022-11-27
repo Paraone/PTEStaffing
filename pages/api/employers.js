@@ -1,8 +1,7 @@
 const nextConnect = require('next-connect');
 // import  { sendMail } from '../../controllers/mailController';
-import clientPromise from 'lib/mongodb';
 import middleware from '../../middleware/middleware';
-import { findWorker, createWorker } from '~controllers/usersController';
+import { findEmployer, createEmployer } from 'controllers/employersController';
 
 export const config = {
   api: {
@@ -10,11 +9,9 @@ export const config = {
   },
 }
 
-const dbName = 'ptestaffing';
-
 const apiRoute = nextConnect({
   onError(err, req, res) {
-    if (err) console.log('api/users.js', { err })
+    if (err) console.log('api/employers.js', { err })
     return res.status(403)
   },
   
@@ -27,16 +24,14 @@ apiRoute.use(middleware);
 
 apiRoute.get(async (req, res) => {
     try {
-        const client = await clientPromise;
-        const db = client.db(dbName);
-        const worker = await findWorker(db, 'w@w.com', 'ww');
+        const employer = await findEmployer('w@w.com', 'ww');
         
-        if (worker) {
+        if (employer) {
             res.status(400).json({ error: 'User already exists' })
             return;
         }
-
-        createWorker(db).then((data) => { 
+        
+        createEmployer().then((data) => { 
             console.log({data}) 
             return res.status(200).json({data})
         })

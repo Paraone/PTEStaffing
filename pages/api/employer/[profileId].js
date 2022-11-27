@@ -1,19 +1,14 @@
 const nextConnect = require('next-connect');
 const assert = require('assert');
-import clientPromise from 'lib/mongodb';
+import { getStaffCollection } from 'controllers/staffController';
 import middleware from '../../../middleware/middleware';
 // import { useDrive } from '../google/gapi';
-const jwt = require('jsonwebtoken');
-const jwtSecret = process.env.JWT_SECRET; // eslint-disable-line
-// const nodemailer = require("nodemailer");
 
 export const config = {
   api: {
     bodyParser: false,
   },
 }
-
-const dbName = 'ptestaffing';
 
 const apiRoute = nextConnect({
   onError(err, req, res) {
@@ -32,9 +27,7 @@ apiRoute.get(async (req, res) => {
   const { query : { profileId } } = req;
 
   try {
-    const client = await clientPromise;
-    const db = client.db(dbName); 
-    const collection = db.collection('user');
+    const collection = await getStaffCollection();
 
     collection.findOne({ profileId }, {projection: { password: 0 }})
     .then((data) => {
@@ -54,31 +47,23 @@ apiRoute.patch(async ({ body, files, query }, res) => {
   const { profileId, confirmationCode } = query;
 
   try {
-    const client = await clientPromise;
-    const db = client.db(dbName);
-    const collection = db.collection('user');
-
+    const collection = await getStaffCollection();
     if (confirmationCode) {
-      collection.findOne({ confirmationCode }, (err, data) => {
-        console.log({err, data})
-        const {email, userId } = data;
+
+      const staff = await collection.findOne({ confirmationCode })
+      if (!staff) {
+        res.status(400).json({ error: true, message: 'not found' })
+      }
+
+      const { email } = staff;
         
-        collection.updateOne(
-          { confirmationCode }, 
-          { $set: { emailConfirmed: true } }, 
-          { upsert: true }, 
-          () => {
-          const token = jwt.sign(
-            { userId, email, profileId, emailConfirmed: true },
-            jwtSecret,
-            {
-              expiresIn: 3000, //50 minutes
-            },
-          );
-          return res.status(200).json({ email, token});
-        });
-      });
-      return;
+      collection.updateOne(
+        { confirmationCode }, 
+        { $set: { emailConfirmed: true } }, 
+        { upsert: true }
+      );
+
+      return res.status(200).json({ email });
     }
 
     const { 
@@ -153,7 +138,6 @@ apiRoute.patch(async ({ body, files, query }, res) => {
 
         Promise.all(deletedFiles).then(() => {
           collection.updateOne({ profileId }, { $set: updateFields }, { upsert: true }, (err, data) => {
-
             return res.status(200).json(data);
           });
         })

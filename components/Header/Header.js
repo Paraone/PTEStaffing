@@ -1,22 +1,22 @@
-import { useContext } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Menu from '../Menu/Menu';
-import { UserContext } from '~components/Layout/Layout';
+import { useSession } from 'next-auth/react';
 import { Login } from '~components';
 import menuItems from '../../json/nav.json';
 import styles from './Header.module.scss';
 
 const Header = () => {
-    const { userId, profileId } = useContext(UserContext);
+  const { data: session } = useSession();
+  const { userId, profileId } = session?.session?.user || {};
     const userMenu = [
       {
-        heading: 'users',
-        cta: '/users'
+        heading: 'staff',
+        cta: '/staff'
       },
       {
         heading: 'profile',
-        cta: `/users/${profileId}`
+        cta: `/staff/${profileId}`
       },
       {
         heading: 'account',
