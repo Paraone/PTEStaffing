@@ -4,13 +4,13 @@ import signupForm from 'json/forms/employerSignup.json';
 import { Form } from '~components';
 import {useTransitionHook} from '~hooks';
 
-const ROUTE = '/api/staff';
+const ROUTE = '/api/employers';
 const handleData = ({data}) => {
   const { error, email, url } = data || {};
-
+  console.log({ url })
   if (error) console.log({error});
   if (email) {
-    Router.push(`/confirmation?email=${email}&alert=${`Go to ${url}`}`)
+    Router.push(`/confirmation?email=${email}&alert=${`Go to ${encodeURIComponent(url)}`}`)
   }
 };
 

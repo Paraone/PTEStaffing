@@ -8,7 +8,8 @@ function Home() {
   const { data: session } = useSession();
 
   const pageStyles = useTransitionHook(10);
-
+  const findStaffHref = session ? `/staff` : '/employer/signup';
+  const findWorkHref = session ? `/staff` : '/staff/signup';
   return (
     <div className={pageStyles}>
       <Head>
@@ -18,8 +19,8 @@ function Home() {
       <h1>PTESTAFFING.COM</h1>
       <h2>I want to:</h2>
       <div className={styles.signups}>
-        <Link className={styles['signup-btn']} href="/employer/signup">find staff</Link>
-        <Link className={styles['signup-btn']} href="/staff/signup">find work</Link>
+        <Link className={styles['signup-btn']} href={findStaffHref}>find staff</Link>
+        <Link className={styles['signup-btn']} href={findWorkHref}>find work</Link>
       </div>
       <h2>The Tri-State Area&apos;s Leading Professional Staffing Network</h2>
       <p>
