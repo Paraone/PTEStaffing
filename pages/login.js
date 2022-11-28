@@ -1,30 +1,29 @@
 import React from 'react';
-import cookie from 'js-cookie';
-import Router from 'next/router';
-import loginForm from '../json/forms/login.json';
-import { Form } from '~components';
-import {useTransitionHook} from '~hooks';
+import { getCsrfToken } from "next-auth/react"
 
-
-const ROUTE = '/api/auth';
-const handleData = ({ data }) => {
-  const { error, message, token } = data || {};
-  
-  if (error) console.log({ error: message });
-  if (token) {
-    cookie.set('token', token, { expires: 2 });
-    Router.push('/');
-  }
-};
-
-const Login = () => {
-  const pageStyles = useTransitionHook();
-  
+export default function Login({ csrfToken }) {
   return (
-    <div className={pageStyles}>
-      <Form inputs={loginForm} title="Log In" route={ROUTE} handleData={handleData} />
-    </div>
-  );
-};
+    <form method="post" action="/api/auth/callback/credentials">
+      <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+      <label htmlFor='email'>
+        email
+      </label>
+      <input name="email" type="email" required />
+      <label htmlFor='password'>
+        Password
+      </label>
+      <input name="password" type="password" required />
+      <div>
+        <button type="submit">Sign in</button>
+      </div>
+    </form>
+  )
+}
 
-export default Login;
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      csrfToken: await getCsrfToken(context),
+    },
+  }
+}

@@ -9,7 +9,7 @@ function Home() {
 
   const pageStyles = useTransitionHook(10);
   const findStaffHref = session ? `/staff` : '/employer/signup';
-  const findWorkHref = session ? `/staff` : '/staff/signup';
+  const findWorkHref = session ? `/employers` : '/staff/signup';
   return (
     <div className={pageStyles}>
       <Head>

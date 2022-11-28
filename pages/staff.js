@@ -3,6 +3,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import { Redirector } from '~components';
 import {useTransitionHook} from '~hooks';
+import styles from './staff.module.scss';
 
 
 // TODO: remove unwanted fields from user data
@@ -24,7 +25,7 @@ const Staff = () => {
 
     const userProfiles = Array.isArray(userData) && userData.length > 0 ?
         userData.map(({ profileId, firstName, lastName, email, profilePic1 }, index) => (
-            <div key={index}>
+            <div className={styles['staff-member']} key={index}>
                 <div><img width={120} src={profilePic1 ? `https://drive.google.com/uc?id=${profilePic1}` : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Placeholder_no_text.svg/1200px-Placeholder_no_text.svg.png'} /></div>
                 <div>First Name: {firstName}</div>
                 <div>Last Name: {lastName}</div>
@@ -39,8 +40,10 @@ const Staff = () => {
     return (
         <Redirector>
             <div className={pageStyles}>
-                Staff Members:
-                {userProfiles}
+                <h1>Staff Members:</h1>
+                <div className={styles['staff-members']}>
+                    {userProfiles}  
+                </div>
             </div>
         </Redirector>
     );

@@ -1,6 +1,5 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-import GoogleProvider from 'next-auth/providers/google';
 import { findstaff, authstaff } from "controllers/staffController";
 import { authEmployer, findEmployer } from "controllers/employersController";
 
@@ -42,11 +41,7 @@ export const authOptions = {
           // (i.e., the request IP address)
           // Return null if user data could not be retrieved
         }
-    }),
-    GoogleProvider({
-        clientId: process.env.GOOGLE_SIGN_IN_CLIENT_ID, // eslint-disable-line
-        clientSecret: process.env.GOOGLE_SIGN_IN_SECRET // eslint-disable-line
-    }),
+    })
     // ...add more providers here
   ],
   callbacks: {
@@ -86,16 +81,10 @@ export const authOptions = {
             }
           }
         };
-      },
-      async signIn({ account, profile }) {
-        console.log({ account, profile });
-        if (account.provider === "google") {
-          return profile.email_verified;
-        }
-        return true // Do different verification for other providers that don't have `email_verified`
-      },
+      }
   },
   pages: {
+    signIn: '/login'
   },
   theme: {
     colorScheme: "light", // "auto" | "dark" | "light"
