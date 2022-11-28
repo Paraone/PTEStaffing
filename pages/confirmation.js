@@ -13,7 +13,7 @@ function Confirmation() {
         if (businessName) {
             axios
             .patch(`/api/employer/${businessName}?confirmationCode=${confirmationCode}`)
-            .then(({ data, data: { error, email } }) => {
+            .then(({ data: { error, email } }) => {
                 if (error) console.log({error});
                 if (!email) return console.log({ email });
                 Router.push(`/?alert=${'You have successfully registered your account.'}`);
@@ -25,7 +25,6 @@ function Confirmation() {
         axios
         .patch(`/api/staff/${profileId}?confirmationCode=${confirmationCode}`)
         .then(({ data, data: { error, email } }) => {
-            console.log({ data })
             if (error) console.log({error});
             if (!email) return console.log({ email });
             Router.push(`/?alert=${'You have successfully registered your account.'}`);
