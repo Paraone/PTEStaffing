@@ -1,0 +1,31 @@
+/* MOBILE */
+.staff-members {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    .staff-member {
+        margin: 5px;
+    }
+}
+
+/* TABLET */
+@media only screen and (min-width: 481px) {
+    .staff-members {
+        justify-content: flex-start;
+
+        .staff-member {
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+/* DESKTOP SMALL */
+@media only screen and (min-width: 769px) {
+}
+
+/* DESKTOP LARGE */
+@media only screen and (min-width: 1025px) {
+}

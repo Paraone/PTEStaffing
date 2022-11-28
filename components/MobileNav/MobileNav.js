@@ -6,7 +6,7 @@ import Menu from '../Menu/Menu';
 import { Login } from '~components';
 import menuItems from '../../json/nav.json';
 import styles from './MobileNav.module.scss';
-import { useSession } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 
 const MobileNav = () => {
     const { data: session } = useSession();
@@ -77,6 +77,10 @@ const MobileNav = () => {
                     )
                 }
                 <Menu onClick={toggleMenu} className={styles['mobile-user-menu']} menuItems={menuItems} />
+                {session &&
+                    <Link href="" onClick={() => signOut({ callbackUrl: `/?alert=${'You have been signed out.'}`})}>Sign Out</Link>
+                }
+
             </div>
         </>
 
