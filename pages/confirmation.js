@@ -1,12 +1,13 @@
 import axios from 'axios';
 import Head from 'next/head';
+import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import { useTransitionHook } from '~hooks';
 
 
 function Confirmation() {
     const router = useRouter();
-    const { confirmationCode, email, profileId, businessName } = router?.query || {};
+    const { confirmationCode, email, profileId, businessName, confirmationURL } = router?.query || {};
     const pageStyles = useTransitionHook();
     console.log({ confirmationCode, email, profileId, businessName })
     if (confirmationCode) {
@@ -43,6 +44,7 @@ function Confirmation() {
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <h1>PTESTAFFING.COM</h1>
+            <div><span>Go to: </span><Link href={confirmationURL}>{confirmationURL}</Link></div>
             <p>
                 Please confirm your account by visiting the link in the email sent to {email}
             </p>
