@@ -2,7 +2,7 @@ const nextConnect = require('next-connect');
 const assert = require('assert');
 import middleware from '../../middleware/middleware';
 import { findEmployer, createEmployer, getEmployerCollection } from '~controllers/employersController';
-const baseURL = process.env.NODE_ENV === 'production' ? 'https://pte-staffing.vercel.app' : 'http://localhost:3000'
+const baseURL = process.env.NODE_ENV === 'production' ? 'https://pte-staffing.vercel.app' : 'http://localhost:3000' // eslint-disable-line
 // import  { sendMail } from '~controllers/mailController';
 
 export const config = {
