@@ -19,10 +19,10 @@ function Home() {
       </Head>
       <h1>PTESTAFFING.COM</h1>
       <div className={styles.signups}>
-        {!session || accountType === EMPLOYER_ACCOUNT_TYPE &&
+        {(!session || accountType === EMPLOYER_ACCOUNT_TYPE) &&
           <Link className={styles['signup-btn']} href={findStaffHref}>find staff</Link>
         }
-        {!session || accountType === STAFF_ACCOUNT_TYPE &&
+        {(!session || accountType === STAFF_ACCOUNT_TYPE) &&
           <Link className={styles['signup-btn']} href={findWorkHref}>find work</Link>
         }
       </div>
