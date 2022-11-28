@@ -2,6 +2,7 @@ const nextConnect = require('next-connect');
 const assert = require('assert');
 import middleware from '../../middleware/middleware';
 import { findEmployer, createEmployer, getEmployerCollection } from '~controllers/employersController';
+const baseURL = process.env.NODE_ENV === 'production' ? 'https://pte-staffing.vercel.app' : 'http://localhost:3000' // eslint-disable-line
 // import  { sendMail } from '~controllers/mailController';
 
 export const config = {
@@ -43,7 +44,7 @@ apiRoute.post(async (req, res) => {
     
     if (ops.length === 1) {
       console.log({ businessName })
-      const { email, confirmationCode } = createdUser;
+      const { email, confirmationCode, businessName } = createdUser;
 
       // const emailData = {
       //   from: '<management@pteEmployering.com>',
@@ -51,10 +52,10 @@ apiRoute.post(async (req, res) => {
       //   subject: "PTEEmployering Registration test ✔",
       //   message: `
       //     Please go to the link below to confirm your account\n
-      //     http://localhost:3000/confirmation?confirmationCode=${confirmationCode}&businessName=${businessName}
+      //     ${baseURL}/confirmation?confirmationCode=${confirmationCode}&businessName=${businessName}
       //   `
       // };
-      res.status(200).json({ email, url: `https://local.ptestaffing.com:3000/confirmation?confirmationCode=${confirmationCode}&businessName=${businessName}` });
+      res.status(200).json({ email, url: `${baseURL}/confirmation?confirmationCode=${confirmationCode}&businessName=${snakeCaseBusinessName}` });
       return;
       // sendMail(emailData, (data) => { 
       //   return;
