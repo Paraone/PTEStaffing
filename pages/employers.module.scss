@@ -1,3 +1,4 @@
+/* MOBILE */
 .businesses {
     display: flex;
     flex-wrap: wrap;
@@ -10,4 +11,16 @@
             margin-left: 0;
         }
     }
+}
+
+/* TABLET */
+@media only screen and (min-width: 481px) {
+}
+
+/* DESKTOP SMALL */
+@media only screen and (min-width: 769px) {
+}
+
+/* DESKTOP LARGE */
+@media only screen and (min-width: 1025px) {
 }
