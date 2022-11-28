@@ -1,4 +1,5 @@
 import React from 'react';
+import { string } from 'prop-types';
 import { getCsrfToken } from "next-auth/react"
 
 export default function Login({ csrfToken }) {
@@ -18,6 +19,10 @@ export default function Login({ csrfToken }) {
       </div>
     </form>
   )
+}
+
+Login.propTypes = {
+  csrfToken: string.isRequired
 }
 
 export async function getServerSideProps(context) {
