@@ -42,7 +42,7 @@ export async function createEmployer(firstName, lastName, email, password, busin
                 firstName,
                 lastName,
                 email,
-                businessName: businessName.split(' ').join('-'),
+                businessName,
                 confirmationCode,
                 accountType: EMPLOYER_ACCOUNT_TYPE,
                 emailConfirmed: false,

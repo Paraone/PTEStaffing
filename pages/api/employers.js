@@ -38,9 +38,8 @@ apiRoute.post(async (req, res) => {
       res.status(400).json({ error: 'Business is already registered.' });
       return;
     }
-    
-    console.log('creating user');
-    const { ops, ops: [createdUser] } = await createEmployer(firstName, lastName, email, password, businessName);
+    const snakeCaseBusinessName = businessName.split(' ').join('_');
+    const { ops, ops: [createdUser] } = await createEmployer(firstName, lastName, email, password, snakeCaseBusinessName);
     
     if (ops.length === 1) {
       console.log({ businessName })
