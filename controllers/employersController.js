@@ -28,9 +28,8 @@ export async function findEmployer({ email, businessName, confirmationCode }) {
     return await collection.findOne({ $or: [{ email }, { businessName }, { confirmationCode }]});
 }
 
-export async function createEmployer(firstName, lastName, email, password, businessName) {
+export async function createEmployer({firstName, lastName, email, password, businessName}) {
     const collection = await getEmployerCollection();
-    console.log({ collection })
     return await bcrypt.hash(password, saltRounds).then(async (hash) => {
         if (!hash) {
             return null;

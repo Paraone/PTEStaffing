@@ -6,11 +6,10 @@ import {useTransitionHook} from '~hooks';
 
 const ROUTE = '/api/employers';
 const handleData = ({data}) => {
-  const { error, email, url } = data || {};
-  console.log({ url })
-  if (error) console.log({error});
+  const { error, message, email, url } = data || {};
+  if (error) console.log({ message });
   if (email) {
-    Router.push(`/confirmation?email=${email}&alert=${`Go to ${encodeURIComponent(url)}`}`)
+    Router.push(`/confirmation?email=${email}&confirmationURL=${encodeURIComponent(url)}`)
   }
 };
 

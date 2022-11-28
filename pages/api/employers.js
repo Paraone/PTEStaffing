@@ -39,12 +39,12 @@ apiRoute.post(async (req, res) => {
       res.status(400).json({ error: 'Business is already registered.' });
       return;
     }
+
     const snakeCaseBusinessName = businessName.split(' ').join('_');
-    const { ops, ops: [createdUser] } = await createEmployer(firstName, lastName, email, password, snakeCaseBusinessName);
+    const { ops, ops: [createdUser] } = await createEmployer({ firstName, lastName, email, password, businessName: snakeCaseBusinessName });
     
     if (ops.length === 1) {
-      console.log({ businessName })
-      const { email, confirmationCode, businessName } = createdUser;
+      const { email, confirmationCode } = createdUser;
 
       // const emailData = {
       //   from: '<management@pteEmployering.com>',
