@@ -14,7 +14,7 @@ export function MyApp ({ Component, pageProps: { session, ...pageProps } }) {
 } 
 
 MyApp.propTypes = {
-    Component: PropTypes.node.isRequired,
+    Component: PropTypes.func.isRequired,
     pageProps: PropTypes.shape({
         session: PropTypes.shape({})
     })
