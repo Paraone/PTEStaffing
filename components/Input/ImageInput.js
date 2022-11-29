@@ -31,13 +31,13 @@ export const ImageInput = ({
                 .then(({ data }) => { 
                     const id = data?.id;
                     console.log({ id })
-                    onChange(name, value, filedata, id);
+                    onChange({ fieldName: name, value, file: filedata, fileId: id });
                     setLoading(false);
                 });
             return;
         }
         
-        onChange(name, value, filedata);
+        onChange({ fieldName: name, value, file: filedata });
     }
     
     const deleteImage = (e) => {

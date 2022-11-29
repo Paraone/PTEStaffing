@@ -1,17 +1,17 @@
 const bcrypt = require('bcrypt');
 const v4 = require('uuid').v4;
 import clientPromise from 'lib/mongodb';
-import { STAFF_ACCOUNT_TYPE, DB_NAME } from '~constants';
+import { STAFF_TYPE, DB_NAME } from '~constants';
 
 const saltRounds = 10;
 
 export async function getStaffCollection() {
     const client = await clientPromise;
     const db = client.db(DB_NAME)
-    return db.collection(STAFF_ACCOUNT_TYPE);
+    return db.collection(STAFF_TYPE);
 }
 
-export async function confirmstaff(confirmationCode) {
+export async function confirmStaff(confirmationCode) {
     const collection = await getStaffCollection();
     return await collection.updateOne(
       { confirmationCode }, 
@@ -19,19 +19,19 @@ export async function confirmstaff(confirmationCode) {
       { upsert: true })
 }
 
-export async function authstaff(password, hash) {
+export async function authStaff(password, hash) {
     return await bcrypt.compare(password, hash);
 }
 
-export async function findstaff({ email, profileId, confirmationCode }) {
+export async function findStaff({ email, profileId, confirmationCode }) {
     const collection = await getStaffCollection();
     return await collection.findOne({ $or: [{ email }, { profileId }, { confirmationCode }]});
 }
 
-export async function createstaff(firstName, lastName, email, password, profileId) {
+export async function createStaff(firstName, lastName, email, password, profileId) {
     const client = await clientPromise;
     const db = client.db(DB_NAME);
-    const collection = db.collection(STAFF_ACCOUNT_TYPE);
+    const collection = db.collection(STAFF_TYPE);
     
     return await bcrypt.hash(password, saltRounds).then(async (hash) => {
         if (!hash) {
@@ -46,7 +46,7 @@ export async function createstaff(firstName, lastName, email, password, profileI
                 email,
                 profileId,
                 confirmationCode,
-                accountType: STAFF_ACCOUNT_TYPE,
+                accountType: STAFF_TYPE,
                 emailConfirmed: false,
                 password: hash,
             }

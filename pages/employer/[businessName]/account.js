@@ -3,21 +3,21 @@ import axios from 'axios';
 import Router, { useRouter } from 'next/router';
 import Head from 'next/head';
 import { Redirector, Form } from '~components';
-import inputs from '../../json/forms/account.json';
+import inputs from 'json/forms/businessAccount.json';
 
-const Account = () => {
+const BusinessAccount = () => {
     const router = useRouter();
 
-    const { query: { accountId } } = router;
+    const { query: { businessName } } = router;
     const [userData, setUserData] = useState({});
-    const { firstName, lastName, email } = userData;
+    const { email } = userData;
 
     const handleData = (response) => {
         setUserData(response?.data?.data || {});
     };
 
     const handleFormData = () => {
-      Router.push(`/staff/${accountId}`);
+      Router.push(`/employer/${businessName}`);
     };
 
     useEffect(() => {
@@ -26,11 +26,11 @@ const Account = () => {
       let source = axios.CancelToken.source();
       axios({
           method: 'GET',
-          url: `/api/staff/${accountId}`,
+          url: `/api/employer/${businessName}`,
           cancelToken: source.token
       })
       .then(handleData)
-      .catch((err) => console.log('[accountId].js', { err }))
+      .catch((err) => console.log('pages/[businessName].js', { err }))
       
       return () => { source.cancel("Cancelling in cleanup") };
     }, []);
@@ -68,15 +68,15 @@ const Account = () => {
       <Redirector>
         <div>
           <Head>
-            <title>Account Page: {accountId}</title>
+            <title>Account Page: {businessName}</title>
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           </Head>
-          <h1>Account for {firstName + ' ' + lastName}</h1>
+          <h1>Account for {businessName}</h1>
     
           <Form  
             inputs={inputsWithValues} 
             title="Account Info" 
-            route={`/api/staff/${accountId}`} 
+            route={`/api/employer/${businessName}`} 
             handleData={handleFormData} 
             method="patch"
           />
@@ -85,4 +85,4 @@ const Account = () => {
     );
 }
 
-export default Account;
+export default BusinessAccount;

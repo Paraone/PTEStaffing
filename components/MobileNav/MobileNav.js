@@ -14,12 +14,14 @@ const MobileNav = () => {
     const [displayMenu, setDisplayMenu] = useState(false);
     let profileHeading = 'profile';
     let profileCta = `/staff/${profileId}`
-    let accountCta = `/accounts/${profileId}`
+    let accountCta = `/staff/${profileId}/account`
+    
     if (businessName) {
         profileHeading = 'overview';
         profileCta = `/employer/${businessName}`;
-        accountCta = `/employerAccounts/${businessName}`
+        accountCta = `/employer/${businessName}/account`
     }
+    
     const userMenu = [
         {
             heading: 'employers',

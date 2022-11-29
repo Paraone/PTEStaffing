@@ -1,6 +1,6 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-import { findstaff, authstaff } from "controllers/staffController";
+import { findStaff, authStaff } from "controllers/staffController";
 import { authEmployer, findEmployer } from "controllers/employersController";
 
 export const authOptions = {
@@ -14,7 +14,7 @@ export const authOptions = {
         },
         async authorize(credentials) {
             const { email, password } = credentials;
-            const staff = await findstaff({ email });
+            const staff = await findStaff({ email });
             const employer = await findEmployer({ email });
             if (!staff) {
               if (!employer) return null;
@@ -28,7 +28,7 @@ export const authOptions = {
             }
 
             const { password: passwordHash } = staff;
-            const match = await authstaff(password, passwordHash);
+            const match = await authStaff(password, passwordHash);
 
             if (!match) return null;
 
@@ -48,7 +48,7 @@ export const authOptions = {
     session: async ({ session }) => {
         if (!session) return;
         const email = session?.user?.email;
-        const staff = await findstaff({ email });
+        const staff = await findStaff({ email });
         const employer = await findEmployer({ email})
         if (!staff) {
           if (!employer) return;

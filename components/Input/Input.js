@@ -19,9 +19,15 @@ export const Input = (props) => {
         onChange, 
         onBlur,
         file,
-        fileId
+        fileId,
+        disabled
     } = props;
     const { type: validationType } = validation;
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
     if (validationType === 'image') {
         return (
             <ImageInput {...{
@@ -42,14 +48,31 @@ export const Input = (props) => {
     const changeHandler = (e) => {
         const { value, files } = e.target;
         const filedata = files?.[0];
-        onChange(name, value, filedata);
+        onChange({ fieldName: name, value, file: filedata, type });
     }
     const labelText = <span>{label}{required && <span className="required">*</span>}</span>;
-    const inputWithLabel = type === "checkbox" 
-        ? (
+    let inputWithLabel = (
+        <>
+            {label && <label htmlFor={name}>{labelText}</label>}
+            <input
+                value={file || value}
+                placeholder={placeholder}
+                onChange={changeHandler}
+                onBlur={() => onBlur(name)}
+                name={name}
+                type={type}
+                required={required}
+                disabled={disabled}
+                min={type === 'date' ? `${year}-${month}-${day}` : undefined}
+            />
+        </>
+    );
+
+    if (type === 'checkbox' || type === 'radio') {
+        inputWithLabel = (
             <>
                 <input
-                    value={file || value}
+                    value={value}
                     onChange={changeHandler}
                     onBlur={() => onBlur(name)}
                     name={name}
@@ -57,24 +80,13 @@ export const Input = (props) => {
                     placeholder={placeholder}
                     type={type}
                     required={required} 
+                    disabled={disabled}
                 />
                 <span>{labelText}</span>
             </>
-          )
-        : (
-            <>
-                {label && <label htmlFor={name}>{labelText}</label>}
-                <input
-                    value={value}
-                    placeholder={placeholder}
-                    onChange={changeHandler}
-                    onBlur={() => onBlur(name)}
-                    name={name}
-                    type={type}
-                    required={required}
-                />
-            </>
-        )
+        );
+    }
+
     return (
         <div>
             {inputWithLabel}
@@ -92,6 +104,7 @@ Input.propTypes = {
     value: string, 
     required: bool, 
     checked: bool,
+    disabled: bool,
     validation: shape({}),
     validated: bool,
     onChange: func.isRequired, 
@@ -112,6 +125,7 @@ Input.defaultProps = {
     checked: false,
     validation: {},
     validated: true,
+    disabled: false,
     title: {},
 }
 

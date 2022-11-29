@@ -1,21 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { string, array, func} from 'prop-types';
 import axios from 'axios';
-import { Input, CheckboxGroup } from '~components';
+import { Input, CheckboxGroup, RadioGroup } from '~components';
 
-export const Form = ({ inputs, title, route, handleData, method, className, submission = 'Submit' }) => {
+export const Form = ({ inputs, title, route, handleData, method, className, submission }) => {
     if (!Array.isArray(inputs) || !inputs.length) return null;
 
     const initFields = () => {
         const fields = {};
         inputs.forEach((input) => {
-            const { type, name, checkboxes = [] } = input;
+            const { type, name, checkboxes = [], radiobuttons = [] } = input;
             if (type === "checkboxes") {
-                checkboxes.forEach((checkbox) => {
+                checkboxes.forEach(checkbox => {
                     fields[checkbox.name] = { ...checkbox, validated: true };
                 });
                 return;
             }
+
+            if (type === 'radiogroup') {
+                fields[name] = { value: radiobuttons[0].value, validated: true };
+                return;
+            }
+
             fields[name] = { ...input, validated: true };
         });
         return fields;
@@ -57,14 +63,23 @@ export const Form = ({ inputs, title, route, handleData, method, className, subm
 
     const fieldKeys = Object.keys(fields);
 
-    const setField = (fieldName, value, file, fileId) => {
+    const setField = ({ fieldName, value, file, fileId, type }) => {
         const newFields = {...fields};
-        const { type, checked } = newFields[fieldName];
+        const { checked } = newFields[fieldName];
         if (type === 'checkbox') {
+            console.log({ fieldName, checked })
             newFields[fieldName].checked = !checked;
+            console.log({ newFields })
             setFields(newFields);
             return;
         }
+
+        if (type === 'radio') {
+            newFields[fieldName].value = value;
+            setFields(newFields);
+            return;
+        }
+
         if (type === 'file') {
             if (fileId) {
                 newFields[fieldName].fileId = fileId; 
@@ -132,6 +147,11 @@ export const Form = ({ inputs, title, route, handleData, method, className, subm
                 return;
             }
 
+            if (type === 'radiogroup') {
+                formData.append(name, fields[name].value);
+                return;
+            }
+
             const { file, value } = fields[name];
 
             if (type === 'file') {
@@ -148,7 +168,7 @@ export const Form = ({ inputs, title, route, handleData, method, className, subm
 
     const renderInputs = () => 
         inputs.map((input, index) => {
-            const { name, checkboxes, inquiry, type } = input;
+            const { name, checkboxes, radiobuttons, inquiry, type } = input;
             const { fileId } = fields[name] || {};
             
             if (type === 'checkboxes') {
@@ -167,8 +187,26 @@ export const Form = ({ inputs, title, route, handleData, method, className, subm
                     />
                 );
             }
+
+            if (type === 'radiogroup') {
+                const radioGroup = radiobuttons.map((radiobutton) => {
+                    const { value: radioValue, name: radioName} = radiobutton;
+                    return { ...radiobutton, validated: true, checked: fields[radioName].value === radioValue };
+                });
+
+                return (
+                    <RadioGroup 
+                        key={index}
+                        inquiry={inquiry} 
+                        radiobuttons={radioGroup}
+                        onChange={setField} 
+                        onBlur={validateField} 
+                    />
+                )
+            }
             
-            const { value, validated } = fields[name];
+            const { value, validated, checked, dependency } = fields[name];
+
             return(
                 <Input 
                     {...input}
@@ -178,6 +216,8 @@ export const Form = ({ inputs, title, route, handleData, method, className, subm
                     onChange={setField}
                     onBlur={validateField}
                     fileId={fileId}
+                    checked={checked}
+                    disabled={dependency && !fields[dependency].checked}
                 />
             )
         });

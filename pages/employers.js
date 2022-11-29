@@ -33,7 +33,7 @@ const Employers = () => {
                 <div>Last Name: {lastName}</div>
                 <div>Email: {email}</div>
                 <div><Link href="/employer/[businessName]" as={`/employer/${businessName}`}>Overview</Link></div>
-                <div><Link href="/accounts/[businessName]" as={`/accounts/${businessName}`}>Account Page</Link></div>
+                <div><Link href="/employer/[accountId]/account" as={`/employer/${businessName}/account`}>Account Page</Link></div>
             </div>
         ))
         :

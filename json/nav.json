@@ -9,7 +9,7 @@
             },
             {
                 "linkName": "users",
-                "cta": "/users"
+                "cta": "staff"
             }
         ]
     },
@@ -19,7 +19,7 @@
         "list": [
             {
                 "linkName": "users",
-                "cta": "/users"
+                "cta": "staff"
             }
         ]
     },

@@ -1,14 +1,14 @@
 const bcrypt = require('bcrypt');
 const v4 = require('uuid').v4;
 import clientPromise from 'lib/mongodb';
-import { EMPLOYER_ACCOUNT_TYPE, DB_NAME } from '~constants';
+import { EMPLOYER_TYPE, DB_NAME } from '~constants';
 
 const saltRounds = 10;
 
 export async function getEmployerCollection() {
     const client = await clientPromise;
     const db = client.db(DB_NAME);
-    return db.collection(EMPLOYER_ACCOUNT_TYPE)
+    return db.collection(EMPLOYER_TYPE)
 }
 
 export async function confirmEmployer(confirmationCode) {
@@ -43,7 +43,7 @@ export async function createEmployer({firstName, lastName, email, password, busi
                 email,
                 businessName,
                 confirmationCode,
-                accountType: EMPLOYER_ACCOUNT_TYPE,
+                accountType: EMPLOYER_TYPE,
                 emailConfirmed: false,
                 password: hash,
             }

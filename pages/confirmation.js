@@ -40,7 +40,7 @@ function Confirmation() {
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <h1>PTESTAFFING.COM</h1>
-            <div><span>Go to: </span><Link href={confirmationURL}>{confirmationURL}</Link></div>
+            <div><span>Go to: </span><Link href={confirmationURL || ''}>{confirmationURL}</Link></div>
             <p>
                 Please confirm your account by visiting the link in the email sent to {email}
             </p>

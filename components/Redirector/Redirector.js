@@ -3,15 +3,20 @@ import { useSession } from 'next-auth/react';
 import { node } from 'prop-types';
 import Router, { useRouter } from 'next/router';
 import { useTransitionHook } from 'customHooks';
+import { EMPLOYER_TYPE, STAFF_TYPE } from 'constants';
 
 const Redirector = ({ children }) => {
     const pageStyles = useTransitionHook();
     const router = useRouter();
-    const { query = {} } = router;
-    const { accountId } = query;
+    const { query, pathname } = router;
+    const { businessName, profileId } = query || {};
     const { data: session } = useSession();
-    const { profileId, email, emailConfirmed } = session?.session?.user || {};
+    const { profileId: sessionProfileId, businessName: sessionBusinessName, email, emailConfirmed } = session?.session?.user || {};
     const [loading, setLoading] = useState(true);
+    const [, base,, accountPage] = pathname.split('/');
+    const user = sessionProfileId || sessionBusinessName;
+    const isStaffAccount = base === STAFF_TYPE && !!accountPage;
+    const isEmployerAccount = base === EMPLOYER_TYPE && !!accountPage;
 
     useEffect(() => {   
         if (!session) {
@@ -20,8 +25,7 @@ const Redirector = ({ children }) => {
             return;
         }
         
-        // TODO: increase login security by comparing userId
-        if (!!accountId && accountId !== profileId) {
+        if ((isStaffAccount && (user !== profileId)) || (isEmployerAccount && (user !== businessName))) {
             const alert = 'you are unauthorized to view this page.'
             Router.push(`/?alert=${alert}`);
             return;

@@ -1,7 +1,7 @@
 const nextConnect = require('next-connect');
 const assert = require('assert');
 import middleware from '../../middleware/middleware';
-import { findstaff, createstaff, getStaffCollection } from '~controllers/staffController';
+import { findStaff, createStaff, getStaffCollection } from '~controllers/staffController';
 // import  { sendMail } from '~controllers/mailController';
 
 export const config = {
@@ -33,13 +33,13 @@ apiRoute.post(async (req, res) => {
     assert.notEqual(null, password, 'Password required');
     assert.notEqual(null, profileId, 'Profile ID required');
 
-    const staff = await findstaff({ email, profileId })
+    const staff = await findStaff({ email, profileId })
     if (staff) {
       res.status(400).json({ error: 'User already exists.' });
       return;
     }
 
-    const { ops, ops: [createdUser] } = await createstaff(firstName, lastName, email, password, profileId);
+    const { ops, ops: [createdUser] } = await createStaff(firstName, lastName, email, password, profileId);
     
     if (ops.length === 1) {
       const { email, confirmationCode, profileId } = createdUser;
