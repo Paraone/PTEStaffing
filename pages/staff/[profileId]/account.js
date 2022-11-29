@@ -3,21 +3,21 @@ import axios from 'axios';
 import Router, { useRouter } from 'next/router';
 import Head from 'next/head';
 import { Redirector, Form } from '~components';
-import inputs from '../../json/forms/businessAccount.json';
+import inputs from 'json/forms/account.json';
 
-const BusinessAccount = () => {
+const Account = () => {
     const router = useRouter();
 
-    const { query: { businessName } } = router;
+    const { query: { profileId } } = router;
     const [userData, setUserData] = useState({});
-    const { email } = userData;
+    const { firstName, lastName, email } = userData;
 
     const handleData = (response) => {
         setUserData(response?.data?.data || {});
     };
 
     const handleFormData = () => {
-      Router.push(`/employer/${businessName}`);
+      Router.push(`/staff/${profileId}`);
     };
 
     useEffect(() => {
@@ -26,11 +26,11 @@ const BusinessAccount = () => {
       let source = axios.CancelToken.source();
       axios({
           method: 'GET',
-          url: `/api/employer/${businessName}`,
+          url: `/api/staff/${profileId}`,
           cancelToken: source.token
       })
       .then(handleData)
-      .catch((err) => console.log('pages/[businessName].js', { err }))
+      .catch((err) => console.log('[profileId].js', { err }))
       
       return () => { source.cancel("Cancelling in cleanup") };
     }, []);
@@ -68,15 +68,15 @@ const BusinessAccount = () => {
       <Redirector>
         <div>
           <Head>
-            <title>Account Page: {businessName}</title>
+            <title>Account Page: {profileId}</title>
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           </Head>
-          <h1>Account for {businessName}</h1>
+          <h1>Account for {firstName + ' ' + lastName}</h1>
     
           <Form  
             inputs={inputsWithValues} 
             title="Account Info" 
-            route={`/api/employer/${businessName}`} 
+            route={`/api/staff/${profileId}`} 
             handleData={handleFormData} 
             method="patch"
           />
@@ -85,4 +85,4 @@ const BusinessAccount = () => {
     );
 }
 
-export default BusinessAccount;
+export default Account;
