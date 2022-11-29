@@ -42,14 +42,29 @@ export const Input = (props) => {
     const changeHandler = (e) => {
         const { value, files } = e.target;
         const filedata = files?.[0];
-        onChange(name, value, filedata);
+        onChange({name, value, filedata});
     }
     const labelText = <span>{label}{required && <span className="required">*</span>}</span>;
-    const inputWithLabel = type === "checkbox" 
-        ? (
+    let inputWithLabel = (
+        <>
+            {label && <label htmlFor={name}>{labelText}</label>}
+            <input
+                value={file || value}
+                placeholder={placeholder}
+                onChange={changeHandler}
+                onBlur={() => onBlur(name)}
+                name={name}
+                type={type}
+                required={required}
+            />
+        </>
+    );
+
+    if (type === 'checkbox') {
+        inputWithLabel = (
             <>
                 <input
-                    value={file || value}
+                    value={value}
                     onChange={changeHandler}
                     onBlur={() => onBlur(name)}
                     name={name}
@@ -60,21 +75,27 @@ export const Input = (props) => {
                 />
                 <span>{labelText}</span>
             </>
-          )
-        : (
+        );
+    }
+
+    if (type === 'radio') {
+        inputWithLabel = (
             <>
-                {label && <label htmlFor={name}>{labelText}</label>}
                 <input
                     value={value}
-                    placeholder={placeholder}
                     onChange={changeHandler}
                     onBlur={() => onBlur(name)}
                     name={name}
+                    checked={checked}
                     type={type}
                     required={required}
                 />
+                <span>{labelText}</span>
             </>
+
         )
+    }
+
     return (
         <div>
             {inputWithLabel}

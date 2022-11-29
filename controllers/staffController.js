@@ -11,7 +11,7 @@ export async function getStaffCollection() {
     return db.collection(STAFF_ACCOUNT_TYPE);
 }
 
-export async function confirmstaff(confirmationCode) {
+export async function confirmStaff(confirmationCode) {
     const collection = await getStaffCollection();
     return await collection.updateOne(
       { confirmationCode }, 
@@ -19,16 +19,16 @@ export async function confirmstaff(confirmationCode) {
       { upsert: true })
 }
 
-export async function authstaff(password, hash) {
+export async function authStaff(password, hash) {
     return await bcrypt.compare(password, hash);
 }
 
-export async function findstaff({ email, profileId, confirmationCode }) {
+export async function findStaff({ email, profileId, confirmationCode }) {
     const collection = await getStaffCollection();
     return await collection.findOne({ $or: [{ email }, { profileId }, { confirmationCode }]});
 }
 
-export async function createstaff(firstName, lastName, email, password, profileId) {
+export async function createStaff(firstName, lastName, email, password, profileId) {
     const client = await clientPromise;
     const db = client.db(DB_NAME);
     const collection = db.collection(STAFF_ACCOUNT_TYPE);

@@ -30,12 +30,12 @@ export const ResumeInput = ({
                 .then(({ data }) => { 
                     const id = data?.id;
                     console.log({ id })
-                    onChange(name, value, filedata, id);
+                    onChange({name, value, filedata, id});
                 });
             return;
         }
         
-        onChange(name, value, filedata);
+        onChange({name, value, filedata});
     }
     
     const deleteFile = (e) => {

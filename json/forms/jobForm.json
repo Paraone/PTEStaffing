@@ -1,0 +1,345 @@
+[
+    {
+        "type": "text",
+        "name": "jobtitle",
+        "label": "Job Title",
+        "required": true,
+        "error": "Job Title must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "date",
+        "name": "date",
+        "label": "Date",
+        "required": false,
+        "error": "",
+        "validation": {}
+    },
+    {
+        "type": "radiogroup",
+        "name": "wardrobe",
+        "inquiry": "Staff Uniform Request",
+        "radiobuttons": [
+            {
+                "type": "radio",
+                "name": "wardrobe",
+                "value": "all-black",
+                "label": "All Black (Black Button Up Long Sleeved Shirt, Black Dress Pants, Black Belt, Black Shoes, Black Tie)",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "radio",
+                "name": "wardrobe",
+                "value": "white-button-up-black-tie",
+                "label": "White Button Up Shirt, Black Dress Pants, Black Belt, Black Tie",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "radio",
+                "name": "wardrobe",
+                "value": "tuxedo",
+                "label": "Tuxedo",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "radio",
+                "name": "wardrobe",
+                "value": "black-dress-black-suit",
+                "label": "Black dress/ Black Suit",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "radio",
+                "name": "wardrobe",
+                "value": "khaki-pants-white-polo-shirt",
+                "label": "Khaki Pants, White Polo Shirt",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "radio",
+                "name": "wardrobe",
+                "value": "khaki-pants-white-button-down-dress-shirt",
+                "label": "Khaki Pants, White Button Down Dress Shirt",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "radio",
+                "name": "wardrobe",
+                "value": "dark-denim=black-t-shirt",
+                "label": "Dark Denim, Black T-Shirt",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "radio",
+                "name": "wardrobe",
+                "value": "light-denim-black-shirt",
+                "label": "Light Denim, Black Shirt",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "radio",
+                "name": "wardrobe",
+                "value": "custom",
+                "label": "Custom- Please Provide Uniform Request in Event Description Section",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            }
+        ]
+    },
+    {
+        "type": "checkboxes",
+        "name": "positions",
+        "inquiry": "Which position(s) are you looking to fill?",
+        "checkboxes": [
+            {
+                "type": "checkbox",
+                "name": "bartender",
+                "value": "Bartender",
+                "label": "Bartender",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "checkbox",
+                "name": "server-cater-waiter",
+                "value": "Server/ Cater Waiter",
+                "label": "Server/ Cater Waiter",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "checkbox",
+                "name": "brand-ambassador",
+                "value": "Brand Ambassador",
+                "label": "Brand Ambassador",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "checkbox",
+                "name": "clean-up-crew-venue-maintenance",
+                "value": "Clean Up Crew/ Venue Maintenance",
+                "label": "Clean Up Crew/ Venue Maintenance",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "checkbox",
+                "name": "captain-team-lead",
+                "value": "Captain/ Team Lead",
+                "label": "Captain/ Team Lead",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "checkbox",
+                "name": "chef-cook",
+                "value": "Chef/Cook",
+                "label": "Chef/Cook",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "checkbox",
+                "name": "security-doorman",
+                "value": "Security/Doorman",
+                "label": "Security/Doorman",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "checkbox",
+                "name": "host-hostess-greeter",
+                "value": "Host/Hostess/Greeter",
+                "label": "Host/Hostess/Greeter",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "checkbox",
+                "name": "restroom-attendant",
+                "value": "Restroom Attendant",
+                "label": "Restroom Attendant",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "checkbox",
+                "name": "elevator-attendant",
+                "value": "Elevator Attendant",
+                "label": "Elevator Attendant",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "checkbox",
+                "name": "freight-elevator-operator",
+                "value": "Freight Elevator Operator",
+                "label": "Freight Elevator Operator",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "checkbox",
+                "name": "general-labor-set-up-breakdown",
+                "value": "General Labor- Set up/Breakdown",
+                "label": "General Labor- Set up/Breakdown",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "checkbox",
+                "name": "photographer-videographer",
+                "value": "Photographer /Videographer",
+                "label": "Photographer /Videographer",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "checkbox",
+                "name": "dancer",
+                "value": "Belly Dancer / Dancer",
+                "label": "Belly Dancer / Dancer",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "checkbox",
+                "name": "artist",
+                "value": "Graffiti Artist / Painter",
+                "label": "Graffiti Artist / Painter",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "checkbox",
+                "name": "dance-yoga-instructor",
+                "value": "Dance Instructor/ Yoga Instructor",
+                "label": "Dance Instructor/ Yoga Instructor",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "checkbox",
+                "name": "hookah",
+                "value": "Hookah",
+                "label": "Hookah",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "checkbox",
+                "name": "cigar-roller",
+                "value": "Cigar Roller",
+                "label": "Cigar Roller",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "checkbox",
+                "name": "dj",
+                "value": "Dj",
+                "label": "Dj",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "checkbox",
+                "name": "host-event-curator",
+                "value": "Host / Event Curator",
+                "label": "Host / Event Curator",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "checkbox",
+                "name": "virtual-assistant",
+                "value": "Virtual Assistant",
+                "label": "Virtual Assistant",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            },
+            {
+                "type": "checkbox",
+                "name": "other",
+                "value": "Other:",
+                "label": "Other:",
+                "checked": false,
+                "required": false,
+                "error": "",
+                "validation": {}
+            }
+        ]
+    }
+]
