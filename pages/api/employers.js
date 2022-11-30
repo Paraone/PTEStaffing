@@ -55,7 +55,7 @@ apiRoute.post(async (req, res) => {
       //     ${baseURL}/confirmation?confirmationCode=${confirmationCode}&businessName=${businessName}
       //   `
       // };
-      res.status(200).json({ email, url: `${baseURL}/confirmation?confirmationCode=${confirmationCode}&businessName=${snakeCaseBusinessName}` });
+      res.status(200).json({ email, url: encodeURIComponent(`${baseURL}/confirmation?confirmationCode=${confirmationCode}&businessName=${snakeCaseBusinessName}`) });
       return;
       // sendMail(emailData, (data) => { 
       //   return;

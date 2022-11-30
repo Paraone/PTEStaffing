@@ -9,7 +9,7 @@ const handleData = ({data}) => {
   const { error, message, email, url } = data || {};
   if (error) console.log({ message });
   if (email) {
-    Router.push(`/confirmation?email=${email}&confirmationURL=${encodeURIComponent(url)}`)
+    Router.push(`/confirmation?email=${email}&confirmationURL=${url}`)
   }
 };
 

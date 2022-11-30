@@ -10,7 +10,7 @@ const handleData = ({data}) => {
 
   if (error) console.log({error});
   if (email) {
-    Router.push(`/confirmation?email=${email}&alert=${`Go to ${url}`}`)
+    Router.push(`/confirmation?email=${email}&confirmationURL=${url}`)
   }
 };
 
