@@ -4,6 +4,8 @@ import middleware from '../../middleware/middleware';
 import { findStaff, createStaff, getStaffCollection } from '~controllers/staffController';
 // import  { sendMail } from '~controllers/mailController';
 
+const baseURL = process.env.NODE_ENV === 'production' ? 'https://pte-staffing.vercel.app' : 'http://localhost:3000' // eslint-disable-line
+
 export const config = {
   api: {
     bodyParser: false,
@@ -40,9 +42,9 @@ apiRoute.post(async (req, res) => {
     }
 
     const { ops, ops: [createdUser] } = await createStaff(firstName, lastName, email, password, profileId);
-    
+
     if (ops.length === 1) {
-      const { email, confirmationCode, profileId } = createdUser;
+      const { email, confirmationCode } = createdUser;
 
       // const emailData = {
       //   from: '<management@ptestaffing.com>',
@@ -53,7 +55,7 @@ apiRoute.post(async (req, res) => {
       //     http://localhost:3000/confirmation?confirmationCode=${confirmationCode}&profileId=${profileId}
       //   `
       // };
-      res.status(200).json({ email, url: `https://local.ptestaffing.com:3000/confirmation?confirmationCode=${confirmationCode}&profileId=${profileId}` });
+      res.status(200).json({ email, url: encodeURIComponent(`${baseURL}/confirmation?confirmationCode=${confirmationCode}&profileId=${profileId}`) });
       return;
       // sendMail(emailData, (data) => { 
       //   return;
