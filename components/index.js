@@ -10,3 +10,4 @@ export { default as Footer } from "./Footer/Footer.js";
 export { default as Dropdown } from "./Dropdown/Dropdown.js";
 export { default as CheckboxGroup } from "./CheckboxGroup/CheckboxGroup.js";
 export { default as RadioGroup } from "./RadioGroup/RadioGroup.js";
+export { default as Loader } from "./Loader/Loader.js";

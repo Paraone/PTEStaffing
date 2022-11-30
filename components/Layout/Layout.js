@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { debounce } from 'lodash';
 import { node, string, oneOfType } from 'prop-types';
-import { Header, Footer, MobileNav } from '~components';
+import { Header, Footer, MobileNav, Loader } from '~components';
 
 const Layout = ({ children }) => {
     const { query: { alert } } = useRouter();
@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
         return () => { window.removeEventListener('resize', handleResize); }
     }, []);
 
-    if (!loaded) return <h1>Loading...</h1>;
+    if (!loaded) return <Loader />;
     const navigation = showMobile ? <MobileNav /> : <Header />
     // let loggedIn = !!data.profileId;
 
