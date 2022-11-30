@@ -19,9 +19,15 @@ export const Input = (props) => {
         onChange, 
         onBlur,
         file,
-        fileId
+        fileId,
+        disabled
     } = props;
     const { type: validationType } = validation;
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
     if (validationType === 'image') {
         return (
             <ImageInput {...{
@@ -42,7 +48,7 @@ export const Input = (props) => {
     const changeHandler = (e) => {
         const { value, files } = e.target;
         const filedata = files?.[0];
-        onChange({name, value, filedata});
+        onChange({ fieldName: name, value, file: filedata, type });
     }
     const labelText = <span>{label}{required && <span className="required">*</span>}</span>;
     let inputWithLabel = (
@@ -56,11 +62,13 @@ export const Input = (props) => {
                 name={name}
                 type={type}
                 required={required}
+                disabled={disabled}
+                min={type === 'date' ? `${year}-${month}-${day}` : undefined}
             />
         </>
     );
 
-    if (type === 'checkbox') {
+    if (type === 'checkbox' || type === 'radio') {
         inputWithLabel = (
             <>
                 <input
@@ -72,28 +80,11 @@ export const Input = (props) => {
                     placeholder={placeholder}
                     type={type}
                     required={required} 
+                    disabled={disabled}
                 />
                 <span>{labelText}</span>
             </>
         );
-    }
-
-    if (type === 'radio') {
-        inputWithLabel = (
-            <>
-                <input
-                    value={value}
-                    onChange={changeHandler}
-                    onBlur={() => onBlur(name)}
-                    name={name}
-                    checked={checked}
-                    type={type}
-                    required={required}
-                />
-                <span>{labelText}</span>
-            </>
-
-        )
     }
 
     return (
@@ -113,6 +104,7 @@ Input.propTypes = {
     value: string, 
     required: bool, 
     checked: bool,
+    disabled: bool,
     validation: shape({}),
     validated: bool,
     onChange: func.isRequired, 
@@ -133,6 +125,7 @@ Input.defaultProps = {
     checked: false,
     validation: {},
     validated: true,
+    disabled: false,
     title: {},
 }
 

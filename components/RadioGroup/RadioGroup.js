@@ -18,7 +18,7 @@ const radioGroup = ({ inquiry, radiobuttons, onChange, onBlur }) => {
 
 radioGroup.propTypes = {
     inquiry: string.isRequired,
-    checkboxes: array.isRequired,
+    radiobuttons: array.isRequired,
     onChange: func.isRequired,
     onBlur: func
 }

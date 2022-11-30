@@ -22,10 +22,10 @@
 .user-menu {
     a {
         margin-left: 10px;
-        color: grey;
+        color: black;
 
         &:visited {
-            color: grey;
+            color: black;
         }
     }
 }
@@ -40,8 +40,15 @@
     }
 
     a {
-        color: rgb(69, 69, 69);
-        border: 1px solid grey;
-        padding: 3px;
+        color: black;
+        border: 1px solid black;
+        padding: 10px 30px;
+        border-radius: 3px;
+        transition: background-color .15s ease-in;
+
+        &:hover {
+            background-color: lightgray;
+            color: black;
+        }
     }
 }

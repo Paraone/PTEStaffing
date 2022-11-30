@@ -4,7 +4,7 @@ const assert = require('assert');
 import fs from 'fs';
 import middleware from '../../middleware/middleware';
 import { useDrive } from './google/gapi';
-import { STAFF_ACCOUNT_TYPE } from 'constants';
+import { STAFF_TYPE } from 'constants';
 
 export const config = {
   api: {
@@ -65,7 +65,7 @@ apiRoute.delete(({ query }, res) => {
             client.connect(async (err) => {
                 assert.equal(null, err);
                 const db = client.db(dbName);
-                const collection = db.collection(STAFF_ACCOUNT_TYPE);
+                const collection = db.collection(STAFF_TYPE);
 
                 const update = await collection.updateOne({ [filename]: fileId }, { $set: { [filename]: undefined } }, { upsert: true })
                 console.log('image deleted', { update })

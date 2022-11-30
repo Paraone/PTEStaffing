@@ -30,8 +30,8 @@ const Staff = () => {
                 <div>First Name: {firstName}</div>
                 <div>Last Name: {lastName}</div>
                 <div>Email: {email}</div>
-                <div><Link href="/users/[profileId]" as={`/users/${profileId}`}>profilePage</Link></div>
-                <div><Link href="/accounts/[accountId]" as={`/accounts/${profileId}`}>Account Page</Link></div>
+                <div><Link href="staff/[profileId]" as={`staff/${profileId}`}>profilePage</Link></div>
+                <div><Link href="/staff/[accountId]/account" as={`/staff/${profileId}/account`}>Account Page</Link></div>
             </div>
         ))
         :

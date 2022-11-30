@@ -4,12 +4,12 @@
         text-align: center;
     }
 
-    .signups {
+    .buttons {
         display: flex;
         justify-content: center;
     }
     
-    .signup-btn {
+    .find-btn {
         display: inline-block;
         padding: 10px 30px;
         margin: 5px;
@@ -37,7 +37,7 @@
             text-align: left;
         }
 
-        .signups {
+        .buttons {
             justify-content: flex-start;
         }
     }

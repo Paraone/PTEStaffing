@@ -3,7 +3,7 @@ import { string, array, func} from 'prop-types';
 import axios from 'axios';
 import { Input, CheckboxGroup, RadioGroup } from '~components';
 
-export const Form = ({ inputs, title, route, handleData, method, className, submission = 'Submit' }) => {
+export const Form = ({ inputs, title, route, handleData, method, className, submission }) => {
     if (!Array.isArray(inputs) || !inputs.length) return null;
 
     const initFields = () => {
@@ -18,11 +18,8 @@ export const Form = ({ inputs, title, route, handleData, method, className, subm
             }
 
             if (type === 'radiogroup') {
-                radiobuttons.forEach(radiobutton => {
-                    fields[radiobutton.value] = { ...radiobutton, validated: true };
-                })
-
-                fields[name] = radiobuttons[0].value;
+                fields[name] = { value: radiobuttons[0].value, validated: true };
+                return;
             }
 
             fields[name] = { ...input, validated: true };
@@ -66,18 +63,21 @@ export const Form = ({ inputs, title, route, handleData, method, className, subm
 
     const fieldKeys = Object.keys(fields);
 
-    const setField = ({ fieldName, value, file, fileId }) => {
+    const setField = ({ fieldName, value, file, fileId, type }) => {
         const newFields = {...fields};
-        const { type, checked } = newFields[fieldName];
+        const { checked } = newFields[fieldName];
         if (type === 'checkbox') {
+            console.log({ fieldName, checked })
             newFields[fieldName].checked = !checked;
+            console.log({ newFields })
             setFields(newFields);
             return;
         }
 
         if (type === 'radio') {
-            newFields[fieldName].checked = !checked;
+            newFields[fieldName].value = value;
             setFields(newFields);
+            return;
         }
 
         if (type === 'file') {
@@ -148,7 +148,7 @@ export const Form = ({ inputs, title, route, handleData, method, className, subm
             }
 
             if (type === 'radiogroup') {
-                formData.append(name, fields[name]);
+                formData.append(name, fields[name].value);
                 return;
             }
 
@@ -190,8 +190,8 @@ export const Form = ({ inputs, title, route, handleData, method, className, subm
 
             if (type === 'radiogroup') {
                 const radioGroup = radiobuttons.map((radiobutton) => {
-                    const { validated, checked } = fields[radiobutton.value];
-                    return { ...radiobutton, validated, checked };
+                    const { value: radioValue, name: radioName} = radiobutton;
+                    return { ...radiobutton, validated: true, checked: fields[radioName].value === radioValue };
                 });
 
                 return (
@@ -205,7 +205,8 @@ export const Form = ({ inputs, title, route, handleData, method, className, subm
                 )
             }
             
-            const { value, validated } = fields[name];
+            const { value, validated, checked, dependency } = fields[name];
+
             return(
                 <Input 
                     {...input}
@@ -215,6 +216,8 @@ export const Form = ({ inputs, title, route, handleData, method, className, subm
                     onChange={setField}
                     onBlur={validateField}
                     fileId={fileId}
+                    checked={checked}
+                    disabled={dependency && !fields[dependency].checked}
                 />
             )
         });

@@ -2,9 +2,9 @@ import Head from 'next/head';
 import Link from 'next/link';
 import cx from 'classnames';
 import { useTransitionHook } from '~hooks';
-import { useSession } from 'next-auth/react';
+import { useSession, signIn } from 'next-auth/react';
 import styles from './index.module.scss';
-import { EMPLOYER_ACCOUNT_TYPE, STAFF_ACCOUNT_TYPE } from '~constants';
+import { EMPLOYER_TYPE, STAFF_TYPE } from '~constants';
 
 function Home() {
   const { data: session } = useSession();
@@ -19,12 +19,12 @@ function Home() {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <h1>PTESTAFFING.COM</h1>
-      <div className={styles.signups}>
-        {(!session || accountType === EMPLOYER_ACCOUNT_TYPE) &&
-          <Link className={styles['signup-btn']} href={findStaffHref}>find staff</Link>
+      <div className={styles.buttons}>
+        {(!session || accountType === EMPLOYER_TYPE) &&
+          <Link className={styles['find-btn']} href={findStaffHref}>find staff</Link>
         }
-        {(!session || accountType === STAFF_ACCOUNT_TYPE) &&
-          <Link className={styles['signup-btn']} href={findWorkHref}>find work</Link>
+        {(!session || accountType === STAFF_TYPE) &&
+          <Link className={styles['find-btn']} href={findWorkHref}>find work</Link>
         }
       </div>
       <h2>The Tri-State Area&apos;s Leading Professional Staffing Network</h2>
@@ -35,7 +35,7 @@ function Home() {
       </p>
       {!session &&
         <>
-          <Link href="/login">Login</Link>
+          <Link href="/login" onClick={() => signIn('email', { callbackUrl: `/?alert=${'You have signed in.'}`})}>Sign In</Link>
           <p>or</p>
           <Link href="/signup">Sign Up</Link>
         </>

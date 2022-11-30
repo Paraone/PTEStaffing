@@ -6,14 +6,12 @@ import {useTransitionHook} from '~hooks';
 
 const ROUTE = '/api/jobs';
 const handleData = ({data}) => {
-  const { error, message, jobId } = data || {};
+  const { error, message, id } = data || {};
   if (error) console.log({ message });
-  if (jobId) {
-    Router.push(`/job/${jobId}`);
-  }
+  if (id) Router.push(`/job/${id}`);
 };
 
-const Signup = () => {
+const createJob = () => {
   const pageStyles = useTransitionHook();
 
   return (
@@ -22,4 +20,4 @@ const Signup = () => {
   </div>
 )};
 
-export default Signup;
+export default createJob;

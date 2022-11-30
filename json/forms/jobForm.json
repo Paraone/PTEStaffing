@@ -86,7 +86,7 @@
             {
                 "type": "radio",
                 "name": "wardrobe",
-                "value": "dark-denim=black-t-shirt",
+                "value": "dark-denim-black-t-shirt",
                 "label": "Dark Denim, Black T-Shirt",
                 "checked": false,
                 "required": false,
@@ -329,17 +329,23 @@
                 "required": false,
                 "error": "",
                 "validation": {}
-            },
-            {
-                "type": "checkbox",
-                "name": "other",
-                "value": "Other:",
-                "label": "Other:",
-                "checked": false,
-                "required": false,
-                "error": "",
-                "validation": {}
             }
         ]
+    },
+    {
+        "type": "checkbox",
+        "name": "other",
+        "value": "Other:",
+        "label": "Other:",
+        "checked": false,
+        "required": false,
+        "error": "",
+        "validation": {}
+    },
+    {
+        "type": "text",
+        "name": "othertext",
+        "required": false,
+        "dependency": "other"
     }
 ]
