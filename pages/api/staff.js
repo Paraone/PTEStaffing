@@ -46,6 +46,7 @@ apiRoute.post(async (req, res) => {
     if (ops.length === 1) {
       const { email, confirmationCode } = createdUser;
 
+      const encodedURL = encodeURIComponent(`${baseURL}/confirmation?confirmationCode=${confirmationCode}&businessName=${profileId}`);
       // const emailData = {
       //   from: '<management@ptestaffing.com>',
       //   to: email,
@@ -55,7 +56,7 @@ apiRoute.post(async (req, res) => {
       //     http://localhost:3000/confirmation?confirmationCode=${confirmationCode}&profileId=${profileId}
       //   `
       // };
-      res.status(200).json({ email, url: encodeURIComponent(`${baseURL}/confirmation?confirmationCode=${confirmationCode}&profileId=${profileId}`) });
+      res.status(200).json({ email, url: encodedURL });
       return;
       // sendMail(emailData, (data) => { 
       //   return;
