@@ -56,7 +56,9 @@ const Header = () => {
                   <Menu className={styles['user-menu']} menuItems={userMenu}/>
                 ) : (    
                   <div className={styles['header-login']}>
-                    <Login /> <span>or</span> <Link href="/signup">Sign Up</Link>
+                    <Login /> 
+                    <span>or Find: </span> 
+                    <Link className={styles['plain-link']} href="/employer/signup">Staff</Link><span> | </span><Link className={styles['plain-link']} href="/staff/signup">Work</Link>
                   </div>
                 )
               }

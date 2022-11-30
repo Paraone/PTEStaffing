@@ -37,7 +37,9 @@ function Home() {
         <>
           <Link href="/login" onClick={() => signIn('email', { callbackUrl: `/?alert=${'You have signed in.'}`})}>Sign In</Link>
           <p>or</p>
-          <Link href="/signup">Sign Up</Link>
+          <p>
+            find <Link href="/employer/signup">Staff</Link> | <Link href="/staff/signup">Work</Link>
+          </p>
         </>
       }
       

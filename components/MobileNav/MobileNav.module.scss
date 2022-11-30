@@ -95,6 +95,10 @@
     overflow: scroll;
     transition: transform .2s ease-in;
 
+    a {
+        color: grey;
+    }
+
     .close-btn {
         width: 100%;
         text-align: right;
