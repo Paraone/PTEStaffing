@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
-import { Redirector } from '~components';
+import { Redirector, Loader } from '~components';
 import {useTransitionHook} from '~hooks';
 import styles from './staff.module.scss';
 
@@ -35,7 +35,7 @@ const Staff = () => {
             </div>
         ))
         :
-        (<h1>Loading...</h1>);
+        (<Loader />);
 
     return (
         <Redirector>

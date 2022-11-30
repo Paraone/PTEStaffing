@@ -3,6 +3,7 @@ import { useSession } from 'next-auth/react';
 import { node } from 'prop-types';
 import Router, { useRouter } from 'next/router';
 import { useTransitionHook } from 'customHooks';
+import { Loader } from '~components';
 import { EMPLOYER_TYPE, STAFF_TYPE } from 'constants';
 
 const Redirector = ({ children }) => {
@@ -13,10 +14,10 @@ const Redirector = ({ children }) => {
     const { data: session } = useSession();
     const { profileId: sessionProfileId, businessName: sessionBusinessName, email, emailConfirmed } = session?.session?.user || {};
     const [loading, setLoading] = useState(true);
-    const [, base,, accountPage] = pathname.split('/');
+    const [, accountType,, accountRoute] = pathname.split('/');
     const user = sessionProfileId || sessionBusinessName;
-    const isStaffAccount = base === STAFF_TYPE && !!accountPage;
-    const isEmployerAccount = base === EMPLOYER_TYPE && !!accountPage;
+    const isStaffAccount = accountType === STAFF_TYPE && !!accountRoute;
+    const isEmployerAccount = accountType === EMPLOYER_TYPE && !!accountRoute;
 
     useEffect(() => {   
         if (!session) {
@@ -38,7 +39,7 @@ const Redirector = ({ children }) => {
         setLoading(false);
     }, [router]);
 
-    if (loading) return <h1>Loading...</h1>;
+    if (loading) return <Loader />;
 
     return (
         <div className={pageStyles}>

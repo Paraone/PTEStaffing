@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Router, { useRouter } from 'next/router';
 import Head from 'next/head';
-import { Redirector, Form } from '~components';
+import { Redirector, Form, Loader } from '~components';
 import inputs from 'json/forms/businessAccount.json';
 
 const BusinessAccount = () => {
@@ -36,7 +36,7 @@ const BusinessAccount = () => {
     }, []);
 
     
-    if (!email) return <h1>Loading...</h1>;
+    if (!email) return <Loader />;
    
     const inputsWithValues = inputs.map((input) => {
       const { type, name, checkboxes = [], validation = {} } = input;
