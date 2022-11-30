@@ -74,7 +74,11 @@ const MobileNav = () => {
                         <Menu onClick={toggleMenu} className={styles['mobile-user-menu']} menuItems={userMenu} />
                     ) : (
                         <div className={styles['mobile-nav-login']}>
-                            <Login /> <span>or</span> <Link onClick={toggleMenu} href="/signup">Sign Up</Link>
+                            <Login /> 
+                            <span>or</span> 
+                            <div>
+                                <span>Find: </span><Link onClick={toggleMenu} href="/employer/signup">Staff</Link><span> | </span><Link onClick={toggleMenu} href="/staff/signup">Work</Link>
+                            </div>
                         </div>
                     )
                 }
