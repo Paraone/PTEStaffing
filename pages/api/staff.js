@@ -2,6 +2,7 @@ const nextConnect = require('next-connect');
 const assert = require('assert');
 import middleware from '../../middleware/middleware';
 import { findStaff, createStaff, getStaffCollection } from '~controllers/staffController';
+import { csrf } from 'lib/csrf';
 // import  { sendMail } from '~controllers/mailController';
 
 const baseURL = process.env.NODE_ENV === 'production' ? 'https://pte-staffing.vercel.app' : 'http://localhost:3000' // eslint-disable-line
@@ -37,31 +38,34 @@ apiRoute.post(async (req, res) => {
 
     const staff = await findStaff({ email, profileId })
     if (staff) {
-      res.status(400).json({ error: 'User already exists.' });
+      res.status(200).json({ error: true, message: 'User already exists' });
       return;
     }
 
-    const { ops, ops: [createdUser] } = await createStaff(firstName, lastName, email, password, profileId);
+    const createdUser = await createStaff(firstName, lastName, email, password, profileId);
 
-    if (ops.length === 1) {
-      const { email, confirmationCode } = createdUser;
-
-      const encodedURL = encodeURIComponent(`${baseURL}/confirmation?confirmationCode=${confirmationCode}&businessName=${profileId}`);
-      // const emailData = {
-      //   from: '<management@ptestaffing.com>',
-      //   to: email,
-      //   subject: "PTEStaffing Registration test ✔",
-      //   message: `
-      //     Please go to the link below to confirm your account\n
-      //     http://localhost:3000/confirmation?confirmationCode=${confirmationCode}&profileId=${profileId}
-      //   `
-      // };
-      res.status(200).json({ email, url: encodedURL });
+    if (!createdUser) {
+      res.status(200).json({ error: true, message: 'User not created.'});
       return;
-      // sendMail(emailData, (data) => { 
-      //   return;
-      // });
     }
+    
+    const { confirmationCode } = createdUser;
+
+    const encodedURL = encodeURIComponent(`${baseURL}/confirmation?confirmationCode=${confirmationCode}&businessName=${profileId}`);
+    // const emailData = {
+    //   from: '<management@ptestaffing.com>',
+    //   to: email,
+    //   subject: "PTEStaffing Registration test ✔",
+    //   message: `
+    //     Please go to the link below to confirm your account\n
+    //     http://localhost:3000/confirmation?confirmationCode=${confirmationCode}&profileId=${profileId}
+    //   `
+    // };
+    res.status(200).json({ email, url: encodedURL });
+    return;
+    // sendMail(emailData, (data) => { 
+    //   return;
+    // });
   } catch (e) {
     res.status(400).json({ error: true, message: e.message || e });
   }
@@ -80,4 +84,4 @@ apiRoute.get(async (req, res) => {
   }
 });
 
-export default apiRoute;
+export default csrf(apiRoute);

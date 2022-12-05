@@ -2,6 +2,7 @@ import axios from 'axios';
 import Head from 'next/head';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
+import { Loader } from '~components';
 import { useTransitionHook } from '~hooks';
 
 
@@ -19,7 +20,12 @@ function Confirmation() {
                 Router.push(`/?alert=${'You have successfully registered your account.'}`);
             });
 
-            return <h1>Redirecting...</h1>
+            return (
+                <>
+                    <Loader />
+                    <h1>Redirecting...</h1>
+                </>
+            )
         }
 
         axios
@@ -30,7 +36,12 @@ function Confirmation() {
             Router.push(`/?alert=${'You have successfully registered your account.'}`);
         });
 
-        return <h1>Redirecting...</h1>;
+        return (
+            <>
+                <Loader />
+                <h1>Redirecting...</h1>
+            </>
+        );
     }
 
     return (

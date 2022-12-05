@@ -25,10 +25,8 @@ apiRoute.use(middleware);
 apiRoute.get(async (req, res) => {
   const { query : { jobId } } = req;
 
-  console.log({ jobId })
   findJob(jobId)
   .then((data) => {
-    console.log({data})
     return res.status(200).json(data);
   })
   .catch((err) => {

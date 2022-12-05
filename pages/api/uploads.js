@@ -3,6 +3,7 @@ const mongo = require('mongodb');
 const assert = require('assert');
 import fs from 'fs';
 import middleware from '../../middleware/middleware';
+import { csrf } from 'lib/csrf';
 import { useDrive } from './google/gapi';
 import { STAFF_TYPE } from 'constants';
 
@@ -75,4 +76,4 @@ apiRoute.delete(({ query }, res) => {
     });
 });
 
-export default apiRoute;
+export default csrf(apiRoute);

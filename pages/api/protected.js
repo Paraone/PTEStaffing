@@ -1,7 +1,6 @@
 const nextConnect = require('next-connect');
-import middleware from '../../middleware/middleware';
-import { sendMail } from '../../controllers/mailController';
 import { csrf } from 'lib/csrf';
+import middleware from '../../middleware/middleware';
 
 export const config = {
   api: {
@@ -23,9 +22,7 @@ const apiRoute = nextConnect({
 apiRoute.use(middleware);
 
 apiRoute.post(async (req, res) => {
-    sendMail({ to: 'marcoswadae@gmail.com', from: 'marcoswade@gmail.com', subject: 'test subject', message: 'test message' }, (data) => {
-        return res.status(200).json(data);
-    });
+    return res.status(200).json({ data: 'success' })
 });
 
 export default csrf(apiRoute);

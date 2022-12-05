@@ -1,6 +1,7 @@
 const nextConnect = require('next-connect');
 const assert = require('assert');
 import middleware from '../../middleware/middleware';
+import { csrf } from 'lib/csrf';
 import { createJob, getJobCollection } from '~controllers/jobsController';
 // import  { sendMail } from '~controllers/mailController';
 
@@ -39,14 +40,17 @@ apiRoute.post(async (req, res) => {
     assert.notEqual(null, wardrobe, 'Email required');
     assert.notEqual(null, positions, 'Password required');
 
-    const { ops, ops: [createdJob] } = await createJob({jobtitle, date, wardrobe, positions, other, othertext});
+    const createdJob = await createJob({jobtitle, date, wardrobe, positions, other, othertext});
     const { id } = createdJob;
 
-    if (ops.length === 1) {
-      res.status(200).json({ id });
+    if (!createdJob) {
+      res.status(200).json({ error: true, message: 'Job not created.' });
       return;
     }
+
+    res.status(200).json({ id });
   } catch (e) {
+    console.log( { e })
     res.status(400).json({ error: true, message: e.message || e });
   }
 });
@@ -64,4 +68,4 @@ apiRoute.get(async (req, res) => {
   }
 });
 
-export default apiRoute;
+export default csrf(apiRoute);

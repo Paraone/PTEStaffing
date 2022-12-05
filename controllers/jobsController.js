@@ -10,7 +10,7 @@ export async function getJobCollection() {
 
 export async function findJob(id) {
     const collection = await getJobCollection();
-    return await collection.findOne({ id });
+    return await collection.findOne({ id: Number(id) });
 }
 
 export async function createJob({
@@ -22,17 +22,10 @@ export async function createJob({
     othertext,
 }) {
     const collection = await getJobCollection();
-    console.log({
-        jobtitle,
-        date,
-        wardrobe,
-        positions,
-        other,
-        othertext,
-    })
-    return await collection.insertOne(
+    const id = Date.now();
+    const response = await collection.insert(
         {
-            id: Date.now(),
+            id,
             jobtitle,
             date,
             wardrobe,
@@ -41,4 +34,7 @@ export async function createJob({
             othertext
         }
     );
+    if (!response.acknowledged) return null;
+
+    return { id };
 }

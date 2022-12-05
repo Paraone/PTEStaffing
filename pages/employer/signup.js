@@ -3,6 +3,7 @@ import Router from 'next/router';
 import Link from 'next/link';
 import cx from 'classnames';
 import { signIn } from 'next-auth/react';
+import { setup } from 'lib/csrf';
 import { Form } from '~components';
 import {useTransitionHook} from '~hooks';
 import signupForm from 'json/forms/employerSignup.json';
@@ -27,5 +28,7 @@ const Signup = () => {
     <Form inputs={signupForm} title="Employer Sign Up" route={ROUTE} handleData={handleData} />
   </div>
 )};
+
+export const getServerSideProps = setup(async ({ req, res }) => ({ props: {} }))
 
 export default Signup;

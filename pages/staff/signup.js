@@ -12,7 +12,6 @@ import styles from './signup.module.scss';
 const ROUTE = '/api/staff';
 const handleData = ({data}) => {
   const { error, email, url } = data || {};
-
   if (error) console.log({error});
   if (email) {
     Router.push(`/confirmation?email=${email}&confirmationURL=${url}`)
