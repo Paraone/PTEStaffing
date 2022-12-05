@@ -29,6 +29,6 @@ const Signup = () => {
   </div>
 )};
 
-export const getServerSideProps = setup(async ({ req, res }) => ({ props: {} }))
+export const getServerSideProps = setup(async () => ({ props: {} }))
 
 export default Signup;

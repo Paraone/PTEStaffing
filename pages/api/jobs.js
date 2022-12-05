@@ -1,9 +1,7 @@
 const nextConnect = require('next-connect');
-const assert = require('assert');
 import middleware from '../../middleware/middleware';
 import { csrf } from 'lib/csrf';
 import { createJob, getJobCollection } from '~controllers/jobsController';
-// import  { sendMail } from '~controllers/mailController';
 
 export const config = {
   api: {
@@ -33,12 +31,13 @@ apiRoute.post(async (req, res) => {
     other,
     othertext
    } = req.body;
+
+   if (!jobtitle || !date || !positions ) {
+     res.status(200).json({ error: true, message: 'Required fields are missing.'});
+     return;
+   }
   
   try {
-    assert.notEqual(null, jobtitle, 'Last Name required');
-    assert.notEqual(null, date, 'First Name required');
-    assert.notEqual(null, wardrobe, 'Email required');
-    assert.notEqual(null, positions, 'Password required');
 
     const createdJob = await createJob({jobtitle, date, wardrobe, positions, other, othertext});
     const { id } = createdJob;
@@ -60,7 +59,7 @@ apiRoute.get(async (req, res) => {
     
     const collection = await getJobCollection();
     const data = await collection.find({}).toArray();
-
+    console.log({ data })
     return res.status(200).json({ data })
   } catch (error) {
     console.log('get users.js', { error });

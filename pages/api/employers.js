@@ -29,6 +29,11 @@ apiRoute.post(async (req, res) => {
   const { email, password, firstName, lastName, businessName } = req.body;
   
   try {
+    assert.notEqual(null, lastName, 'Last Name required');
+    assert.notEqual(null, firstName, 'First Name required');
+    assert.notEqual(null, email, 'Email required');
+    assert.notEqual(null, password, 'Password required');
+    assert.notEqual(null, businessName, 'Profile ID required');
 
     const employer = await findEmployer({ email, businessName })
     if (employer) {

@@ -20,6 +20,10 @@ const Header = () => {
   }
     const userMenu = [
       {
+          heading: 'jobs',
+          cta: '/jobs'
+      },
+      {
         heading: 'employers',
         cta: '/employers'
       },

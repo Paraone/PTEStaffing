@@ -11,7 +11,7 @@ function Home() {
   const accountType = session?.session?.user?.accountType;
   const pageStyles = useTransitionHook(10);
   const findStaffHref = session ? `/job/createJob` : '/employer/signup';
-  const findWorkHref = session ? `/employers` : '/staff/signup';
+  const findWorkHref = session ? `/jobs` : '/staff/signup';
   return (
     <div className={cx(styles.root, pageStyles)}>
       <Head>
