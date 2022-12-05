@@ -2,6 +2,7 @@ const nextConnect = require('next-connect');
 const assert = require('assert');
 import middleware from '../../middleware/middleware';
 import { findEmployer, createEmployer, getEmployerCollection } from '~controllers/employersController';
+import { csrf } from 'lib/csrf';
 const baseURL = process.env.NODE_ENV === 'production' ? 'https://pte-staffing.vercel.app' : 'http://localhost:3000' // eslint-disable-line
 // import  { sendMail } from '~controllers/mailController';
 
@@ -36,15 +37,16 @@ apiRoute.post(async (req, res) => {
 
     const employer = await findEmployer({ email, businessName })
     if (employer) {
-      res.status(400).json({ error: 'Business is already registered.' });
+      console.log('employer not null', { employer })
+      res.status(400).json({ error: true, message: 'Business already exists.' });
       return;
     }
 
     const snakeCaseBusinessName = businessName.split(' ').join('_');
-    const { ops, ops: [createdUser] } = await createEmployer({ firstName, lastName, email, password, businessName: snakeCaseBusinessName });
+    const createdEmployer = await createEmployer({ firstName, lastName, email, password, businessName: snakeCaseBusinessName });
     
-    if (ops.length === 1) {
-      const { email, confirmationCode } = createdUser;
+    if (createdEmployer) {
+      const { confirmationCode } = createdEmployer;
       const encodedURL = encodeURIComponent(`${baseURL}/confirmation?confirmationCode=${confirmationCode}&businessName=${snakeCaseBusinessName}`);
       // const emailData = {
       //   from: '<management@pteEmployering.com>',
@@ -62,6 +64,7 @@ apiRoute.post(async (req, res) => {
       // });
     }
   } catch (e) {
+    console.log({ e })
     res.status(400).json({ error: true, message: e.message || e });
   }
 });
@@ -79,4 +82,4 @@ apiRoute.get(async (req, res) => {
   }
 });
 
-export default apiRoute;
+export default csrf(apiRoute);

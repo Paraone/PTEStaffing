@@ -44,7 +44,7 @@ const Job = () => {
     
           <div>wardrobe: {wardrobe}</div>
           <div>positions: {positions}</div>
-          {other &&
+          {(other && !othertext) &&
             <div>other: {othertext}</div>
           }
         </div>

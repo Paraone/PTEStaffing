@@ -67,9 +67,7 @@ export const Form = ({ inputs, title, route, handleData, method, className, subm
         const newFields = {...fields};
         const { checked } = newFields[fieldName];
         if (type === 'checkbox') {
-            console.log({ fieldName, checked })
             newFields[fieldName].checked = !checked;
-            console.log({ newFields })
             setFields(newFields);
             return;
         }

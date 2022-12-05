@@ -1,37 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import cx from 'classnames';
 import Link from 'next/link';
 import { Redirector, Loader } from '~components';
 import {useTransitionHook} from '~hooks';
-import styles from './staff.module.scss';
+import styles from './jobs.module.scss';
 
 
 // TODO: remove unwanted fields from user data
 
-const Staff = () => {
+const Jobs = () => {
     const pageStyles = useTransitionHook();
-    const [userData, setUserData] = useState([]);
+    const [jobsData, setJobsData] = useState([]);
     useEffect(() => {
         let source = axios.CancelToken.source();
-        axios.get('/api/staff', {
+        axios.get('/api/jobs', {
             cancelToken: source.token
         }).then((response) => {
-            const users = response?.data?.data;
-            setUserData(users);
+            const jobs = response?.data?.data;
+            setJobsData(jobs);
         });
         
         return () => { source.cancel("Cancelling in cleanup") };
     }, []);
 
-    const userProfiles = Array.isArray(userData) && userData.length > 0 ?
-        userData.map(({ profileId, firstName, lastName, email, profilePic1 }, index) => (
-            <div className={styles['staff-member']} key={index}>
-                <div><img width={120} src={profilePic1 ? `https://drive.google.com/uc?id=${profilePic1}` : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Placeholder_no_text.svg/1200px-Placeholder_no_text.svg.png'} /></div>
-                <div>First Name: {firstName}</div>
-                <div>Last Name: {lastName}</div>
-                <div>Email: {email}</div>
-                <div><Link href="staff/[profileId]" as={`staff/${profileId}`}>profilePage</Link></div>
-                <div><Link href="/staff/[accountId]/account" as={`/staff/${profileId}/account`}>Account Page</Link></div>
+    const jobsAvailable = Array.isArray(jobsData) && jobsData.length > 0 ?
+        jobsData.map(({ 
+            id,
+            jobtitle,
+            date,
+            wardrobe,
+            positions
+         }, index) => (
+            <div className={styles['job-card']} key={index}>
+                <h1>{jobtitle}<Link className={styles['card-link']} href={`/job/${id}`}>{' ->'}</Link></h1>
+                <div>Date: {date}</div>
+                <div>wardrobe: {wardrobe}</div>
+                <div>positions: {positions}</div>
+                <div></div>
             </div>
         ))
         :
@@ -39,14 +45,14 @@ const Staff = () => {
 
     return (
         <Redirector>
-            <div className={pageStyles}>
-                <h1>Staff Members:</h1>
-                <div className={styles['staff-members']}>
-                    {userProfiles}  
+            <div className={cx(styles.root, pageStyles)}>
+                <h1>Job Posts:</h1>
+                <div className={styles['job-list']}>
+                    {jobsAvailable}  
                 </div>
             </div>
         </Redirector>
     );
 }
 
-export default Staff;
+export default Jobs;

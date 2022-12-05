@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const v4 = require('uuid').v4;
+import { v4 as uuidv4 } from 'uuid';
 import clientPromise from 'lib/mongodb';
 import { EMPLOYER_TYPE, DB_NAME } from '~constants';
 
@@ -34,10 +34,10 @@ export async function createEmployer({firstName, lastName, email, password, busi
         if (!hash) {
             return null;
         }
-        const confirmationCode = v4();
-        return await collection.insertOne(
+        const confirmationCode = uuidv4();
+        const response = await collection.insert(
             {
-                userId: v4(),
+                userId: uuidv4(),
                 firstName,
                 lastName,
                 email,
@@ -46,7 +46,11 @@ export async function createEmployer({firstName, lastName, email, password, busi
                 accountType: EMPLOYER_TYPE,
                 emailConfirmed: false,
                 password: hash,
-            }
+            },
+
         );
+        if (!response.acknowledged) return null;
+
+        return { confirmationCode }
     })
 }

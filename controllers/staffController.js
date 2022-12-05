@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const v4 = require('uuid').v4;
+import { v4 as uuidv4 } from 'uuid';
 import clientPromise from 'lib/mongodb';
 import { STAFF_TYPE, DB_NAME } from '~constants';
 
@@ -35,12 +35,14 @@ export async function createStaff(firstName, lastName, email, password, profileI
     
     return await bcrypt.hash(password, saltRounds).then(async (hash) => {
         if (!hash) {
-            return { error: 'No hash returned.'};
+            console.log('staffController.js | 38: No hash returned.');
+            return null;
         }
-        const confirmationCode = v4();
-        return await collection.insertOne(
+
+        const confirmationCode = uuidv4();
+        const response = await collection.insert(
             {
-                userId: v4(),
+                userId: uuidv4(),
                 firstName,
                 lastName,
                 email,
@@ -51,5 +53,9 @@ export async function createStaff(firstName, lastName, email, password, profileI
                 password: hash,
             }
         );
+
+        if (!response.acknowledged) return null;
+
+        return { confirmationCode }
     })
 }

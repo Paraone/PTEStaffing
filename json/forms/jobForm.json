@@ -14,7 +14,7 @@
         "type": "date",
         "name": "date",
         "label": "Date",
-        "required": false,
+        "required": true,
         "error": "",
         "validation": {}
     },
