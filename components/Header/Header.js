@@ -4,7 +4,7 @@ import styles from './Header.module.scss';
 
 const Header = () => {
   const { data: session } = useSession();
-  const { profileId, businessName } = session?.session?.user || {};
+  // const { profileId, businessName } = session?.session?.user || {};
 
   // let profileHeading = 'profile';
   // let profileCta = `/staff/${profileId}`
