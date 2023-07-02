@@ -5,7 +5,7 @@ import '../styles.scss';
 
 export function MyApp ({ Component, pageProps: { session, ...pageProps } }) {
     return (
-        <SessionProvider basePath="https://local.ptestaffing.com:3000/api/auth" session={session}>
+        <SessionProvider session={session}>
             <Layout>
                 <Component {...pageProps} />
             </Layout>
