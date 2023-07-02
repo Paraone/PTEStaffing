@@ -6,14 +6,14 @@ const Header = () => {
   const { data: session } = useSession();
   const { profileId, businessName } = session?.session?.user || {};
 
-  let profileHeading = 'profile';
-  let profileCta = `/staff/${profileId}`
-  let accountCta = `/staff/${profileId}/account`
-  if (businessName) {
-    profileHeading = 'overview';
-    profileCta = `/employer/${businessName}`;
-    accountCta = `/employer/${businessName}/account`
-  }
+  // let profileHeading = 'profile';
+  // let profileCta = `/staff/${profileId}`
+  // let accountCta = `/staff/${profileId}/account`
+  // if (businessName) {
+  //   profileHeading = 'overview';
+  //   profileCta = `/employer/${businessName}`;
+  //   accountCta = `/employer/${businessName}/account`
+  // }
     // const userMenu = [
     //   {
     //       heading: 'jobs',

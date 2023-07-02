@@ -48,7 +48,7 @@ apiRoute.post(async (req, res) => {
       return;
     }
 
-    const snakeCaseBusinessName = businessName.split(' ').join('_');
+    const snakeCaseBusinessName = ''; //businessName.split(' ').join('_');
     const createdEmployer = await createEmployer({ email, password, businessName: snakeCaseBusinessName });
     
     if (createdEmployer) {
