@@ -42,7 +42,7 @@
     },
     {
         "type": "text",
-        "name": "usernamer",
+        "name": "username",
         "label": "Username",
         "required": true,
         "error": "Username must be 2 to 16 characters.",

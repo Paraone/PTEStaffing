@@ -4,20 +4,20 @@ import { node } from 'prop-types';
 import Router, { useRouter } from 'next/router';
 import { useTransitionHook } from 'customHooks';
 import { Loader } from '~components';
-import { EMPLOYER_TYPE, STAFF_TYPE } from 'constants';
+import { PROVIDER_TYPE, STAFF_TYPE } from 'constants';
 
 const Redirector = ({ children }) => {
     const pageStyles = useTransitionHook();
     const router = useRouter();
     const { query, pathname } = router;
-    const { businessName, profileId } = query || {};
+    const { contentProviderId, profileId } = query || {};
     const { data: session } = useSession();
-    const { profileId: sessionProfileId, businessName: sessionBusinessName, email, emailConfirmed } = session?.session?.user || {};
+    const { profileId: sessionProfileId, contentProviderId: sessionContentProviderId, email, emailConfirmed } = session?.session?.user || {};
     const [loading, setLoading] = useState(true);
     const [, accountType,, accountRoute] = pathname.split('/');
-    const user = sessionProfileId || sessionBusinessName;
+    const user = sessionProfileId || sessionContentProviderId;
     const isStaffAccount = accountType === STAFF_TYPE && !!accountRoute;
-    const isEmployerAccount = accountType === EMPLOYER_TYPE && !!accountRoute;
+    const isContentProviderAccout = accountType === PROVIDER_TYPE && !!accountRoute;
 
     useEffect(() => {   
         if (!session) {
@@ -26,7 +26,7 @@ const Redirector = ({ children }) => {
             return;
         }
         
-        if ((isStaffAccount && (user !== profileId)) || (isEmployerAccount && (user !== businessName))) {
+        if ((isStaffAccount && (user !== profileId)) || (isContentProviderAccout && (user !== contentProviderId))) {
             const alert = 'you are unauthorized to view this page.'
             Router.push(`/?alert=${alert}`);
             return;

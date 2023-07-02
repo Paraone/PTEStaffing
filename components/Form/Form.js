@@ -202,7 +202,6 @@ export const Form = ({ inputs, title, route, handleData, method, className, subm
                     />
                 )
             }
-            
             const { value, validated, checked, dependency } = fields[name];
 
             return(

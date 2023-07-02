@@ -1,7 +1,7 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { findStaff, authStaff } from "controllers/staffController";
-import { authEmployer, findEmployer } from "controllers/employersController";
+import { authContentProvider, findContentProvider } from "controllers/contentProvidersController";
 
 export const authOptions = {
   // Configure one or more authentication providers
@@ -15,16 +15,16 @@ export const authOptions = {
         async authorize(credentials) {
             const { email, password } = credentials;
             const staff = await findStaff({ email });
-            const employer = await findEmployer({ email });
+            const contentProvider = await findContentProvider({ email });
             if (!staff) {
-              if (!employer) return null;
+              if (!contentProvider) return null;
 
-              const  { password: passwordHash } = employer;
-              const match = await authEmployer(password, passwordHash);
+              const  { password: passwordHash } = contentProvider;
+              const match = await authContentProvider(password, passwordHash);
 
               if (!match) return null;
 
-              return employer;
+              return contentProvider;
             }
 
             const { password: passwordHash } = staff;
@@ -49,20 +49,19 @@ export const authOptions = {
         if (!session) return;
         const email = session?.user?.email;
         const staff = await findStaff({ email });
-        const employer = await findEmployer({ email})
+        const contentProvider = await findContentProvider({ email})
         if (!staff) {
-          if (!employer) return;
+          if (!contentProvider) return;
 
           return {
             session: {
               user: {
-                userId: employer.userId,
-                firstName: employer.firstName,
-                lastName: employer.lastName,
-                businessName: employer.businessName,
+                userId: contentProvider.userId,
+                lastName: contentProvider?.legalName,
+                username: contentProvider.username,
                 email,
-                emailConfirmed: employer.emailConfirmed,
-                accountType: employer.accountType
+                emailConfirmed: contentProvider.emailConfirmed,
+                accountType: contentProvider.accountType
               }
             }
           }
@@ -73,7 +72,7 @@ export const authOptions = {
             user: {
               userId: staff.userId,
               firstname: staff.firstName,
-              lastname: staff.lastName,
+              lastname: staff?.lastName,
               profileId: staff.profileId,
               email,
               emailConfirmed: staff.emailConfirmed,
@@ -95,6 +94,6 @@ export const authOptions = {
     secret: process.env.JWT_SECRET, // eslint-disable-line
     maxAge: 60 * 60 * 24 * 30
   },
-  secret: process.env.NEXT_PUBLIC_SECRET // eslint-disable-line
+  secret: process.env.NEXT_PUBLIC_SECRET, // eslint-disable-line
 }
 export default NextAuth(authOptions)

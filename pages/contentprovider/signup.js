@@ -6,10 +6,10 @@ import { signIn } from 'next-auth/react';
 import { setup } from 'lib/csrf';
 import { Form } from '~components';
 import {useTransitionHook} from '~hooks';
-import signupForm from 'json/forms/employerSignup.json';
+import signupForm from 'json/forms/contentProviderSignup.json';
 import styles from './signup.module.scss';
 
-const ROUTE = '/api/employers';
+const ROUTE = '/api/contentproviders';
 const handleData = ({data}) => {
   const { error, message, email, url } = data || {};
   if (error) console.log({ message });

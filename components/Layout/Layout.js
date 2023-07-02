@@ -5,6 +5,7 @@ import Head from 'next/head';
 import { debounce } from 'lodash';
 import { node, string, oneOfType } from 'prop-types';
 import { Header, Footer, MobileNav, Loader } from '~components';
+import styles from './Layout.module.scss';
 
 const Layout = ({ children }) => {
     const { query: { alert } } = useRouter();
@@ -29,7 +30,7 @@ const Layout = ({ children }) => {
     // let loggedIn = !!data.profileId;
 
     return (
-        <div>
+        <div className={styles.root}>
             <Head>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
