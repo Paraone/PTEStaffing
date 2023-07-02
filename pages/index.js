@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import cx from 'classnames';
 import { useTransitionHook } from '~hooks';
-import { useSession, signIn } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import styles from './index.module.scss';
 import { PROVIDER_TYPE, STAFF_TYPE } from '~constants';
 
@@ -19,7 +19,7 @@ function Home() {
         <title>Welcome to Diamond Elite</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <p>Experience Rare Before It's Too Late.</p>
+      <p>Experience Rare Before It&apos;s Too Late.</p>
       <Link className={styles['logo-link']} href="/">
         <Image
           priority

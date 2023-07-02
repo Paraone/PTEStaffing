@@ -31,10 +31,6 @@ apiRoute.post(async (req, res) => {
     password, 
     legalName, 
     username,
-    instagram,
-    twitter,
-    ticktock,
-    onlyfans,
     terms
   } = req.body;
   
@@ -45,7 +41,7 @@ apiRoute.post(async (req, res) => {
     assert.notEqual(null, username, 'Profile ID required');
     assert.notEqual(null, terms, 'Terms and conditions are required');
 
-    const employer = await findEmployer({ email, businessName })
+    const employer = await findEmployer({ email })
     if (employer) {
       console.log('employer not null', { employer })
       res.status(400).json({ error: true, message: 'Business already exists.' });
@@ -53,7 +49,7 @@ apiRoute.post(async (req, res) => {
     }
 
     const snakeCaseBusinessName = businessName.split(' ').join('_');
-    const createdEmployer = await createEmployer({ firstName, email, password, businessName: snakeCaseBusinessName });
+    const createdEmployer = await createEmployer({ email, password, businessName: snakeCaseBusinessName });
     
     if (createdEmployer) {
       const { confirmationCode } = createdEmployer;
