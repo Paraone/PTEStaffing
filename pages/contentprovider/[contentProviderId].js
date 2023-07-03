@@ -38,6 +38,7 @@ const User = () => {
       logo,
       resume
      } = userData || {};
+     
     const logoUrl = `https://drive.google.com/uc?id=${logo}`;
     
     return (!!email &&

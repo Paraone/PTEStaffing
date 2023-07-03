@@ -19,6 +19,8 @@ const Redirector = ({ children }) => {
     const isStaffAccount = accountType === STAFF_TYPE && !!accountRoute;
     const isContentProviderAccout = accountType === PROVIDER_TYPE && !!accountRoute;
 
+    console.log('redirector')
+
     useEffect(() => {   
         if (!session) {
             const alert = 'you must be logged in to view this page.'

@@ -1,0 +1,194 @@
+[
+    {
+        "type": "text",
+        "name": "legalName",
+        "label": "Full Legal Name",
+        "required": true,
+        "error": "Full Legal Name must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "address",
+        "label": "Address",
+        "required": true,
+        "error": "Address must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "city",
+        "label": "City",
+        "required": true,
+        "error": "City must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "state",
+        "label": "State",
+        "required": true,
+        "error": "State must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "zip",
+        "label": "Zipcode",
+        "required": true,
+        "error": "Zipcode must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "country",
+        "label": "Country",
+        "required": true,
+        "error": "Country must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "bankName",
+        "label": "Bank Name",
+        "required": true,
+        "error": "Bank Name must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "accountHolderName",
+        "label": "Account Holder Name",
+        "required": true,
+        "error": "Account Holder Name must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "accountNumber",
+        "label": "Account Number",
+        "required": true,
+        "error": "Account Number must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "routingNumber",
+        "label": "Routing Number",
+        "required": true,
+        "error": "Routing Number must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "cardHolderName",
+        "label": "Card Holder Name",
+        "required": true,
+        "error": "Card Holder Name must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "cardNumber",
+        "label": "Card Number",
+        "required": true,
+        "error": "Card Number must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "experationDate",
+        "label": "Experation Date",
+        "required": true,
+        "error": "Experation Date must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "cvv",
+        "label": "CVV/CVC",
+        "required": true,
+        "error": "CVV/CVC must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "identificationTyp",
+        "label": "ID Type - Passport/Driver's License/National ID Card",
+        "required": true,
+        "error": "Identification Type must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "idNumber",
+        "label": "ID Document Number",
+        "required": true,
+        "error": "ID Document Number must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "file",
+        "name": "idDocument",
+        "label": "ID Upload",
+        "required": true,
+        "error": "ID Upload must be 2 to 16 characters.",
+        "validation": {}
+    },
+    {
+        "type": "checkbox",
+        "name": "terms",
+        "label": "Terms And Conditions",
+        "required": true,
+        "error": "Terms And Conditions must be 2 to 16 characters.",
+        "validation": {}
+    }
+]

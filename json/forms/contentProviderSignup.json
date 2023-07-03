@@ -21,37 +21,6 @@
         }
     },
     {
-        "type": "password",
-        "name": "password",
-        "label": "Password",
-        "required": true,
-        "error": "Password and Confirm Password must match.",
-        "validation": {
-            "match": "passwordConfirm"
-        }
-    },
-    {
-        "type": "password",
-        "name": "passwordConfirm",
-        "label": "Confirm Password",
-        "required": true,
-        "error": "Password and Confirm Password must match.",
-        "validation": {
-            "match": "password"
-        }
-    },
-    {
-        "type": "text",
-        "name": "username",
-        "label": "Username",
-        "required": true,
-        "error": "Username must be 2 to 16 characters.",
-        "validation": {
-            "min": 2,
-            "max": 16
-        }
-    },
-    {
         "type": "text",
         "name": "instagram",
         "label": "Instagram",
@@ -75,10 +44,10 @@
     },
     {
         "type": "text",
-        "name": "ticktock",
-        "label": "Ticktock",
+        "name": "tiktok",
+        "label": "TikTok",
         "required": true,
-        "error": "Ticktock must be 2 to 16 characters.",
+        "error": "TikTok must be 2 to 16 characters.",
         "validation": {
             "min": 2,
             "max": 16
@@ -90,6 +59,94 @@
         "label": "OnlyFans",
         "required": true,
         "error": "OnlyFans must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "city",
+        "label": "City",
+        "required": true,
+        "error": "City must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "state",
+        "label": "State",
+        "required": true,
+        "error": "State must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "lingerie",
+        "label": "Favorite Lingerie",
+        "required": true,
+        "error": "Favorite Lingerie must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "shoe",
+        "label": "Favorite Designer Shoe",
+        "required": true,
+        "error": "Favorite Designer Shoe must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "bag",
+        "label": "Favorite Designer Bag",
+        "required": true,
+        "error": "Favorite Designer Bag must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "jewelry",
+        "label": "Favorite Jewelry Designer",
+        "required": true,
+        "error": "Favorite Jewelry Designer must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "restaurant",
+        "label": "Favorite Restaurant",
+        "required": true,
+        "error": "Favorite Restaurant must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "travel",
+        "label": "Favorite Travel Destination",
+        "required": true,
+        "error": "Favorite Travel Destination must be 2 to 16 characters.",
         "validation": {
             "min": 2,
             "max": 16
