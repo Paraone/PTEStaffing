@@ -49,7 +49,7 @@ apiRoute.post(async (req, res) => {
     assert.notEqual(null, email, 'Email required');
     assert.notEqual(null, terms, 'Terms and conditions are required');
 
-    const contentProvider = await findContentProvider({ email, username });
+    const contentProvider = await findContentProvider({ email });
 
     if (contentProvider) {
       console.log('contentProvider not null', { contentProvider })
