@@ -1,4 +1,5 @@
 import React from 'react';
+import { string } from 'prop-types';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 
@@ -9,5 +10,13 @@ const Login = ({ className }) => {
     </>
   )
 };
+
+Login.propTypes = {
+  className: string
+}
+
+Login.defaultProps = {
+  className: ''
+}
 
 export default Login;
