@@ -1,32 +1,10 @@
 [
     {
         "type": "text",
-        "name": "businessName",
-        "label": "Business Name",
+        "name": "legalName",
+        "label": "Full Legal Name",
         "required": true,
-        "error": "Business Name must be 2 to 16 characters.",
-        "validation": {
-            "min": 2,
-            "max": 16
-        }
-    },
-    {
-        "type": "text",
-        "name": "firstName",
-        "label": "First Name",
-        "required": true,
-        "error": "First Name must be 2 to 16 characters.",
-        "validation": {
-            "min": 2,
-            "max": 16
-        }
-    },
-    {
-        "type": "text",
-        "name": "lastName",
-        "label": "Last Name",
-        "required": true,
-        "error": "Last Name must be 2 to 16 characters.",
+        "error": "Full Legal Name must be 2 to 16 characters.",
         "validation": {
             "min": 2,
             "max": 16
@@ -61,5 +39,68 @@
         "validation": {
             "match": "password"
         }
+    },
+    {
+        "type": "text",
+        "name": "usernamer",
+        "label": "Username",
+        "required": true,
+        "error": "Username must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "instagram",
+        "label": "Instagram",
+        "required": true,
+        "error": "Instagram must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "twitter",
+        "label": "Twitter",
+        "required": true,
+        "error": "Twitter must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "ticktock",
+        "label": "Ticktock",
+        "required": true,
+        "error": "Ticktock must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "onlyfans",
+        "label": "OnlyFans",
+        "required": true,
+        "error": "OnlyFans must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "checkbox",
+        "name": "terms",
+        "label": "I accept the Diamond Elite terms & conditions.",
+        "required": true,
+        "error": "You must accept the Diamond Elite terms and conditions to sign up as a content provider",
+        "validation": {}
     }
 ]

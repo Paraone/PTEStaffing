@@ -1,5 +1,7 @@
 .header {
     width: 100%;
+    display: flex;
+    justify-content: center;
 
     .header-top {
         display: flex;
@@ -13,10 +15,13 @@
         }
     }
 }
-
-.logo {
-    width: 100px;
-    height: 100px;
+.logo-link {
+    background-color: black;
+    
+    .logo {
+        width: 500px;
+        height: 150px;
+    }
 }
 
 .user-menu {

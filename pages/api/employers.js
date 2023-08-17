@@ -26,24 +26,30 @@ const apiRoute = nextConnect({
 apiRoute.use(middleware);
 
 apiRoute.post(async (req, res) => {
-  const { email, password, firstName, lastName, businessName } = req.body;
+  const { 
+    email, 
+    password, 
+    legalName, 
+    username,
+    terms
+  } = req.body;
   
   try {
-    assert.notEqual(null, lastName, 'Last Name required');
-    assert.notEqual(null, firstName, 'First Name required');
+    assert.notEqual(null, legalName, 'First Name required');
     assert.notEqual(null, email, 'Email required');
     assert.notEqual(null, password, 'Password required');
-    assert.notEqual(null, businessName, 'Profile ID required');
+    assert.notEqual(null, username, 'Profile ID required');
+    assert.notEqual(null, terms, 'Terms and conditions are required');
 
-    const employer = await findEmployer({ email, businessName })
+    const employer = await findEmployer({ email })
     if (employer) {
       console.log('employer not null', { employer })
       res.status(400).json({ error: true, message: 'Business already exists.' });
       return;
     }
 
-    const snakeCaseBusinessName = businessName.split(' ').join('_');
-    const createdEmployer = await createEmployer({ firstName, lastName, email, password, businessName: snakeCaseBusinessName });
+    const snakeCaseBusinessName = ''; //businessName.split(' ').join('_');
+    const createdEmployer = await createEmployer({ email, password, businessName: snakeCaseBusinessName });
     
     if (createdEmployer) {
       const { confirmationCode } = createdEmployer;

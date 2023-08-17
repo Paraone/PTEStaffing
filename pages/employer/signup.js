@@ -23,9 +23,13 @@ const Signup = () => {
 
   return (
   <div className={cx(styles.root, pageStyles)}>
-    <span>Already a member? </span>
-    <Link href="" onClick={() => signIn("email", { callbackUrl: `/?alert=${'You have signed in.'}` })}>Sign In</Link>
-    <Form inputs={signupForm} title="Employer Sign Up" route={ROUTE} handleData={handleData} />
+    <div className={styles.container}>
+      <p>The Crème de la Crème of Content Creators: Diamond Elite Awaits You
+</p>
+      <Form className={styles.form} inputs={signupForm} route={ROUTE} handleData={handleData} />
+    </div>
+      <div>Already a member? </div>
+      <Link href="" onClick={() => signIn("email", { callbackUrl: `/?alert=${'You have signed in.'}` })}>Sign In</Link>
   </div>
 )};
 

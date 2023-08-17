@@ -1,0 +1,163 @@
+[
+    {
+        "type": "text",
+        "name": "legalName",
+        "label": "Full Legal Name",
+        "required": true,
+        "error": "Full Legal Name must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "email",
+        "name": "email",
+        "label": "Email",
+        "required": true,
+        "error": "You must enter a valid email.",
+        "validation": {
+            "pattern": "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
+        }
+    },
+    {
+        "type": "text",
+        "name": "instagram",
+        "label": "Instagram",
+        "required": true,
+        "error": "Instagram must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "twitter",
+        "label": "Twitter",
+        "required": true,
+        "error": "Twitter must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "tiktok",
+        "label": "TikTok",
+        "required": true,
+        "error": "TikTok must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "onlyfans",
+        "label": "OnlyFans",
+        "required": true,
+        "error": "OnlyFans must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "city",
+        "label": "City",
+        "required": true,
+        "error": "City must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "state",
+        "label": "State",
+        "required": true,
+        "error": "State must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "lingerie",
+        "label": "Favorite Lingerie",
+        "required": true,
+        "error": "Favorite Lingerie must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "shoe",
+        "label": "Favorite Designer Shoe",
+        "required": true,
+        "error": "Favorite Designer Shoe must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "bag",
+        "label": "Favorite Designer Bag",
+        "required": true,
+        "error": "Favorite Designer Bag must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "jewelry",
+        "label": "Favorite Jewelry Designer",
+        "required": true,
+        "error": "Favorite Jewelry Designer must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "restaurant",
+        "label": "Favorite Restaurant",
+        "required": true,
+        "error": "Favorite Restaurant must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "text",
+        "name": "travel",
+        "label": "Favorite Travel Destination",
+        "required": true,
+        "error": "Favorite Travel Destination must be 2 to 16 characters.",
+        "validation": {
+            "min": 2,
+            "max": 16
+        }
+    },
+    {
+        "type": "checkbox",
+        "name": "terms",
+        "label": "I accept the Diamond Elite terms & conditions.",
+        "required": true,
+        "error": "You must accept the Diamond Elite terms and conditions to sign up as a content provider",
+        "validation": {}
+    }
+]
