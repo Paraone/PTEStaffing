@@ -49,7 +49,8 @@ apiRoute.post(async (req, res) => {
     assert.notEqual(null, email, 'Email required');
     assert.notEqual(null, terms, 'Terms and conditions are required');
 
-    const contentProvider = await findContentProvider({ email, username })
+    const contentProvider = await findContentProvider({ email, username });
+
     if (contentProvider) {
       console.log('contentProvider not null', { contentProvider })
       res.status(400).json({ error: true, message: 'A Profile with this username or email already exists.' });
@@ -76,7 +77,7 @@ apiRoute.post(async (req, res) => {
     
     if (createdContentProvider) {
       const { confirmationCode } = createdContentProvider;
-      const encodedURL = encodeURIComponent(`${baseURL}/confirmation?confirmationCode=${confirmationCode}&username=${snakeCaseUsername}`);
+      const encodedURL = encodeURIComponent(`${baseURL}/confirmation?confirmationCode=${confirmationCode}&username=${email}`);
       // const emailData = {
       //   from: '<management@ptecontentProvidering.com>',
       //   to: email,
