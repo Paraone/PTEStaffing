@@ -120,6 +120,7 @@ export const Form = ({ inputs, title, route, handleData, method, className, subm
 
     const onSubmit = (e) => {
         e.preventDefault();
+        console.log('onSubmit')
         fieldKeys.forEach((name) => validateField(name));
         const isValid = fieldKeys.reduce((acc, name) => {
             if(!acc) return acc;
@@ -127,7 +128,7 @@ export const Form = ({ inputs, title, route, handleData, method, className, subm
         }, true);
         
         if (!isValid) return;
-
+        console.log('isValid')
         const formData = new FormData();
         inputs.forEach(({ name, type, checkboxes }) => {
             if (type === 'checkboxes') {

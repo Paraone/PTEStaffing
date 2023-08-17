@@ -28,21 +28,25 @@ apiRoute.use(middleware);
 apiRoute.post(async (req, res) => {
   const { 
     email, 
-    password, 
     legalName, 
-    username,
     instagram,
     twitter,
     ticktock,
     onlyfans,
+    city,
+    state,
+    lingerie,
+    shoe,
+    bag,
+    jewelry,
+    restaurant,
+    travel,
     terms
   } = req.body;
 
   try {
     assert.notEqual(null, legalName, 'First Name required');
     assert.notEqual(null, email, 'Email required');
-    assert.notEqual(null, password, 'Password required');
-    assert.notEqual(null, username, 'Username required');
     assert.notEqual(null, terms, 'Terms and conditions are required');
 
     const contentProvider = await findContentProvider({ email, username })
@@ -52,16 +56,21 @@ apiRoute.post(async (req, res) => {
       return;
     }
 
-    const snakeCaseUsername = username.split(' ').join('_');
     const createdContentProvider = await createContentProvider({ 
       legalName, 
       email, 
-      password, 
-      username: snakeCaseUsername,
       instagram,
       twitter,
       ticktock,
       onlyfans,
+      city,
+      state,
+      lingerie,
+      shoe,
+      bag,
+      jewelry,
+      restaurant,
+      travel,
       terms
     });
     

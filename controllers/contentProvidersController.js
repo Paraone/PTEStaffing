@@ -31,8 +31,6 @@ export async function findContentProvider({ email, username, confirmationCode })
 export async function createContentProvider({ 
     legalName, 
     email, 
-    password, 
-    username,
     instagram,
     twitter,
     ticktock,
@@ -48,10 +46,11 @@ export async function createContentProvider({
     terms
 }) {
     const collection = await getContentProviderCollection();
-    return await bcrypt.hash(password, saltRounds).then(async (hash) => {
+    return await bcrypt.hash('password', saltRounds).then(async (hash) => {
         if (!hash) {
             return null;
         }
+
         const confirmationCode = uuidv4();
         const response = await collection.insert(
             {
