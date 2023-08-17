@@ -23,9 +23,9 @@ export async function authContentProvider(password, hash) {
     return await bcrypt.compare(password, hash);
 }
 
-export async function findContentProvider({ email, username, confirmationCode }) {
+export async function findContentProvider({ email, confirmationCode }) {
     const collection = await getContentProviderCollection();
-    return await collection.findOne({ $or: [{ email }, { username }, { confirmationCode }]});
+    return await collection.findOne({ $or: [{ email }, { confirmationCode }]});
 }
 
 export async function createContentProvider({ 
@@ -47,17 +47,18 @@ export async function createContentProvider({
 }) {
     const collection = await getContentProviderCollection();
     return await bcrypt.hash('password', saltRounds).then(async (hash) => {
+        console.log('bcrypt')
         if (!hash) {
+            console.log('no hash')
             return null;
         }
-
+        console.log('hashed')
         const confirmationCode = uuidv4();
         const response = await collection.insert(
             {
                 userId: uuidv4(),
                 legalName,
                 email,
-                username,
                 instagram,
                 twitter,
                 ticktock,
