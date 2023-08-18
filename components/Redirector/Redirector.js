@@ -13,6 +13,7 @@ const Redirector = ({ children }) => {
     const { contentProviderId, profileId } = query || {};
     const { data: session } = useSession();
     const { profileId: sessionProfileId, contentProviderId: sessionContentProviderId, email, emailConfirmed } = session?.session?.user || {};
+    console.log({user: session?.session?.user})
     const [loading, setLoading] = useState(true);
     const [, accountType,, accountRoute] = pathname.split('/');
     const user = sessionProfileId || sessionContentProviderId;
