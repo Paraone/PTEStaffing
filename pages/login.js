@@ -48,7 +48,7 @@ Login.propTypes = {
 export async function getServerSideProps(context) {
   return {
     props: {
-      csrfToken: 'await getCsrfToken(context)',
+      csrfToken: await getCsrfToken(context),
     },
   }
 }
